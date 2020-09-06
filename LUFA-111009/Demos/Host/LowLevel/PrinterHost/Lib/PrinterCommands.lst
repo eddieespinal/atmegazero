@@ -1,0 +1,298 @@
+   1               		.file	"PrinterCommands.c"
+   2               	__SREG__ = 0x3f
+   3               	__SP_H__ = 0x3e
+   4               	__SP_L__ = 0x3d
+   5               	__CCP__  = 0x34
+   6               	__tmp_reg__ = 0
+   7               	__zero_reg__ = 1
+  15               	.Ltext0:
+  16               		.section	.text.Printer_SoftReset,"ax",@progbits
+  17               	.global	Printer_SoftReset
+  19               	Printer_SoftReset:
+  20               	.LFB144:
+  21               	.LSM0:
+  22               	/* prologue: function */
+  23               	/* frame size = 0 */
+  24               	.LSM1:
+  25 0000 8091 0000 		lds r24,PrinterInterfaceNumber
+  26 0004 91E2      		ldi r25,lo8(33)
+  27 0006 9093 0000 		sts USB_ControlRequest,r25
+  28 000a 92E0      		ldi r25,lo8(2)
+  29 000c 9093 0000 		sts USB_ControlRequest+1,r25
+  30 0010 1092 0000 		sts (USB_ControlRequest+2)+1,__zero_reg__
+  31 0014 1092 0000 		sts USB_ControlRequest+2,__zero_reg__
+  32 0018 8093 0000 		sts USB_ControlRequest+4,r24
+  33 001c 1092 0000 		sts USB_ControlRequest+5,__zero_reg__
+  34 0020 1092 0000 		sts (USB_ControlRequest+6)+1,__zero_reg__
+  35 0024 1092 0000 		sts USB_ControlRequest+6,__zero_reg__
+  36               	.LBB18:
+  37               	.LBB19:
+  38               	.LSM2:
+  39 0028 1092 A700 		sts 167,__zero_reg__
+  40               	.LBE19:
+  41               	.LBE18:
+  42               	.LSM3:
+  43 002c 80E0      		ldi r24,lo8(0)
+  44 002e 90E0      		ldi r25,hi8(0)
+  45 0030 0E94 0000 		call USB_Host_SendControlRequest
+  46               	/* epilogue start */
+  47               	.LSM4:
+  48 0034 0895      		ret
+  49               	.LFE144:
+  51               		.section	.text.Printer_GetPortStatus,"ax",@progbits
+  52               	.global	Printer_GetPortStatus
+  54               	Printer_GetPortStatus:
+  55               	.LFB143:
+  56               	.LSM5:
+  57               	.LVL0:
+  58               	/* prologue: function */
+  59               	/* frame size = 0 */
+  60               	.LSM6:
+  61 0000 3091 0000 		lds r19,PrinterInterfaceNumber
+  62 0004 21EA      		ldi r18,lo8(-95)
+  63 0006 2093 0000 		sts USB_ControlRequest,r18
+  64 000a 21E0      		ldi r18,lo8(1)
+  65 000c 2093 0000 		sts USB_ControlRequest+1,r18
+  66 0010 1092 0000 		sts (USB_ControlRequest+2)+1,__zero_reg__
+  67 0014 1092 0000 		sts USB_ControlRequest+2,__zero_reg__
+  68 0018 3093 0000 		sts USB_ControlRequest+4,r19
+  69 001c 1092 0000 		sts USB_ControlRequest+5,__zero_reg__
+  70 0020 21E0      		ldi r18,lo8(1)
+  71 0022 30E0      		ldi r19,hi8(1)
+  72 0024 3093 0000 		sts (USB_ControlRequest+6)+1,r19
+  73 0028 2093 0000 		sts USB_ControlRequest+6,r18
+  74               	.LBB20:
+  75               	.LBB21:
+  76               	.LSM7:
+  77 002c 1092 A700 		sts 167,__zero_reg__
+  78               	.LBE21:
+  79               	.LBE20:
+  80               	.LSM8:
+  81 0030 0E94 0000 		call USB_Host_SendControlRequest
+  82               	.LVL1:
+  83               	/* epilogue start */
+  84               	.LSM9:
+  85 0034 0895      		ret
+  86               	.LFE143:
+  88               		.section	.text.Printer_GetDeviceID,"ax",@progbits
+  89               	.global	Printer_GetDeviceID
+  91               	Printer_GetDeviceID:
+  92               	.LFB142:
+  93               	.LSM10:
+  94               	.LVL2:
+  95 0000 CF92      		push r12
+  96 0002 DF92      		push r13
+  97 0004 FF92      		push r15
+  98 0006 0F93      		push r16
+  99 0008 1F93      		push r17
+ 100 000a DF93      		push r29
+ 101 000c CF93      		push r28
+ 102 000e 00D0      		rcall .
+ 103 0010 CDB7      		in r28,__SP_L__
+ 104 0012 DEB7      		in r29,__SP_H__
+ 105               	/* prologue: function */
+ 106               	/* frame size = 2 */
+ 107 0014 8C01      		movw r16,r24
+ 108 0016 6B01      		movw r12,r22
+ 109               	.LSM11:
+ 110 0018 1A82      		std Y+2,__zero_reg__
+ 111 001a 1982      		std Y+1,__zero_reg__
+ 112               	.LVL3:
+ 113               	.LSM12:
+ 114 001c 9091 0000 		lds r25,PrinterInterfaceNumber
+ 115 0020 81EA      		ldi r24,lo8(-95)
+ 116               	.LVL4:
+ 117 0022 8093 0000 		sts USB_ControlRequest,r24
+ 118 0026 1092 0000 		sts USB_ControlRequest+1,__zero_reg__
+ 119 002a 1092 0000 		sts (USB_ControlRequest+2)+1,__zero_reg__
+ 120 002e 1092 0000 		sts USB_ControlRequest+2,__zero_reg__
+ 121 0032 9093 0000 		sts USB_ControlRequest+4,r25
+ 122 0036 1092 0000 		sts USB_ControlRequest+5,__zero_reg__
+ 123 003a 82E0      		ldi r24,lo8(2)
+ 124 003c 90E0      		ldi r25,hi8(2)
+ 125 003e 9093 0000 		sts (USB_ControlRequest+6)+1,r25
+ 126 0042 8093 0000 		sts USB_ControlRequest+6,r24
+ 127               	.LBB22:
+ 128               	.LBB23:
+ 129               	.LSM13:
+ 130 0046 1092 A700 		sts 167,__zero_reg__
+ 131               	.LBE23:
+ 132               	.LBE22:
+ 133               	.LSM14:
+ 134 004a CE01      		movw r24,r28
+ 135 004c 0196      		adiw r24,1
+ 136 004e 0E94 0000 		call USB_Host_SendControlRequest
+ 137               	.LVL5:
+ 138 0052 F82E      		mov r15,r24
+ 139               	.LVL6:
+ 140 0054 8823      		tst r24
+ 141 0056 01F4      		brne .L6
+ 142               	.LVL7:
+ 143               	.LSM15:
+ 144 0058 2981      		ldd r18,Y+1
+ 145 005a 3A81      		ldd r19,Y+2
+ 146 005c 2115      		cp r18,__zero_reg__
+ 147 005e 3105      		cpc r19,__zero_reg__
+ 148 0060 01F0      		breq .L10
+ 149               	.L7:
+ 150               	.LBB24:
+ 151               	.LBB25:
+ 152               	.LSM16:
+ 153 0062 832F      		mov r24,r19
+ 154               	.LVL8:
+ 155 0064 922F      		mov r25,r18
+ 156               	.LBE25:
+ 157               	.LBE24:
+ 158               	.LSM17:
+ 159 0066 9A83      		std Y+2,r25
+ 160 0068 8983      		std Y+1,r24
+ 161               	.LVL9:
+ 162               	.LSM18:
+ 163 006a C816      		cp r12,r24
+ 164 006c D906      		cpc r13,r25
+ 165 006e 00F4      		brsh .L8
+ 166               	.LSM19:
+ 167 0070 DA82      		std Y+2,r13
+ 168 0072 C982      		std Y+1,r12
+ 169               	.LVL10:
+ 170               	.L8:
+ 171               	.LSM20:
+ 172 0074 8981      		ldd r24,Y+1
+ 173 0076 9A81      		ldd r25,Y+2
+ 174 0078 9093 0000 		sts (USB_ControlRequest+6)+1,r25
+ 175 007c 8093 0000 		sts USB_ControlRequest+6,r24
+ 176               	.LSM21:
+ 177 0080 C801      		movw r24,r16
+ 178 0082 0E94 0000 		call USB_Host_SendControlRequest
+ 179 0086 F82E      		mov r15,r24
+ 180 0088 8823      		tst r24
+ 181 008a 01F4      		brne .L6
+ 182               	.LVL11:
+ 183               	.LSM22:
+ 184 008c B801      		movw r22,r16
+ 185 008e 6E5F      		subi r22,lo8(-(2))
+ 186 0090 7F4F      		sbci r23,hi8(-(2))
+ 187 0092 4981      		ldd r20,Y+1
+ 188 0094 5A81      		ldd r21,Y+2
+ 189 0096 4250      		subi r20,lo8(-(-2))
+ 190 0098 5040      		sbci r21,hi8(-(-2))
+ 191               	.LVL12:
+ 192 009a C801      		movw r24,r16
+ 193               	.LVL13:
+ 194 009c 0E94 0000 		call memmove
+ 195               	.LVL14:
+ 196               	.LSM23:
+ 197 00a0 8981      		ldd r24,Y+1
+ 198 00a2 9A81      		ldd r25,Y+2
+ 199               	.LVL15:
+ 200 00a4 080F      		add r16,r24
+ 201 00a6 191F      		adc r17,r25
+ 202 00a8 0250      		subi r16,lo8(-(-2))
+ 203 00aa 1040      		sbci r17,hi8(-(-2))
+ 204               	.LVL16:
+ 205               	.L10:
+ 206 00ac F801      		movw r30,r16
+ 207 00ae 1082      		st Z,__zero_reg__
+ 208               	.LVL17:
+ 209               	.L6:
+ 210               	.LSM24:
+ 211 00b0 8F2D      		mov r24,r15
+ 212               	.LVL18:
+ 213               	/* epilogue start */
+ 214 00b2 0F90      		pop __tmp_reg__
+ 215 00b4 0F90      		pop __tmp_reg__
+ 216 00b6 CF91      		pop r28
+ 217 00b8 DF91      		pop r29
+ 218 00ba 1F91      		pop r17
+ 219 00bc 0F91      		pop r16
+ 220               	.LVL19:
+ 221 00be FF90      		pop r15
+ 222               	.LVL20:
+ 223 00c0 DF90      		pop r13
+ 224 00c2 CF90      		pop r12
+ 225               	.LVL21:
+ 226 00c4 0895      		ret
+ 227               	.LFE142:
+ 229               		.section	.text.Printer_SendData,"ax",@progbits
+ 230               	.global	Printer_SendData
+ 232               	Printer_SendData:
+ 233               	.LFB141:
+ 234               	.LSM25:
+ 235               	.LVL22:
+ 236 0000 1F93      		push r17
+ 237               	/* prologue: function */
+ 238               	/* frame size = 0 */
+ 239               	.LBB26:
+ 240               	.LBB27:
+ 241               	.LSM26:
+ 242 0002 22E0      		ldi r18,lo8(2)
+ 243 0004 2093 A700 		sts 167,r18
+ 244               	.LBE27:
+ 245               	.LBE26:
+ 246               	.LBB28:
+ 247               	.LBB29:
+ 248               	.LSM27:
+ 249 0008 2091 A900 		lds r18,169
+ 250 000c 2F7B      		andi r18,lo8(-65)
+ 251 000e 2093 A900 		sts 169,r18
+ 252               	.LBE29:
+ 253               	.LBE28:
+ 254               	.LSM28:
+ 255 0012 40E0      		ldi r20,lo8(0)
+ 256 0014 50E0      		ldi r21,hi8(0)
+ 257 0016 0E94 0000 		call Pipe_Write_Stream_LE
+ 258               	.LVL23:
+ 259 001a 182F      		mov r17,r24
+ 260               	.LVL24:
+ 261 001c 8823      		tst r24
+ 262 001e 01F4      		brne .L12
+ 263               	.LVL25:
+ 264               	.LBB30:
+ 265               	.LBB31:
+ 266               	.LSM29:
+ 267 0020 8091 A600 		lds r24,166
+ 268               	.LVL26:
+ 269 0024 8B77      		andi r24,lo8(123)
+ 270 0026 8093 A600 		sts 166,r24
+ 271               	.LBE31:
+ 272               	.LBE30:
+ 273               	.LSM30:
+ 274 002a 0E94 0000 		call Pipe_WaitUntilReady
+ 275               	.LBB32:
+ 276               	.LBB33:
+ 277               	.LSM31:
+ 278 002e 8091 A900 		lds r24,169
+ 279 0032 8064      		ori r24,lo8(64)
+ 280 0034 8093 A900 		sts 169,r24
+ 281               	.LVL27:
+ 282               	.L12:
+ 283               	.LBE33:
+ 284               	.LBE32:
+ 285               	.LSM32:
+ 286 0038 812F      		mov r24,r17
+ 287               	/* epilogue start */
+ 288 003a 1F91      		pop r17
+ 289               	.LVL28:
+ 290 003c 0895      		ret
+ 291               	.LFE141:
+ 341               	.Letext0:
+DEFINED SYMBOLS
+                            *ABS*:00000000 PrinterCommands.c
+C:\Users\Eddie\AppData\Local\Temp/cc4HHP5I.s:2      *ABS*:0000003f __SREG__
+C:\Users\Eddie\AppData\Local\Temp/cc4HHP5I.s:3      *ABS*:0000003e __SP_H__
+C:\Users\Eddie\AppData\Local\Temp/cc4HHP5I.s:4      *ABS*:0000003d __SP_L__
+C:\Users\Eddie\AppData\Local\Temp/cc4HHP5I.s:5      *ABS*:00000034 __CCP__
+C:\Users\Eddie\AppData\Local\Temp/cc4HHP5I.s:6      *ABS*:00000000 __tmp_reg__
+C:\Users\Eddie\AppData\Local\Temp/cc4HHP5I.s:7      *ABS*:00000001 __zero_reg__
+C:\Users\Eddie\AppData\Local\Temp/cc4HHP5I.s:19     .text.Printer_SoftReset:00000000 Printer_SoftReset
+C:\Users\Eddie\AppData\Local\Temp/cc4HHP5I.s:54     .text.Printer_GetPortStatus:00000000 Printer_GetPortStatus
+C:\Users\Eddie\AppData\Local\Temp/cc4HHP5I.s:91     .text.Printer_GetDeviceID:00000000 Printer_GetDeviceID
+C:\Users\Eddie\AppData\Local\Temp/cc4HHP5I.s:232    .text.Printer_SendData:00000000 Printer_SendData
+
+UNDEFINED SYMBOLS
+PrinterInterfaceNumber
+USB_ControlRequest
+USB_Host_SendControlRequest
+memmove
+Pipe_Write_Stream_LE
+Pipe_WaitUntilReady

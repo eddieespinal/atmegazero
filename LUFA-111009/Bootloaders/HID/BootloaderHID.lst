@@ -1,0 +1,347 @@
+   1               		.file	"BootloaderHID.c"
+   2               	__SREG__ = 0x3f
+   3               	__SP_H__ = 0x3e
+   4               	__SP_L__ = 0x3d
+   5               	__CCP__  = 0x34
+   6               	__tmp_reg__ = 0
+   7               	__zero_reg__ = 1
+  15               	.Ltext0:
+  16               		.section	.text.EVENT_USB_Device_ControlRequest,"ax",@progbits
+  17               	.global	EVENT_USB_Device_ControlRequest
+  19               	EVENT_USB_Device_ControlRequest:
+  20               	.LFB96:
+  21               	.LSM0:
+  22 0000 0F93      		push r16
+  23 0002 1F93      		push r17
+  24               	/* prologue: function */
+  25               	/* frame size = 0 */
+  26               	.LSM1:
+  27 0004 8091 0000 		lds r24,USB_ControlRequest
+  28 0008 8F77      		andi r24,lo8(127)
+  29 000a 8132      		cpi r24,lo8(33)
+  30 000c 01F0      		breq .+2
+  31 000e 00C0      		rjmp .L12
+  32               	.LSM2:
+  33 0010 8091 0000 		lds r24,USB_ControlRequest+1
+  34 0014 8930      		cpi r24,lo8(9)
+  35 0016 01F0      		breq .+2
+  36 0018 00C0      		rjmp .L12
+  37               	.LBB28:
+  38               	.LBB29:
+  39               	.LBB30:
+  40               	.LSM3:
+  41 001a 8091 E800 		lds r24,232
+  42 001e 877F      		andi r24,lo8(-9)
+  43 0020 8093 E800 		sts 232,r24
+  44               	.L4:
+  45               	.LBE30:
+  46               	.LBE29:
+  47               	.LBB31:
+  48               	.LBB32:
+  49               	.LSM4:
+  50 0024 8091 E800 		lds r24,232
+  51               	.LBE32:
+  52               	.LBE31:
+  53               	.LSM5:
+  54 0028 82FF      		sbrs r24,2
+  55 002a 00C0      		rjmp .L4
+  56               	.LBB33:
+  57               	.LBB34:
+  58               	.LSM6:
+  59 002c 8091 F100 		lds r24,241
+  60 0030 282F      		mov r18,r24
+  61               	.LVL0:
+  62               	.LSM7:
+  63 0032 8091 F100 		lds r24,241
+  64 0036 382F      		mov r19,r24
+  65               	.LVL1:
+  66               	.LBE34:
+  67               	.LBE33:
+  68               	.LSM8:
+  69 0038 40E0      		ldi r20,lo8(0)
+  70 003a 50E0      		ldi r21,hi8(0)
+  71               	.LVL2:
+  72               	.LSM9:
+  73 003c 742F      		mov r23,r20
+  74 003e 632F      		mov r22,r19
+  75 0040 522F      		mov r21,r18
+  76 0042 4427      		clr r20
+  77               	.LVL3:
+  78 0044 2F5F      		subi r18,lo8(-1)
+  79 0046 3F4F      		sbci r19,hi8(-1)
+  80 0048 01F4      		brne .L5
+  81               	.LSM10:
+  82 004a 1092 0000 		sts RunBootloader,__zero_reg__
+  83 004e 00C0      		rjmp .L6
+  84               	.L5:
+  85               	.LSM11:
+  86 0050 83E0      		ldi r24,lo8(3)
+  87               	/* #APP */
+  88               	 ;  134 "BootloaderHID.c" 1
+  89 0052 FA01      		movw r30, r20
+  90 0054 6093 5B00 		sts  91, r22
+  91 0058 8093 5700 		sts 87, r24
+  92 005c E895      		spm
+  93               		
+  94               	 ;  0 "" 2
+  95               	/* #NOAPP */
+  96               	.L7:
+  97               	.LSM12:
+  98 005e 07B6      		in __tmp_reg__,87-32
+  99 0060 00FC      		sbrc __tmp_reg__,0
+ 100 0062 00C0      		rjmp .L7
+ 101 0064 10E0      		ldi r17,lo8(0)
+ 102               	.LVL4:
+ 103               	.LBB35:
+ 104               	.LSM13:
+ 105 0066 01E0      		ldi r16,lo8(1)
+ 106               	.LVL5:
+ 107               	.L10:
+ 108               	.LBB36:
+ 109               	.LBB37:
+ 110               	.LSM14:
+ 111 0068 8091 F200 		lds r24,242
+ 112 006c 9091 F300 		lds r25,(242)+1
+ 113               	.LBE37:
+ 114               	.LBE36:
+ 115               	.LSM15:
+ 116 0070 892B      		or r24,r25
+ 117 0072 01F4      		brne .L8
+ 118               	.LBB38:
+ 119               	.LBB39:
+ 120               	.LSM16:
+ 121 0074 8091 E800 		lds r24,232
+ 122 0078 8B77      		andi r24,lo8(123)
+ 123 007a 8093 E800 		sts 232,r24
+ 124               	.L9:
+ 125               	.LBE39:
+ 126               	.LBE38:
+ 127               	.LBB40:
+ 128               	.LBB41:
+ 129               	.LSM17:
+ 130 007e 8091 E800 		lds r24,232
+ 131               	.LBE41:
+ 132               	.LBE40:
+ 133               	.LSM18:
+ 134 0082 82FF      		sbrs r24,2
+ 135 0084 00C0      		rjmp .L9
+ 136               	.L8:
+ 137               	.LBB42:
+ 138               	.LBB43:
+ 139               	.LSM19:
+ 140 0086 8091 F100 		lds r24,241
+ 141 008a 282F      		mov r18,r24
+ 142               	.LVL6:
+ 143               	.LSM20:
+ 144 008c 8091 F100 		lds r24,241
+ 145 0090 382F      		mov r19,r24
+ 146               	.LVL7:
+ 147               	.LBE43:
+ 148               	.LBE42:
+ 149               	.LSM21:
+ 150 0092 812F      		mov r24,r17
+ 151 0094 90E0      		ldi r25,lo8(0)
+ 152 0096 880F      		lsl r24
+ 153 0098 991F      		rol r25
+ 154               	.LVL8:
+ 155 009a A0E0      		ldi r26,lo8(0)
+ 156 009c B0E0      		ldi r27,hi8(0)
+ 157 009e 840F      		add r24,r20
+ 158 00a0 951F      		adc r25,r21
+ 159 00a2 A61F      		adc r26,r22
+ 160 00a4 B71F      		adc r27,r23
+ 161               	.LVL9:
+ 162               	/* #APP */
+ 163               	 ;  148 "BootloaderHID.c" 1
+ 164 00a6 0901      		movw  r0, r18
+ 165 00a8 FC01      		movw r30, r24
+ 166 00aa A093 5B00 		sts 91, r26
+ 167 00ae 0093 5700 		sts 87, r16
+ 168 00b2 E895      		spm
+ 169 00b4 1124      		clr  r1
+ 170               		
+ 171               	 ;  0 "" 2
+ 172               	.LSM22:
+ 173               	/* #NOAPP */
+ 174 00b6 1F5F      		subi r17,lo8(-(1))
+ 175               	.LVL10:
+ 176 00b8 1038      		cpi r17,lo8(-128)
+ 177 00ba 01F4      		brne .L10
+ 178               	.LBE35:
+ 179               	.LSM23:
+ 180 00bc 85E0      		ldi r24,lo8(5)
+ 181               	/* #APP */
+ 182               	 ;  152 "BootloaderHID.c" 1
+ 183 00be FA01      		movw r30, r20
+ 184 00c0 6093 5B00 		sts 91, r22
+ 185 00c4 8093 5700 		sts 87, r24
+ 186 00c8 E895      		spm
+ 187               		
+ 188               	 ;  0 "" 2
+ 189               	/* #NOAPP */
+ 190               	.L11:
+ 191               	.LSM24:
+ 192 00ca 07B6      		in __tmp_reg__,87-32
+ 193 00cc 00FC      		sbrc __tmp_reg__,0
+ 194 00ce 00C0      		rjmp .L11
+ 195               	.LSM25:
+ 196 00d0 81E1      		ldi r24,lo8(17)
+ 197               	/* #APP */
+ 198               	 ;  156 "BootloaderHID.c" 1
+ 199 00d2 8093 5700 		sts 87, r24
+ 200 00d6 E895      		spm
+ 201               		
+ 202               	 ;  0 "" 2
+ 203               	.LVL11:
+ 204               	/* #NOAPP */
+ 205               	.L6:
+ 206               	.LBB44:
+ 207               	.LBB45:
+ 208               	.LSM26:
+ 209 00d8 8091 E800 		lds r24,232
+ 210 00dc 8B77      		andi r24,lo8(123)
+ 211 00de 8093 E800 		sts 232,r24
+ 212               	.LBE45:
+ 213               	.LBE44:
+ 214               	.LSM27:
+ 215 00e2 0E94 0000 		call Endpoint_ClearStatusStage
+ 216               	.LVL12:
+ 217               	.L12:
+ 218               	/* epilogue start */
+ 219               	.LBE28:
+ 220               	.LSM28:
+ 221 00e6 1F91      		pop r17
+ 222               	.LVL13:
+ 223 00e8 0F91      		pop r16
+ 224 00ea 0895      		ret
+ 225               	.LFE96:
+ 227               		.section	.text.EVENT_USB_Device_ConfigurationChanged,"ax",@progbits
+ 228               	.global	EVENT_USB_Device_ConfigurationChanged
+ 230               	EVENT_USB_Device_ConfigurationChanged:
+ 231               	.LFB95:
+ 232               	.LSM29:
+ 233               	/* prologue: function */
+ 234               	/* frame size = 0 */
+ 235               	.LBB46:
+ 236               	.LBB47:
+ 237               	.LSM30:
+ 238 0000 81E0      		ldi r24,lo8(1)
+ 239 0002 61EC      		ldi r22,lo8(-63)
+ 240 0004 42E3      		ldi r20,lo8(50)
+ 241 0006 0E94 0000 		call Endpoint_ConfigureEndpoint_Prv
+ 242               	/* epilogue start */
+ 243               	.LBE47:
+ 244               	.LBE46:
+ 245               	.LSM31:
+ 246 000a 0895      		ret
+ 247               	.LFE95:
+ 249               		.section	.text.SetupHardware,"ax",@progbits
+ 250               	.global	SetupHardware
+ 252               	SetupHardware:
+ 253               	.LFB94:
+ 254               	.LSM32:
+ 255               	/* prologue: function */
+ 256               	/* frame size = 0 */
+ 257               	.LSM33:
+ 258 0000 84B7      		in r24,84-32
+ 259 0002 877F      		andi r24,lo8(-9)
+ 260 0004 84BF      		out 84-32,r24
+ 261               	.LSM34:
+ 262 0006 88E1      		ldi r24,lo8(24)
+ 263               	/* #APP */
+ 264               	 ;  72 "BootloaderHID.c" 1
+ 265 0008 0FB6      		in __tmp_reg__, __SREG__
+ 266 000a F894      		cli
+ 267 000c 8093 6000 		sts 96, r24
+ 268 0010 1092 6000 		sts 96, __zero_reg__
+ 269 0014 0FBE      		out __SREG__,__tmp_reg__
+ 270               		
+ 271               	 ;  0 "" 2
+ 272               	.LSM35:
+ 273               	/* #NOAPP */
+ 274 0016 81E0      		ldi r24,lo8(1)
+ 275 0018 85BF      		out 85-32,r24
+ 276               	.LSM36:
+ 277 001a 82E0      		ldi r24,lo8(2)
+ 278 001c 85BF      		out 85-32,r24
+ 279               	.LSM37:
+ 280 001e 0E94 0000 		call USB_Init
+ 281               	/* epilogue start */
+ 282               	.LSM38:
+ 283 0022 0895      		ret
+ 284               	.LFE94:
+ 286               		.section	.text.main,"ax",@progbits
+ 287               	.global	main
+ 289               	main:
+ 290               	.LFB93:
+ 291               	.LSM39:
+ 292               	/* prologue: function */
+ 293               	/* frame size = 0 */
+ 294               	.LSM40:
+ 295 0000 0E94 0000 		call SetupHardware
+ 296               	.LSM41:
+ 297               	/* #APP */
+ 298               	 ;  53 "BootloaderHID.c" 1
+ 299 0004 7894      		sei
+ 300               	 ;  0 "" 2
+ 301               	/* #NOAPP */
+ 302 0006 00C0      		rjmp .L23
+ 303               	.L24:
+ 304               	.LSM42:
+ 305 0008 0E94 0000 		call USB_USBTask
+ 306               	.L23:
+ 307               	.LSM43:
+ 308 000c 8091 0000 		lds r24,RunBootloader
+ 309 0010 8823      		tst r24
+ 310 0012 01F4      		brne .L24
+ 311               	.LBB48:
+ 312               	.LBB49:
+ 313               	.LSM44:
+ 314 0014 8091 E000 		lds r24,224
+ 315 0018 8160      		ori r24,lo8(1)
+ 316 001a 8093 E000 		sts 224,r24
+ 317               	.LBE49:
+ 318               	.LBE48:
+ 319               	.LSM45:
+ 320 001e 2CE0      		ldi r18,lo8(12)
+ 321 0020 88E1      		ldi r24,lo8(24)
+ 322 0022 90E0      		ldi r25,hi8(24)
+ 323               	/* #APP */
+ 324               	 ;  62 "BootloaderHID.c" 1
+ 325 0024 0FB6      		in __tmp_reg__,__SREG__
+ 326 0026 F894      		cli
+ 327 0028 A895      		wdr
+ 328 002a 8093 6000 		sts 96,r24
+ 329 002e 0FBE      		out __SREG__,__tmp_reg__
+ 330 0030 2093 6000 		sts 96,r18
+ 331               		
+ 332               	 ;  0 "" 2
+ 333               	/* #NOAPP */
+ 334               	.L25:
+ 335 0034 00C0      		rjmp .L25
+ 336               	.LFE93:
+ 338               		.data
+ 341               	RunBootloader:
+ 342 0000 01        		.byte	1
+ 391               	.Letext0:
+DEFINED SYMBOLS
+                            *ABS*:00000000 BootloaderHID.c
+C:\Users\Eddie\AppData\Local\Temp/ccnHY5HJ.s:2      *ABS*:0000003f __SREG__
+C:\Users\Eddie\AppData\Local\Temp/ccnHY5HJ.s:3      *ABS*:0000003e __SP_H__
+C:\Users\Eddie\AppData\Local\Temp/ccnHY5HJ.s:4      *ABS*:0000003d __SP_L__
+C:\Users\Eddie\AppData\Local\Temp/ccnHY5HJ.s:5      *ABS*:00000034 __CCP__
+C:\Users\Eddie\AppData\Local\Temp/ccnHY5HJ.s:6      *ABS*:00000000 __tmp_reg__
+C:\Users\Eddie\AppData\Local\Temp/ccnHY5HJ.s:7      *ABS*:00000001 __zero_reg__
+C:\Users\Eddie\AppData\Local\Temp/ccnHY5HJ.s:19     .text.EVENT_USB_Device_ControlRequest:00000000 EVENT_USB_Device_ControlRequest
+C:\Users\Eddie\AppData\Local\Temp/ccnHY5HJ.s:341    .data:00000000 RunBootloader
+C:\Users\Eddie\AppData\Local\Temp/ccnHY5HJ.s:230    .text.EVENT_USB_Device_ConfigurationChanged:00000000 EVENT_USB_Device_ConfigurationChanged
+C:\Users\Eddie\AppData\Local\Temp/ccnHY5HJ.s:252    .text.SetupHardware:00000000 SetupHardware
+C:\Users\Eddie\AppData\Local\Temp/ccnHY5HJ.s:289    .text.main:00000000 main
+
+UNDEFINED SYMBOLS
+USB_ControlRequest
+Endpoint_ClearStatusStage
+Endpoint_ConfigureEndpoint_Prv
+USB_Init
+USB_USBTask
+__do_copy_data

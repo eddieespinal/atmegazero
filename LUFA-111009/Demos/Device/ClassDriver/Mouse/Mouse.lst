@@ -1,0 +1,402 @@
+   1               		.file	"Mouse.c"
+   2               	__SREG__ = 0x3f
+   3               	__SP_H__ = 0x3e
+   4               	__SP_L__ = 0x3d
+   5               	__CCP__  = 0x34
+   6               	__tmp_reg__ = 0
+   7               	__zero_reg__ = 1
+  15               	.Ltext0:
+  16               		.section	.text.EVENT_USB_Device_Connect,"ax",@progbits
+  17               	.global	EVENT_USB_Device_Connect
+  19               	EVENT_USB_Device_Connect:
+  20               	.LFB109:
+  21               	.LSM0:
+  22               	/* prologue: function */
+  23               	/* frame size = 0 */
+  24               	.LBB29:
+  25               	.LBB30:
+  26               	.LSM1:
+  27 0000 8BB1      		in r24,43-32
+  28 0002 8F70      		andi r24,lo8(15)
+  29 0004 806A      		ori r24,lo8(-96)
+  30 0006 8BB9      		out 43-32,r24
+  31               	/* epilogue start */
+  32               	.LBE30:
+  33               	.LBE29:
+  34               	.LSM2:
+  35 0008 0895      		ret
+  36               	.LFE109:
+  38               		.section	.text.EVENT_USB_Device_Disconnect,"ax",@progbits
+  39               	.global	EVENT_USB_Device_Disconnect
+  41               	EVENT_USB_Device_Disconnect:
+  42               	.LFB110:
+  43               	.LSM3:
+  44               	/* prologue: function */
+  45               	/* frame size = 0 */
+  46               	.LBB31:
+  47               	.LBB32:
+  48               	.LSM4:
+  49 0000 8BB1      		in r24,43-32
+  50 0002 8F70      		andi r24,lo8(15)
+  51 0004 8061      		ori r24,lo8(16)
+  52 0006 8BB9      		out 43-32,r24
+  53               	/* epilogue start */
+  54               	.LBE32:
+  55               	.LBE31:
+  56               	.LSM5:
+  57 0008 0895      		ret
+  58               	.LFE110:
+  60               		.section	.text.EVENT_USB_Device_StartOfFrame,"ax",@progbits
+  61               	.global	EVENT_USB_Device_StartOfFrame
+  63               	EVENT_USB_Device_StartOfFrame:
+  64               	.LFB113:
+  65               	.LSM6:
+  66               	/* prologue: function */
+  67               	/* frame size = 0 */
+  68               	.LBB33:
+  69               	.LBB34:
+  70               	.LSM7:
+  71 0000 8091 0000 		lds r24,Mouse_HID_Interface+11
+  72 0004 9091 0000 		lds r25,(Mouse_HID_Interface+11)+1
+  73 0008 0097      		sbiw r24,0
+  74 000a 01F0      		breq .L7
+  75               	.LSM8:
+  76 000c 0197      		sbiw r24,1
+  77 000e 9093 0000 		sts (Mouse_HID_Interface+11)+1,r25
+  78 0012 8093 0000 		sts Mouse_HID_Interface+11,r24
+  79               	.L7:
+  80 0016 0895      		ret
+  81               	.LBE34:
+  82               	.LBE33:
+  83               	.LFE113:
+  85               		.section	.text.CALLBACK_HID_Device_CreateHIDReport,"ax",@progbits
+  86               	.global	CALLBACK_HID_Device_CreateHIDReport
+  88               	CALLBACK_HID_Device_CreateHIDReport:
+  89               	.LFB114:
+  90               	.LSM9:
+  91               	.LVL0:
+  92 0000 0F93      		push r16
+  93               	.LVL1:
+  94 0002 1F93      		push r17
+  95               	/* prologue: function */
+  96               	/* frame size = 0 */
+  97 0004 D801      		movw r26,r16
+  98               	.LVL2:
+  99               	.LSM10:
+ 100 0006 F901      		movw r30,r18
+ 101               	.LVL3:
+ 102               	.LBB35:
+ 103               	.LBB36:
+ 104               	.LSM11:
+ 105 0008 23B1      		in r18,35-32
+ 106               	.LVL4:
+ 107 000a 8CB1      		in r24,44-32
+ 108               	.LVL5:
+ 109 000c 8095      		com r24
+ 110 000e 90E0      		ldi r25,lo8(0)
+ 111 0010 8073      		andi r24,lo8(48)
+ 112 0012 9070      		andi r25,hi8(48)
+ 113 0014 9595      		asr r25
+ 114 0016 8795      		ror r24
+ 115 0018 2095      		com r18
+ 116 001a 207E      		andi r18,lo8(-32)
+ 117 001c 282B      		or r18,r24
+ 118               	.LBE36:
+ 119               	.LBE35:
+ 120               	.LBB37:
+ 121               	.LBB38:
+ 122               	.LSM12:
+ 123 001e 3CB1      		in r19,44-32
+ 124               	.LBE38:
+ 125               	.LBE37:
+ 126               	.LSM13:
+ 127 0020 27FF      		sbrs r18,7
+ 128 0022 00C0      		rjmp .L9
+ 129               	.LVL6:
+ 130               	.LSM14:
+ 131 0024 8FEF      		ldi r24,lo8(-1)
+ 132 0026 00C0      		rjmp .L16
+ 133               	.L9:
+ 134               	.LSM15:
+ 135 0028 24FF      		sbrs r18,4
+ 136 002a 00C0      		rjmp .L10
+ 137               	.LSM16:
+ 138 002c 81E0      		ldi r24,lo8(1)
+ 139               	.L16:
+ 140 002e 8283      		std Z+2,r24
+ 141               	.LVL7:
+ 142               	.L10:
+ 143               	.LSM17:
+ 144 0030 922F      		mov r25,r18
+ 145 0032 26FF      		sbrs r18,6
+ 146 0034 00C0      		rjmp .L11
+ 147               	.LVL8:
+ 148               	.LSM18:
+ 149 0036 8FEF      		ldi r24,lo8(-1)
+ 150 0038 00C0      		rjmp .L17
+ 151               	.L11:
+ 152               	.LSM19:
+ 153 003a 23FF      		sbrs r18,3
+ 154 003c 00C0      		rjmp .L12
+ 155               	.LSM20:
+ 156 003e 81E0      		ldi r24,lo8(1)
+ 157               	.L17:
+ 158 0040 8183      		std Z+1,r24
+ 159               	.L12:
+ 160               	.LSM21:
+ 161 0042 95FF      		sbrs r25,5
+ 162 0044 00C0      		rjmp .L13
+ 163               	.LSM22:
+ 164 0046 8081      		ld r24,Z
+ 165 0048 8160      		ori r24,lo8(1)
+ 166 004a 8083      		st Z,r24
+ 167               	.L13:
+ 168               	.LSM23:
+ 169 004c 32FD      		sbrc r19,2
+ 170 004e 00C0      		rjmp .L14
+ 171               	.LSM24:
+ 172 0050 8081      		ld r24,Z
+ 173 0052 8260      		ori r24,lo8(2)
+ 174 0054 8083      		st Z,r24
+ 175               	.L14:
+ 176               	.LSM25:
+ 177 0056 83E0      		ldi r24,lo8(3)
+ 178 0058 90E0      		ldi r25,hi8(3)
+ 179 005a 8D93      		st X+,r24
+ 180 005c 9C93      		st X,r25
+ 181               	.LSM26:
+ 182 005e 81E0      		ldi r24,lo8(1)
+ 183               	/* epilogue start */
+ 184 0060 1F91      		pop r17
+ 185 0062 0F91      		pop r16
+ 186 0064 0895      		ret
+ 187               	.LFE114:
+ 189               		.section	.text.CALLBACK_HID_Device_ProcessHIDReport,"ax",@progbits
+ 190               	.global	CALLBACK_HID_Device_ProcessHIDReport
+ 192               	CALLBACK_HID_Device_ProcessHIDReport:
+ 193               	.LFB115:
+ 194               	.LSM27:
+ 195               	.LVL9:
+ 196               	/* prologue: function */
+ 197               	/* frame size = 0 */
+ 198               	/* epilogue start */
+ 199               	.LSM28:
+ 200 0000 0895      		ret
+ 201               	.LFE115:
+ 203               		.section	.text.EVENT_USB_Device_ControlRequest,"ax",@progbits
+ 204               	.global	EVENT_USB_Device_ControlRequest
+ 206               	EVENT_USB_Device_ControlRequest:
+ 207               	.LFB112:
+ 208               	.LSM29:
+ 209               	/* prologue: function */
+ 210               	/* frame size = 0 */
+ 211               	.LSM30:
+ 212 0000 80E0      		ldi r24,lo8(Mouse_HID_Interface)
+ 213 0002 90E0      		ldi r25,hi8(Mouse_HID_Interface)
+ 214 0004 0E94 0000 		call HID_Device_ProcessControlRequest
+ 215               	/* epilogue start */
+ 216               	.LSM31:
+ 217 0008 0895      		ret
+ 218               	.LFE112:
+ 220               		.section	.text.EVENT_USB_Device_ConfigurationChanged,"ax",@progbits
+ 221               	.global	EVENT_USB_Device_ConfigurationChanged
+ 223               	EVENT_USB_Device_ConfigurationChanged:
+ 224               	.LFB111:
+ 225               	.LSM32:
+ 226               	/* prologue: function */
+ 227               	/* frame size = 0 */
+ 228               	.LSM33:
+ 229 0000 80E0      		ldi r24,lo8(Mouse_HID_Interface)
+ 230 0002 90E0      		ldi r25,hi8(Mouse_HID_Interface)
+ 231 0004 0E94 0000 		call HID_Device_ConfigureEndpoints
+ 232               	.LBB39:
+ 233               	.LBB40:
+ 234               	.LBB41:
+ 235               	.LBB42:
+ 236               	.LSM34:
+ 237 0008 9091 E200 		lds r25,226
+ 238 000c 9460      		ori r25,lo8(4)
+ 239 000e 9093 E200 		sts 226,r25
+ 240               	.LBE42:
+ 241               	.LBE41:
+ 242               	.LBE40:
+ 243               	.LBE39:
+ 244               	.LSM35:
+ 245 0012 80FD      		sbrc r24,0
+ 246 0014 00C0      		rjmp .L23
+ 247 0016 90E9      		ldi r25,lo8(-112)
+ 248 0018 00C0      		rjmp .L24
+ 249               	.L23:
+ 250 001a 90E6      		ldi r25,lo8(96)
+ 251               	.L24:
+ 252               	.LBB43:
+ 253               	.LBB44:
+ 254               	.LSM36:
+ 255 001c 8BB1      		in r24,43-32
+ 256 001e 8F70      		andi r24,lo8(15)
+ 257 0020 982B      		or r25,r24
+ 258 0022 9BB9      		out 43-32,r25
+ 259               	/* epilogue start */
+ 260               	.LBE44:
+ 261               	.LBE43:
+ 262               	.LSM37:
+ 263 0024 0895      		ret
+ 264               	.LFE111:
+ 266               		.section	.text.SetupHardware,"ax",@progbits
+ 267               	.global	SetupHardware
+ 269               	SetupHardware:
+ 270               	.LFB108:
+ 271               	.LSM38:
+ 272               	/* prologue: function */
+ 273               	/* frame size = 0 */
+ 274               	.LSM39:
+ 275 0000 84B7      		in r24,84-32
+ 276 0002 877F      		andi r24,lo8(-9)
+ 277 0004 84BF      		out 84-32,r24
+ 278               	.LSM40:
+ 279 0006 88E1      		ldi r24,lo8(24)
+ 280               	/* #APP */
+ 281               	 ;  84 "Mouse.c" 1
+ 282 0008 0FB6      		in __tmp_reg__, __SREG__
+ 283 000a F894      		cli
+ 284 000c 8093 6000 		sts 96, r24
+ 285 0010 1092 6000 		sts 96, __zero_reg__
+ 286 0014 0FBE      		out __SREG__,__tmp_reg__
+ 287               		
+ 288               	 ;  0 "" 2
+ 289               	/* #NOAPP */
+ 290               	.LBB45:
+ 291               	.LSM41:
+ 292 0016 80E0      		ldi r24,lo8(0)
+ 293 0018 90E0      		ldi r25,hi8(0)
+ 294 001a 20E8      		ldi r18,lo8(-128)
+ 295               	/* #APP */
+ 296               	 ;  87 "Mouse.c" 1
+ 297 001c 0FB6      		in __tmp_reg__,__SREG__
+ 298 001e F894      		cli
+ 299 0020 2093 6100 		sts 97, r18
+ 300 0024 8093 6100 		sts 97, r24
+ 301 0028 0FBE      		out __SREG__, __tmp_reg__
+ 302               	 ;  0 "" 2
+ 303               	/* #NOAPP */
+ 304               	.LBE45:
+ 305               	.LBB46:
+ 306               	.LBB47:
+ 307               	.LSM42:
+ 308 002a 84B1      		in r24,36-32
+ 309 002c 8F71      		andi r24,lo8(31)
+ 310 002e 84B9      		out 36-32,r24
+ 311               	.LSM43:
+ 312 0030 8DB1      		in r24,45-32
+ 313 0032 8F7C      		andi r24,lo8(-49)
+ 314 0034 8DB9      		out 45-32,r24
+ 315               	.LSM44:
+ 316 0036 85B1      		in r24,37-32
+ 317 0038 806E      		ori r24,lo8(-32)
+ 318 003a 85B9      		out 37-32,r24
+ 319               	.LSM45:
+ 320 003c 8EB1      		in r24,46-32
+ 321 003e 8063      		ori r24,lo8(48)
+ 322 0040 8EB9      		out 46-32,r24
+ 323               	.LBE47:
+ 324               	.LBE46:
+ 325               	.LBB48:
+ 326               	.LBB49:
+ 327               	.LSM46:
+ 328 0042 8AB1      		in r24,42-32
+ 329 0044 806F      		ori r24,lo8(-16)
+ 330 0046 8AB9      		out 42-32,r24
+ 331               	.LSM47:
+ 332 0048 8BB1      		in r24,43-32
+ 333 004a 8F70      		andi r24,lo8(15)
+ 334 004c 8BB9      		out 43-32,r24
+ 335               	.LBE49:
+ 336               	.LBE48:
+ 337               	.LBB50:
+ 338               	.LBB51:
+ 339               	.LSM48:
+ 340 004e 6A98      		cbi 45-32,2
+ 341               	.LSM49:
+ 342 0050 729A      		sbi 46-32,2
+ 343               	.LBE51:
+ 344               	.LBE50:
+ 345               	.LSM50:
+ 346 0052 0E94 0000 		call USB_Init
+ 347               	/* epilogue start */
+ 348               	.LSM51:
+ 349 0056 0895      		ret
+ 350               	.LFE108:
+ 352               		.section	.text.main,"ax",@progbits
+ 353               	.global	main
+ 355               	main:
+ 356               	.LFB107:
+ 357               	.LSM52:
+ 358               	/* prologue: function */
+ 359               	/* frame size = 0 */
+ 360               	.LSM53:
+ 361 0000 0E94 0000 		call SetupHardware
+ 362               	.LBB52:
+ 363               	.LBB53:
+ 364               	.LSM54:
+ 365 0004 8BB1      		in r24,43-32
+ 366 0006 8F70      		andi r24,lo8(15)
+ 367 0008 8061      		ori r24,lo8(16)
+ 368 000a 8BB9      		out 43-32,r24
+ 369               	.LBE53:
+ 370               	.LBE52:
+ 371               	.LSM55:
+ 372               	/* #APP */
+ 373               	 ;  70 "Mouse.c" 1
+ 374 000c 7894      		sei
+ 375               	 ;  0 "" 2
+ 376               	/* #NOAPP */
+ 377               	.L29:
+ 378               	.LSM56:
+ 379 000e 80E0      		ldi r24,lo8(Mouse_HID_Interface)
+ 380 0010 90E0      		ldi r25,hi8(Mouse_HID_Interface)
+ 381 0012 0E94 0000 		call HID_Device_USBTask
+ 382               	.LSM57:
+ 383 0016 0E94 0000 		call USB_USBTask
+ 384 001a 00C0      		rjmp .L29
+ 385               	.LFE107:
+ 387               	.global	Mouse_HID_Interface
+ 388               		.data
+ 391               	Mouse_HID_Interface:
+ 392 0000 00        		.byte	0
+ 393 0001 01        		.byte	1
+ 394 0002 0800      		.word	8
+ 395 0004 00        		.byte	0
+ 396 0005 0000      		.word	PrevMouseHIDReportBuffer
+ 397 0007 03        		.byte	3
+ 398 0008 0000 0000 		.skip 5,0
+ 398      00
+ 399               		.lcomm PrevMouseHIDReportBuffer,3
+ 488               	.Letext0:
+DEFINED SYMBOLS
+                            *ABS*:00000000 Mouse.c
+C:\Users\Eddie\AppData\Local\Temp/ccpsJshg.s:2      *ABS*:0000003f __SREG__
+C:\Users\Eddie\AppData\Local\Temp/ccpsJshg.s:3      *ABS*:0000003e __SP_H__
+C:\Users\Eddie\AppData\Local\Temp/ccpsJshg.s:4      *ABS*:0000003d __SP_L__
+C:\Users\Eddie\AppData\Local\Temp/ccpsJshg.s:5      *ABS*:00000034 __CCP__
+C:\Users\Eddie\AppData\Local\Temp/ccpsJshg.s:6      *ABS*:00000000 __tmp_reg__
+C:\Users\Eddie\AppData\Local\Temp/ccpsJshg.s:7      *ABS*:00000001 __zero_reg__
+C:\Users\Eddie\AppData\Local\Temp/ccpsJshg.s:19     .text.EVENT_USB_Device_Connect:00000000 EVENT_USB_Device_Connect
+C:\Users\Eddie\AppData\Local\Temp/ccpsJshg.s:41     .text.EVENT_USB_Device_Disconnect:00000000 EVENT_USB_Device_Disconnect
+C:\Users\Eddie\AppData\Local\Temp/ccpsJshg.s:63     .text.EVENT_USB_Device_StartOfFrame:00000000 EVENT_USB_Device_StartOfFrame
+C:\Users\Eddie\AppData\Local\Temp/ccpsJshg.s:391    .data:00000000 Mouse_HID_Interface
+C:\Users\Eddie\AppData\Local\Temp/ccpsJshg.s:88     .text.CALLBACK_HID_Device_CreateHIDReport:00000000 CALLBACK_HID_Device_CreateHIDReport
+C:\Users\Eddie\AppData\Local\Temp/ccpsJshg.s:192    .text.CALLBACK_HID_Device_ProcessHIDReport:00000000 CALLBACK_HID_Device_ProcessHIDReport
+C:\Users\Eddie\AppData\Local\Temp/ccpsJshg.s:206    .text.EVENT_USB_Device_ControlRequest:00000000 EVENT_USB_Device_ControlRequest
+C:\Users\Eddie\AppData\Local\Temp/ccpsJshg.s:223    .text.EVENT_USB_Device_ConfigurationChanged:00000000 EVENT_USB_Device_ConfigurationChanged
+C:\Users\Eddie\AppData\Local\Temp/ccpsJshg.s:269    .text.SetupHardware:00000000 SetupHardware
+C:\Users\Eddie\AppData\Local\Temp/ccpsJshg.s:355    .text.main:00000000 main
+                             .bss:00000000 PrevMouseHIDReportBuffer
+
+UNDEFINED SYMBOLS
+HID_Device_ProcessControlRequest
+HID_Device_ConfigureEndpoints
+USB_Init
+HID_Device_USBTask
+USB_USBTask
+__do_copy_data
+__do_clear_bss

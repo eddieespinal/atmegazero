@@ -1,0 +1,558 @@
+   1               		.file	"VirtualSerialMouse.c"
+   2               	__SREG__ = 0x3f
+   3               	__SP_H__ = 0x3e
+   4               	__SP_L__ = 0x3d
+   5               	__CCP__  = 0x34
+   6               	__tmp_reg__ = 0
+   7               	__zero_reg__ = 1
+  15               	.Ltext0:
+  16               		.section	.text.EVENT_USB_Device_Connect,"ax",@progbits
+  17               	.global	EVENT_USB_Device_Connect
+  19               	EVENT_USB_Device_Connect:
+  20               	.LFB110:
+  21               	.LSM0:
+  22               	/* prologue: function */
+  23               	/* frame size = 0 */
+  24               	.LBB29:
+  25               	.LBB30:
+  26               	.LSM1:
+  27 0000 8BB1      		in r24,43-32
+  28 0002 8F70      		andi r24,lo8(15)
+  29 0004 806A      		ori r24,lo8(-96)
+  30 0006 8BB9      		out 43-32,r24
+  31               	/* epilogue start */
+  32               	.LBE30:
+  33               	.LBE29:
+  34               	.LSM2:
+  35 0008 0895      		ret
+  36               	.LFE110:
+  38               		.section	.text.EVENT_USB_Device_Disconnect,"ax",@progbits
+  39               	.global	EVENT_USB_Device_Disconnect
+  41               	EVENT_USB_Device_Disconnect:
+  42               	.LFB111:
+  43               	.LSM3:
+  44               	/* prologue: function */
+  45               	/* frame size = 0 */
+  46               	.LBB31:
+  47               	.LBB32:
+  48               	.LSM4:
+  49 0000 8BB1      		in r24,43-32
+  50 0002 8F70      		andi r24,lo8(15)
+  51 0004 8061      		ori r24,lo8(16)
+  52 0006 8BB9      		out 43-32,r24
+  53               	/* epilogue start */
+  54               	.LBE32:
+  55               	.LBE31:
+  56               	.LSM5:
+  57 0008 0895      		ret
+  58               	.LFE111:
+  60               		.section	.text.EVENT_USB_Device_StartOfFrame,"ax",@progbits
+  61               	.global	EVENT_USB_Device_StartOfFrame
+  63               	EVENT_USB_Device_StartOfFrame:
+  64               	.LFB114:
+  65               	.LSM6:
+  66               	/* prologue: function */
+  67               	/* frame size = 0 */
+  68               	.LBB33:
+  69               	.LBB34:
+  70               	.LSM7:
+  71 0000 8091 0000 		lds r24,Mouse_HID_Interface+11
+  72 0004 9091 0000 		lds r25,(Mouse_HID_Interface+11)+1
+  73 0008 0097      		sbiw r24,0
+  74 000a 01F0      		breq .L7
+  75               	.LSM8:
+  76 000c 0197      		sbiw r24,1
+  77 000e 9093 0000 		sts (Mouse_HID_Interface+11)+1,r25
+  78 0012 8093 0000 		sts Mouse_HID_Interface+11,r24
+  79               	.L7:
+  80 0016 0895      		ret
+  81               	.LBE34:
+  82               	.LBE33:
+  83               	.LFE114:
+  85               		.section	.text.CALLBACK_HID_Device_CreateHIDReport,"ax",@progbits
+  86               	.global	CALLBACK_HID_Device_CreateHIDReport
+  88               	CALLBACK_HID_Device_CreateHIDReport:
+  89               	.LFB115:
+  90               	.LSM9:
+  91               	.LVL0:
+  92 0000 0F93      		push r16
+  93               	.LVL1:
+  94 0002 1F93      		push r17
+  95               	/* prologue: function */
+  96               	/* frame size = 0 */
+  97 0004 D801      		movw r26,r16
+  98               	.LVL2:
+  99               	.LSM10:
+ 100 0006 F901      		movw r30,r18
+ 101               	.LVL3:
+ 102               	.LBB35:
+ 103               	.LBB36:
+ 104               	.LSM11:
+ 105 0008 23B1      		in r18,35-32
+ 106               	.LVL4:
+ 107 000a 8CB1      		in r24,44-32
+ 108               	.LVL5:
+ 109 000c 8095      		com r24
+ 110 000e 90E0      		ldi r25,lo8(0)
+ 111 0010 8073      		andi r24,lo8(48)
+ 112 0012 9070      		andi r25,hi8(48)
+ 113 0014 9595      		asr r25
+ 114 0016 8795      		ror r24
+ 115 0018 2095      		com r18
+ 116 001a 207E      		andi r18,lo8(-32)
+ 117 001c 282B      		or r18,r24
+ 118               	.LBE36:
+ 119               	.LBE35:
+ 120               	.LBB37:
+ 121               	.LBB38:
+ 122               	.LSM12:
+ 123 001e 3CB1      		in r19,44-32
+ 124               	.LBE38:
+ 125               	.LBE37:
+ 126               	.LSM13:
+ 127 0020 27FF      		sbrs r18,7
+ 128 0022 00C0      		rjmp .L9
+ 129               	.LVL6:
+ 130               	.LSM14:
+ 131 0024 8FEF      		ldi r24,lo8(-1)
+ 132 0026 00C0      		rjmp .L16
+ 133               	.L9:
+ 134               	.LSM15:
+ 135 0028 24FF      		sbrs r18,4
+ 136 002a 00C0      		rjmp .L10
+ 137               	.LSM16:
+ 138 002c 81E0      		ldi r24,lo8(1)
+ 139               	.L16:
+ 140 002e 8283      		std Z+2,r24
+ 141               	.LVL7:
+ 142               	.L10:
+ 143               	.LSM17:
+ 144 0030 922F      		mov r25,r18
+ 145 0032 26FF      		sbrs r18,6
+ 146 0034 00C0      		rjmp .L11
+ 147               	.LVL8:
+ 148               	.LSM18:
+ 149 0036 8FEF      		ldi r24,lo8(-1)
+ 150 0038 00C0      		rjmp .L17
+ 151               	.L11:
+ 152               	.LSM19:
+ 153 003a 23FF      		sbrs r18,3
+ 154 003c 00C0      		rjmp .L12
+ 155               	.LSM20:
+ 156 003e 81E0      		ldi r24,lo8(1)
+ 157               	.L17:
+ 158 0040 8183      		std Z+1,r24
+ 159               	.L12:
+ 160               	.LSM21:
+ 161 0042 95FF      		sbrs r25,5
+ 162 0044 00C0      		rjmp .L13
+ 163               	.LSM22:
+ 164 0046 8081      		ld r24,Z
+ 165 0048 8160      		ori r24,lo8(1)
+ 166 004a 8083      		st Z,r24
+ 167               	.L13:
+ 168               	.LSM23:
+ 169 004c 32FD      		sbrc r19,2
+ 170 004e 00C0      		rjmp .L14
+ 171               	.LSM24:
+ 172 0050 8081      		ld r24,Z
+ 173 0052 8260      		ori r24,lo8(2)
+ 174 0054 8083      		st Z,r24
+ 175               	.L14:
+ 176               	.LSM25:
+ 177 0056 83E0      		ldi r24,lo8(3)
+ 178 0058 90E0      		ldi r25,hi8(3)
+ 179 005a 8D93      		st X+,r24
+ 180 005c 9C93      		st X,r25
+ 181               	.LSM26:
+ 182 005e 81E0      		ldi r24,lo8(1)
+ 183               	/* epilogue start */
+ 184 0060 1F91      		pop r17
+ 185 0062 0F91      		pop r16
+ 186 0064 0895      		ret
+ 187               	.LFE115:
+ 189               		.section	.text.CALLBACK_HID_Device_ProcessHIDReport,"ax",@progbits
+ 190               	.global	CALLBACK_HID_Device_ProcessHIDReport
+ 192               	CALLBACK_HID_Device_ProcessHIDReport:
+ 193               	.LFB116:
+ 194               	.LSM27:
+ 195               	.LVL9:
+ 196               	/* prologue: function */
+ 197               	/* frame size = 0 */
+ 198               	/* epilogue start */
+ 199               	.LSM28:
+ 200 0000 0895      		ret
+ 201               	.LFE116:
+ 203               		.section	.text.EVENT_USB_Device_ControlRequest,"ax",@progbits
+ 204               	.global	EVENT_USB_Device_ControlRequest
+ 206               	EVENT_USB_Device_ControlRequest:
+ 207               	.LFB113:
+ 208               	.LSM29:
+ 209               	/* prologue: function */
+ 210               	/* frame size = 0 */
+ 211               	.LSM30:
+ 212 0000 80E0      		ldi r24,lo8(VirtualSerial_CDC_Interface)
+ 213 0002 90E0      		ldi r25,hi8(VirtualSerial_CDC_Interface)
+ 214 0004 0E94 0000 		call CDC_Device_ProcessControlRequest
+ 215               	.LSM31:
+ 216 0008 80E0      		ldi r24,lo8(Mouse_HID_Interface)
+ 217 000a 90E0      		ldi r25,hi8(Mouse_HID_Interface)
+ 218 000c 0E94 0000 		call HID_Device_ProcessControlRequest
+ 219               	/* epilogue start */
+ 220               	.LSM32:
+ 221 0010 0895      		ret
+ 222               	.LFE113:
+ 224               		.section	.text.EVENT_USB_Device_ConfigurationChanged,"ax",@progbits
+ 225               	.global	EVENT_USB_Device_ConfigurationChanged
+ 227               	EVENT_USB_Device_ConfigurationChanged:
+ 228               	.LFB112:
+ 229               	.LSM33:
+ 230 0000 0F93      		push r16
+ 231 0002 1F93      		push r17
+ 232               	/* prologue: function */
+ 233               	/* frame size = 0 */
+ 234               	.LSM34:
+ 235 0004 80E0      		ldi r24,lo8(Mouse_HID_Interface)
+ 236 0006 90E0      		ldi r25,hi8(Mouse_HID_Interface)
+ 237 0008 0E94 0000 		call HID_Device_ConfigureEndpoints
+ 238 000c 082F      		mov r16,r24
+ 239               	.LSM35:
+ 240 000e 80E0      		ldi r24,lo8(VirtualSerial_CDC_Interface)
+ 241 0010 90E0      		ldi r25,hi8(VirtualSerial_CDC_Interface)
+ 242 0012 0E94 0000 		call CDC_Device_ConfigureEndpoints
+ 243               	.LBB39:
+ 244               	.LBB40:
+ 245               	.LBB41:
+ 246               	.LBB42:
+ 247               	.LSM36:
+ 248 0016 9091 E200 		lds r25,226
+ 249 001a 9460      		ori r25,lo8(4)
+ 250 001c 9093 E200 		sts 226,r25
+ 251               	.LBE42:
+ 252               	.LBE41:
+ 253               	.LBE40:
+ 254               	.LBE39:
+ 255               	.LSM37:
+ 256 0020 10E0      		ldi r17,lo8(0)
+ 257 0022 90E0      		ldi r25,lo8(0)
+ 258 0024 0823      		and r16,r24
+ 259 0026 1923      		and r17,r25
+ 260 0028 00FF      		sbrs r16,0
+ 261 002a 00C0      		rjmp .L23
+ 262 002c 90E6      		ldi r25,lo8(96)
+ 263 002e 00C0      		rjmp .L24
+ 264               	.L23:
+ 265 0030 90E9      		ldi r25,lo8(-112)
+ 266               	.L24:
+ 267               	.LBB43:
+ 268               	.LBB44:
+ 269               	.LSM38:
+ 270 0032 8BB1      		in r24,43-32
+ 271 0034 8F70      		andi r24,lo8(15)
+ 272 0036 982B      		or r25,r24
+ 273 0038 9BB9      		out 43-32,r25
+ 274               	/* epilogue start */
+ 275               	.LBE44:
+ 276               	.LBE43:
+ 277               	.LSM39:
+ 278 003a 1F91      		pop r17
+ 279 003c 0F91      		pop r16
+ 280 003e 0895      		ret
+ 281               	.LFE112:
+ 283               		.data
+ 284               	.LC0:
+ 285 0000 4A6F 7973 		.string	"Joystick Down\r\n"
+ 285      7469 636B 
+ 285      2044 6F77 
+ 285      6E0D 0A00 
+ 286               	.LC1:
+ 287 0010 4A6F 7973 		.string	"Joystick Left\r\n"
+ 287      7469 636B 
+ 287      204C 6566 
+ 287      740D 0A00 
+ 288               	.LC2:
+ 289 0020 4A6F 7973 		.string	"Joystick Right\r\n"
+ 289      7469 636B 
+ 289      2052 6967 
+ 289      6874 0D0A 
+ 289      00
+ 290               	.LC3:
+ 291 0031 4A6F 7973 		.string	"Joystick Pressed\r\n"
+ 291      7469 636B 
+ 291      2050 7265 
+ 291      7373 6564 
+ 291      0D0A 00
+ 292               	.LC4:
+ 293 0044 4A6F 7973 		.string	"Joystick Up\r\n"
+ 293      7469 636B 
+ 293      2055 700D 
+ 293      0A00 
+ 294               		.section	.text.CheckJoystickMovement,"ax",@progbits
+ 295               	.global	CheckJoystickMovement
+ 297               	CheckJoystickMovement:
+ 298               	.LFB109:
+ 299               	.LSM40:
+ 300               	/* prologue: function */
+ 301               	/* frame size = 0 */
+ 302               	.LBB45:
+ 303               	.LBB46:
+ 304               	.LSM41:
+ 305 0000 23B1      		in r18,35-32
+ 306 0002 8CB1      		in r24,44-32
+ 307 0004 8095      		com r24
+ 308 0006 90E0      		ldi r25,lo8(0)
+ 309 0008 8073      		andi r24,lo8(48)
+ 310 000a 9070      		andi r25,hi8(48)
+ 311 000c 9595      		asr r25
+ 312 000e 8795      		ror r24
+ 313 0010 2095      		com r18
+ 314 0012 207E      		andi r18,lo8(-32)
+ 315 0014 282B      		or r18,r24
+ 316               	.LBE46:
+ 317               	.LBE45:
+ 318               	.LSM42:
+ 319 0016 27FD      		sbrc r18,7
+ 320 0018 00C0      		rjmp .L27
+ 321               	.LSM43:
+ 322 001a 24FF      		sbrs r18,4
+ 323 001c 00C0      		rjmp .L28
+ 324 001e 60E0      		ldi r22,lo8(.LC0)
+ 325 0020 70E0      		ldi r23,hi8(.LC0)
+ 326               	.LVL10:
+ 327 0022 00C0      		rjmp .L29
+ 328               	.LVL11:
+ 329               	.L28:
+ 330               	.LSM44:
+ 331 0024 26FF      		sbrs r18,6
+ 332 0026 00C0      		rjmp .L30
+ 333 0028 60E0      		ldi r22,lo8(.LC1)
+ 334 002a 70E0      		ldi r23,hi8(.LC1)
+ 335               	.LVL12:
+ 336 002c 00C0      		rjmp .L29
+ 337               	.LVL13:
+ 338               	.L30:
+ 339               	.LSM45:
+ 340 002e 23FF      		sbrs r18,3
+ 341 0030 00C0      		rjmp .L31
+ 342 0032 60E0      		ldi r22,lo8(.LC2)
+ 343 0034 70E0      		ldi r23,hi8(.LC2)
+ 344               	.LVL14:
+ 345 0036 00C0      		rjmp .L29
+ 346               	.LVL15:
+ 347               	.L31:
+ 348               	.LSM46:
+ 349 0038 25FF      		sbrs r18,5
+ 350 003a 00C0      		rjmp .L32
+ 351 003c 60E0      		ldi r22,lo8(.LC3)
+ 352 003e 70E0      		ldi r23,hi8(.LC3)
+ 353               	.LVL16:
+ 354 0040 00C0      		rjmp .L29
+ 355               	.LVL17:
+ 356               	.L32:
+ 357               	.LSM47:
+ 358 0042 1092 0000 		sts ActionSent.4022,__zero_reg__
+ 359 0046 0895      		ret
+ 360               	.L27:
+ 361 0048 60E0      		ldi r22,lo8(.LC4)
+ 362 004a 70E0      		ldi r23,hi8(.LC4)
+ 363               	.LVL18:
+ 364               	.L29:
+ 365               	.LSM48:
+ 366 004c 8091 0000 		lds r24,ActionSent.4022
+ 367 0050 8823      		tst r24
+ 368 0052 01F4      		brne .L34
+ 369               	.LSM49:
+ 370 0054 81E0      		ldi r24,lo8(1)
+ 371 0056 8093 0000 		sts ActionSent.4022,r24
+ 372               	.LSM50:
+ 373 005a 80E0      		ldi r24,lo8(VirtualSerial_CDC_Interface)
+ 374 005c 90E0      		ldi r25,hi8(VirtualSerial_CDC_Interface)
+ 375 005e 0E94 0000 		call CDC_Device_SendString
+ 376               	.LVL19:
+ 377               	.L34:
+ 378 0062 0895      		ret
+ 379               	.LFE109:
+ 381               		.section	.text.SetupHardware,"ax",@progbits
+ 382               	.global	SetupHardware
+ 384               	SetupHardware:
+ 385               	.LFB108:
+ 386               	.LSM51:
+ 387               	/* prologue: function */
+ 388               	/* frame size = 0 */
+ 389               	.LSM52:
+ 390 0000 84B7      		in r24,84-32
+ 391 0002 877F      		andi r24,lo8(-9)
+ 392 0004 84BF      		out 84-32,r24
+ 393               	.LSM53:
+ 394 0006 88E1      		ldi r24,lo8(24)
+ 395               	/* #APP */
+ 396               	 ;  114 "VirtualSerialMouse.c" 1
+ 397 0008 0FB6      		in __tmp_reg__, __SREG__
+ 398 000a F894      		cli
+ 399 000c 8093 6000 		sts 96, r24
+ 400 0010 1092 6000 		sts 96, __zero_reg__
+ 401 0014 0FBE      		out __SREG__,__tmp_reg__
+ 402               		
+ 403               	 ;  0 "" 2
+ 404               	/* #NOAPP */
+ 405               	.LBB47:
+ 406               	.LSM54:
+ 407 0016 80E0      		ldi r24,lo8(0)
+ 408 0018 90E0      		ldi r25,hi8(0)
+ 409 001a 20E8      		ldi r18,lo8(-128)
+ 410               	/* #APP */
+ 411               	 ;  117 "VirtualSerialMouse.c" 1
+ 412 001c 0FB6      		in __tmp_reg__,__SREG__
+ 413 001e F894      		cli
+ 414 0020 2093 6100 		sts 97, r18
+ 415 0024 8093 6100 		sts 97, r24
+ 416 0028 0FBE      		out __SREG__, __tmp_reg__
+ 417               	 ;  0 "" 2
+ 418               	/* #NOAPP */
+ 419               	.LBE47:
+ 420               	.LBB48:
+ 421               	.LBB49:
+ 422               	.LSM55:
+ 423 002a 84B1      		in r24,36-32
+ 424 002c 8F71      		andi r24,lo8(31)
+ 425 002e 84B9      		out 36-32,r24
+ 426               	.LSM56:
+ 427 0030 8DB1      		in r24,45-32
+ 428 0032 8F7C      		andi r24,lo8(-49)
+ 429 0034 8DB9      		out 45-32,r24
+ 430               	.LSM57:
+ 431 0036 85B1      		in r24,37-32
+ 432 0038 806E      		ori r24,lo8(-32)
+ 433 003a 85B9      		out 37-32,r24
+ 434               	.LSM58:
+ 435 003c 8EB1      		in r24,46-32
+ 436 003e 8063      		ori r24,lo8(48)
+ 437 0040 8EB9      		out 46-32,r24
+ 438               	.LBE49:
+ 439               	.LBE48:
+ 440               	.LBB50:
+ 441               	.LBB51:
+ 442               	.LSM59:
+ 443 0042 8AB1      		in r24,42-32
+ 444 0044 806F      		ori r24,lo8(-16)
+ 445 0046 8AB9      		out 42-32,r24
+ 446               	.LSM60:
+ 447 0048 8BB1      		in r24,43-32
+ 448 004a 8F70      		andi r24,lo8(15)
+ 449 004c 8BB9      		out 43-32,r24
+ 450               	.LBE51:
+ 451               	.LBE50:
+ 452               	.LSM61:
+ 453 004e 0E94 0000 		call USB_Init
+ 454               	/* epilogue start */
+ 455               	.LSM62:
+ 456 0052 0895      		ret
+ 457               	.LFE108:
+ 459               		.section	.text.main,"ax",@progbits
+ 460               	.global	main
+ 462               	main:
+ 463               	.LFB107:
+ 464               	.LSM63:
+ 465               	/* prologue: function */
+ 466               	/* frame size = 0 */
+ 467               	.LSM64:
+ 468 0000 0E94 0000 		call SetupHardware
+ 469               	.LBB52:
+ 470               	.LBB53:
+ 471               	.LSM65:
+ 472 0004 8BB1      		in r24,43-32
+ 473 0006 8F70      		andi r24,lo8(15)
+ 474 0008 8061      		ori r24,lo8(16)
+ 475 000a 8BB9      		out 43-32,r24
+ 476               	.LBE53:
+ 477               	.LBE52:
+ 478               	.LSM66:
+ 479               	/* #APP */
+ 480               	 ;  94 "VirtualSerialMouse.c" 1
+ 481 000c 7894      		sei
+ 482               	 ;  0 "" 2
+ 483               	/* #NOAPP */
+ 484               	.L38:
+ 485               	.LSM67:
+ 486 000e 0E94 0000 		call CheckJoystickMovement
+ 487               	.LSM68:
+ 488 0012 80E0      		ldi r24,lo8(VirtualSerial_CDC_Interface)
+ 489 0014 90E0      		ldi r25,hi8(VirtualSerial_CDC_Interface)
+ 490 0016 0E94 0000 		call CDC_Device_ReceiveByte
+ 491               	.LSM69:
+ 492 001a 80E0      		ldi r24,lo8(VirtualSerial_CDC_Interface)
+ 493 001c 90E0      		ldi r25,hi8(VirtualSerial_CDC_Interface)
+ 494 001e 0E94 0000 		call CDC_Device_USBTask
+ 495               	.LSM70:
+ 496 0022 80E0      		ldi r24,lo8(Mouse_HID_Interface)
+ 497 0024 90E0      		ldi r25,hi8(Mouse_HID_Interface)
+ 498 0026 0E94 0000 		call HID_Device_USBTask
+ 499               	.LSM71:
+ 500 002a 0E94 0000 		call USB_USBTask
+ 501 002e 00C0      		rjmp .L38
+ 502               	.LFE107:
+ 504               	.global	VirtualSerial_CDC_Interface
+ 505               		.data
+ 508               	VirtualSerial_CDC_Interface:
+ 509 0052 00        		.byte	0
+ 510 0053 03        		.byte	3
+ 511 0054 1000      		.word	16
+ 512 0056 00        		.byte	0
+ 513 0057 04        		.byte	4
+ 514 0058 1000      		.word	16
+ 515 005a 00        		.byte	0
+ 516 005b 02        		.byte	2
+ 517 005c 0800      		.word	8
+ 518 005e 00        		.byte	0
+ 519 005f 0000 0000 		.skip 9,0
+ 519      0000 0000 
+ 519      00
+ 520               	.global	Mouse_HID_Interface
+ 523               	Mouse_HID_Interface:
+ 524 0068 02        		.byte	2
+ 525 0069 01        		.byte	1
+ 526 006a 0800      		.word	8
+ 527 006c 00        		.byte	0
+ 528 006d 0000      		.word	PrevMouseHIDReportBuffer
+ 529 006f 03        		.byte	3
+ 530 0070 0000 0000 		.skip 5,0
+ 530      00
+ 531               		.lcomm ActionSent.4022,1
+ 532               		.lcomm PrevMouseHIDReportBuffer,3
+ 629               	.Letext0:
+DEFINED SYMBOLS
+                            *ABS*:00000000 VirtualSerialMouse.c
+C:\Users\Eddie\AppData\Local\Temp/ccBhUgjj.s:2      *ABS*:0000003f __SREG__
+C:\Users\Eddie\AppData\Local\Temp/ccBhUgjj.s:3      *ABS*:0000003e __SP_H__
+C:\Users\Eddie\AppData\Local\Temp/ccBhUgjj.s:4      *ABS*:0000003d __SP_L__
+C:\Users\Eddie\AppData\Local\Temp/ccBhUgjj.s:5      *ABS*:00000034 __CCP__
+C:\Users\Eddie\AppData\Local\Temp/ccBhUgjj.s:6      *ABS*:00000000 __tmp_reg__
+C:\Users\Eddie\AppData\Local\Temp/ccBhUgjj.s:7      *ABS*:00000001 __zero_reg__
+C:\Users\Eddie\AppData\Local\Temp/ccBhUgjj.s:19     .text.EVENT_USB_Device_Connect:00000000 EVENT_USB_Device_Connect
+C:\Users\Eddie\AppData\Local\Temp/ccBhUgjj.s:41     .text.EVENT_USB_Device_Disconnect:00000000 EVENT_USB_Device_Disconnect
+C:\Users\Eddie\AppData\Local\Temp/ccBhUgjj.s:63     .text.EVENT_USB_Device_StartOfFrame:00000000 EVENT_USB_Device_StartOfFrame
+C:\Users\Eddie\AppData\Local\Temp/ccBhUgjj.s:523    .data:00000068 Mouse_HID_Interface
+C:\Users\Eddie\AppData\Local\Temp/ccBhUgjj.s:88     .text.CALLBACK_HID_Device_CreateHIDReport:00000000 CALLBACK_HID_Device_CreateHIDReport
+C:\Users\Eddie\AppData\Local\Temp/ccBhUgjj.s:192    .text.CALLBACK_HID_Device_ProcessHIDReport:00000000 CALLBACK_HID_Device_ProcessHIDReport
+C:\Users\Eddie\AppData\Local\Temp/ccBhUgjj.s:206    .text.EVENT_USB_Device_ControlRequest:00000000 EVENT_USB_Device_ControlRequest
+C:\Users\Eddie\AppData\Local\Temp/ccBhUgjj.s:508    .data:00000052 VirtualSerial_CDC_Interface
+C:\Users\Eddie\AppData\Local\Temp/ccBhUgjj.s:227    .text.EVENT_USB_Device_ConfigurationChanged:00000000 EVENT_USB_Device_ConfigurationChanged
+C:\Users\Eddie\AppData\Local\Temp/ccBhUgjj.s:297    .text.CheckJoystickMovement:00000000 CheckJoystickMovement
+                             .bss:00000000 ActionSent.4022
+C:\Users\Eddie\AppData\Local\Temp/ccBhUgjj.s:384    .text.SetupHardware:00000000 SetupHardware
+C:\Users\Eddie\AppData\Local\Temp/ccBhUgjj.s:462    .text.main:00000000 main
+C:\Users\Eddie\AppData\Local\Temp/ccBhUgjj.s:531    .bss:00000001 PrevMouseHIDReportBuffer
+
+UNDEFINED SYMBOLS
+CDC_Device_ProcessControlRequest
+HID_Device_ProcessControlRequest
+HID_Device_ConfigureEndpoints
+CDC_Device_ConfigureEndpoints
+CDC_Device_SendString
+USB_Init
+CDC_Device_ReceiveByte
+CDC_Device_USBTask
+HID_Device_USBTask
+USB_USBTask
+__do_copy_data
+__do_clear_bss

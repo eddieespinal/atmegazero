@@ -1,0 +1,128 @@
+   1               		.file	"UDP.c"
+   2               	__SREG__ = 0x3f
+   3               	__SP_H__ = 0x3e
+   4               	__SP_L__ = 0x3d
+   5               	__CCP__  = 0x34
+   6               	__tmp_reg__ = 0
+   7               	__zero_reg__ = 1
+  15               	.Ltext0:
+  16               		.section	.text.UDP_ProcessUDPPacket,"ax",@progbits
+  17               	.global	UDP_ProcessUDPPacket
+  19               	UDP_ProcessUDPPacket:
+  20               	.LFB103:
+  21               	.LSM0:
+  22               	.LVL0:
+  23 0000 EF92      		push r14
+  24 0002 FF92      		push r15
+  25 0004 0F93      		push r16
+  26 0006 1F93      		push r17
+  27 0008 CF93      		push r28
+  28 000a DF93      		push r29
+  29               	/* prologue: function */
+  30               	/* frame size = 0 */
+  31 000c 7C01      		movw r14,r24
+  32 000e EB01      		movw r28,r22
+  33 0010 8A01      		movw r16,r20
+  34               	.LSM1:
+  35 0012 CB01      		movw r24,r22
+  36               	.LVL1:
+  37 0014 0E94 0000 		call DecodeUDPHeader
+  38               	.LVL2:
+  39               	.LBB6:
+  40               	.LBB7:
+  41               	.LSM2:
+  42 0018 8A81      		ldd r24,Y+2
+  43 001a 9B81      		ldd r25,Y+3
+  44               	.LVL3:
+  45               	.LSM3:
+  46 001c 282F      		mov r18,r24
+  47               	.LVL4:
+  48               	.LSM4:
+  49 001e 892F      		mov r24,r25
+  50               	.LVL5:
+  51               	.LSM5:
+  52 0020 922F      		mov r25,r18
+  53               	.LVL6:
+  54               	.LBE7:
+  55               	.LBE6:
+  56               	.LSM6:
+  57 0022 8334      		cpi r24,67
+  58 0024 9105      		cpc r25,__zero_reg__
+  59 0026 01F4      		brne .L2
+  60               	.LSM7:
+  61 0028 BE01      		movw r22,r28
+  62 002a 685F      		subi r22,lo8(-(8))
+  63 002c 7F4F      		sbci r23,hi8(-(8))
+  64 002e A801      		movw r20,r16
+  65 0030 485F      		subi r20,lo8(-(8))
+  66 0032 5F4F      		sbci r21,hi8(-(8))
+  67 0034 C701      		movw r24,r14
+  68               	.LVL7:
+  69 0036 0E94 0000 		call DHCP_ProcessDHCPPacket
+  70               	.LVL8:
+  71 003a 9C01      		movw r18,r24
+  72               	.LVL9:
+  73               	.LSM8:
+  74 003c 1816      		cp __zero_reg__,r24
+  75 003e 1906      		cpc __zero_reg__,r25
+  76 0040 04F4      		brge .L2
+  77               	.LVL10:
+  78               	.LSM9:
+  79 0042 8A81      		ldd r24,Y+2
+  80 0044 9B81      		ldd r25,Y+3
+  81               	.LVL11:
+  82 0046 F801      		movw r30,r16
+  83 0048 9183      		std Z+1,r25
+  84 004a 8083      		st Z,r24
+  85               	.LSM10:
+  86 004c 8881      		ld r24,Y
+  87 004e 9981      		ldd r25,Y+1
+  88 0050 9383      		std Z+3,r25
+  89 0052 8283      		std Z+2,r24
+  90               	.LSM11:
+  91 0054 1782      		std Z+7,__zero_reg__
+  92 0056 1682      		std Z+6,__zero_reg__
+  93               	.LSM12:
+  94 0058 C901      		movw r24,r18
+  95 005a 0896      		adiw r24,8
+  96 005c 9483      		std Z+4,r25
+  97 005e 8583      		std Z+5,r24
+  98               	.LSM13:
+  99 0060 9C01      		movw r18,r24
+ 100               	.LVL12:
+ 101 0062 00C0      		rjmp .L4
+ 102               	.LVL13:
+ 103               	.L2:
+ 104 0064 20E0      		ldi r18,lo8(0)
+ 105 0066 30E0      		ldi r19,hi8(0)
+ 106               	.LVL14:
+ 107               	.L4:
+ 108               	.LSM14:
+ 109 0068 C901      		movw r24,r18
+ 110               	.LVL15:
+ 111               	/* epilogue start */
+ 112 006a DF91      		pop r29
+ 113 006c CF91      		pop r28
+ 114               	.LVL16:
+ 115 006e 1F91      		pop r17
+ 116 0070 0F91      		pop r16
+ 117               	.LVL17:
+ 118 0072 FF90      		pop r15
+ 119 0074 EF90      		pop r14
+ 120               	.LVL18:
+ 121 0076 0895      		ret
+ 122               	.LFE103:
+ 148               	.Letext0:
+DEFINED SYMBOLS
+                            *ABS*:00000000 UDP.c
+C:\Users\Eddie\AppData\Local\Temp/cck3AfpV.s:2      *ABS*:0000003f __SREG__
+C:\Users\Eddie\AppData\Local\Temp/cck3AfpV.s:3      *ABS*:0000003e __SP_H__
+C:\Users\Eddie\AppData\Local\Temp/cck3AfpV.s:4      *ABS*:0000003d __SP_L__
+C:\Users\Eddie\AppData\Local\Temp/cck3AfpV.s:5      *ABS*:00000034 __CCP__
+C:\Users\Eddie\AppData\Local\Temp/cck3AfpV.s:6      *ABS*:00000000 __tmp_reg__
+C:\Users\Eddie\AppData\Local\Temp/cck3AfpV.s:7      *ABS*:00000001 __zero_reg__
+C:\Users\Eddie\AppData\Local\Temp/cck3AfpV.s:19     .text.UDP_ProcessUDPPacket:00000000 UDP_ProcessUDPPacket
+
+UNDEFINED SYMBOLS
+DecodeUDPHeader
+DHCP_ProcessDHCPPacket

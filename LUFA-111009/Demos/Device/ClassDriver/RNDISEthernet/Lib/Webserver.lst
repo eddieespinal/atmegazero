@@ -1,0 +1,429 @@
+   1               		.file	"Webserver.c"
+   2               	__SREG__ = 0x3f
+   3               	__SP_H__ = 0x3e
+   4               	__SP_L__ = 0x3d
+   5               	__CCP__  = 0x34
+   6               	__tmp_reg__ = 0
+   7               	__zero_reg__ = 1
+  15               	.Ltext0:
+  16               		.section	.text.IsHTTPCommand,"ax",@progbits
+  18               	IsHTTPCommand:
+  19               	.LFB104:
+  20               	.LSM0:
+  21               	.LVL0:
+  22               	/* prologue: function */
+  23               	/* frame size = 0 */
+  24               	.LSM1:
+  25 0000 DB01      		movw r26,r22
+  26 0002 0D90      		ld __tmp_reg__,X+
+  27 0004 0020      		tst __tmp_reg__
+  28 0006 01F4      		brne .-6
+  29 0008 1197      		sbiw r26,1
+  30 000a A61B      		sub r26,r22
+  31 000c B70B      		sbc r27,r23
+  32 000e AD01      		movw r20,r26
+  33 0010 0E94 0000 		call strncmp
+  34               	.LVL1:
+  35 0014 9C01      		movw r18,r24
+  36 0016 80E0      		ldi r24,lo8(0)
+  37 0018 232B      		or r18,r19
+  38 001a 01F4      		brne .L2
+  39 001c 81E0      		ldi r24,lo8(1)
+  40               	.L2:
+  41               	.LSM2:
+  42 001e 0895      		ret
+  43               	.LFE104:
+  45               		.data
+  46               	.LC0:
+  47 0000 4745 5400 		.string	"GET"
+  48               	.LC1:
+  49 0004 4745 5420 		.string	"GET / "
+  49      2F20 00
+  50               	.LC2:
+  51 000b 4845 4144 		.string	"HEAD"
+  51      00
+  52               	.LC3:
+  53 0010 4845 4144 		.string	"HEAD / "
+  53      202F 2000 
+  54               	.LC4:
+  55 0018 5452 4143 		.string	"TRACE"
+  55      4500 
+  56               		.section	.text.Webserver_ApplicationCallback,"ax",@progbits
+  57               	.global	Webserver_ApplicationCallback
+  59               	Webserver_ApplicationCallback:
+  60               	.LFB105:
+  61               	.LSM3:
+  62               	.LVL2:
+  63 0000 AF92      		push r10
+  64 0002 BF92      		push r11
+  65 0004 CF92      		push r12
+  66 0006 DF92      		push r13
+  67 0008 EF92      		push r14
+  68 000a FF92      		push r15
+  69 000c 0F93      		push r16
+  70 000e 1F93      		push r17
+  71 0010 CF93      		push r28
+  72 0012 DF93      		push r29
+  73               	/* prologue: function */
+  74               	/* frame size = 0 */
+  75 0014 5C01      		movw r10,r24
+  76 0016 EB01      		movw r28,r22
+  77               	.LSM4:
+  78 0018 8B01      		movw r16,r22
+  79               	.LVL3:
+  80 001a 0E5F      		subi r16,lo8(-(2))
+  81 001c 1F4F      		sbci r17,hi8(-(2))
+  82               	.LSM5:
+  83 001e 33E0      		ldi r19,lo8(515)
+  84 0020 C32E      		mov r12,r19
+  85 0022 32E0      		ldi r19,hi8(515)
+  86 0024 D32E      		mov r13,r19
+  87 0026 C60E      		add r12,r22
+  88 0028 D71E      		adc r13,r23
+  89 002a F601      		movw r30,r12
+  90 002c 8081      		ld r24,Z
+  91               	.LVL4:
+  92 002e 8823      		tst r24
+  93 0030 01F4      		brne .+2
+  94 0032 00C0      		rjmp .L5
+  95 0034 22E0      		ldi r18,lo8(514)
+  96 0036 E22E      		mov r14,r18
+  97 0038 F22E      		mov r15,r18
+  98 003a E60E      		add r14,r22
+  99 003c F71E      		adc r15,r23
+ 100 003e F701      		movw r30,r14
+ 101 0040 8081      		ld r24,Z
+ 102 0042 8823      		tst r24
+ 103 0044 01F0      		breq .+2
+ 104 0046 00C0      		rjmp .L14
+ 105               	.LSM6:
+ 106 0048 C801      		movw r24,r16
+ 107 004a 60E0      		ldi r22,lo8(.LC0)
+ 108 004c 70E0      		ldi r23,hi8(.LC0)
+ 109               	.LVL5:
+ 110 004e 0E94 0000 		call IsHTTPCommand
+ 111 0052 8823      		tst r24
+ 112 0054 01F0      		breq .L7
+ 113               	.LSM7:
+ 114 0056 C801      		movw r24,r16
+ 115 0058 60E0      		ldi r22,lo8(.LC1)
+ 116 005a 70E0      		ldi r23,hi8(.LC1)
+ 117 005c 0E94 0000 		call IsHTTPCommand
+ 118 0060 8823      		tst r24
+ 119 0062 01F0      		breq .L10
+ 120               	.LSM8:
+ 121 0064 1092 0000 		sts PageBlock.4142,__zero_reg__
+ 122               	.LSM9:
+ 123 0068 C801      		movw r24,r16
+ 124 006a 60E0      		ldi r22,lo8(HTTP200Header)
+ 125 006c 70E0      		ldi r23,hi8(HTTP200Header)
+ 126 006e 0E94 0000 		call strcpy_P
+ 127               	.LSM10:
+ 128 0072 81E0      		ldi r24,lo8(1)
+ 129 0074 F701      		movw r30,r14
+ 130 0076 8083      		st Z,r24
+ 131 0078 F801      		movw r30,r16
+ 132 007a 0190      		ld __tmp_reg__,Z+
+ 133 007c 0020      		tst __tmp_reg__
+ 134 007e 01F4      		brne .-6
+ 135 0080 3197      		sbiw r30,1
+ 136 0082 E01B      		sub r30,r16
+ 137 0084 F10B      		sbc r31,r17
+ 138 0086 F983      		std Y+1,r31
+ 139 0088 E883      		st Y,r30
+ 140 008a F601      		movw r30,r12
+ 141 008c 8083      		st Z,r24
+ 142               	.LSM11:
+ 143 008e CC5F      		subi r28,lo8(-(516))
+ 144 0090 DD4F      		sbci r29,hi8(-(516))
+ 145 0092 8883      		st Y,r24
+ 146 0094 00C0      		rjmp .L14
+ 147               	.L7:
+ 148               	.LSM12:
+ 149 0096 C801      		movw r24,r16
+ 150 0098 60E0      		ldi r22,lo8(.LC2)
+ 151 009a 70E0      		ldi r23,hi8(.LC2)
+ 152 009c 0E94 0000 		call IsHTTPCommand
+ 153 00a0 8823      		tst r24
+ 154 00a2 01F0      		breq .L9
+ 155               	.LSM13:
+ 156 00a4 C801      		movw r24,r16
+ 157 00a6 60E0      		ldi r22,lo8(.LC3)
+ 158 00a8 70E0      		ldi r23,hi8(.LC3)
+ 159 00aa 0E94 0000 		call IsHTTPCommand
+ 160 00ae 8823      		tst r24
+ 161 00b0 01F0      		breq .L10
+ 162               	.LSM14:
+ 163 00b2 C801      		movw r24,r16
+ 164 00b4 60E0      		ldi r22,lo8(HTTP200Header)
+ 165 00b6 70E0      		ldi r23,hi8(HTTP200Header)
+ 166 00b8 00C0      		rjmp .L15
+ 167               	.L10:
+ 168               	.LSM15:
+ 169 00ba C801      		movw r24,r16
+ 170 00bc 60E0      		ldi r22,lo8(HTTP404Header)
+ 171 00be 70E0      		ldi r23,hi8(HTTP404Header)
+ 172               	.L15:
+ 173 00c0 0E94 0000 		call strcpy_P
+ 174               	.LSM16:
+ 175 00c4 81E0      		ldi r24,lo8(1)
+ 176 00c6 F701      		movw r30,r14
+ 177 00c8 8083      		st Z,r24
+ 178 00ca F801      		movw r30,r16
+ 179 00cc 0190      		ld __tmp_reg__,Z+
+ 180 00ce 0020      		tst __tmp_reg__
+ 181 00d0 01F4      		brne .-6
+ 182 00d2 3197      		sbiw r30,1
+ 183 00d4 E01B      		sub r30,r16
+ 184 00d6 F10B      		sbc r31,r17
+ 185 00d8 F983      		std Y+1,r31
+ 186 00da E883      		st Y,r30
+ 187               	.L17:
+ 188 00dc F601      		movw r30,r12
+ 189 00de 8083      		st Z,r24
+ 190               	.LSM17:
+ 191 00e0 85E1      		ldi r24,lo8(533)
+ 192 00e2 92E0      		ldi r25,hi8(533)
+ 193 00e4 A80E      		add r10,r24
+ 194 00e6 B91E      		adc r11,r25
+ 195 00e8 00C0      		rjmp .L16
+ 196               	.L9:
+ 197               	.LSM18:
+ 198 00ea C801      		movw r24,r16
+ 199 00ec 60E0      		ldi r22,lo8(.LC4)
+ 200 00ee 70E0      		ldi r23,hi8(.LC4)
+ 201 00f0 0E94 0000 		call IsHTTPCommand
+ 202 00f4 8823      		tst r24
+ 203 00f6 01F0      		breq .L12
+ 204               	.LSM19:
+ 205 00f8 81E0      		ldi r24,lo8(1)
+ 206 00fa F701      		movw r30,r14
+ 207 00fc 8083      		st Z,r24
+ 208 00fe 00C0      		rjmp .L17
+ 209               	.L12:
+ 210               	.LSM20:
+ 211 0100 F601      		movw r30,r12
+ 212 0102 1082      		st Z,__zero_reg__
+ 213 0104 1982      		std Y+1,__zero_reg__
+ 214 0106 1882      		st Y,__zero_reg__
+ 215 0108 00C0      		rjmp .L14
+ 216               	.LVL6:
+ 217               	.L5:
+ 218               	.LSM21:
+ 219 010a CC5F      		subi r28,lo8(-(516))
+ 220 010c DD4F      		sbci r29,hi8(-(516))
+ 221               	.LVL7:
+ 222 010e 8881      		ld r24,Y
+ 223 0110 C450      		subi r28,lo8(-(-516))
+ 224 0112 D240      		sbci r29,hi8(-(-516))
+ 225 0114 8823      		tst r24
+ 226 0116 01F4      		brne .+2
+ 227 0118 00C0      		rjmp .L14
+ 228 011a CE5F      		subi r28,lo8(-(514))
+ 229 011c DD4F      		sbci r29,hi8(-(514))
+ 230 011e 8881      		ld r24,Y
+ 231 0120 C250      		subi r28,lo8(-(-514))
+ 232 0122 D240      		sbci r29,hi8(-(-514))
+ 233 0124 8823      		tst r24
+ 234 0126 01F0      		breq .L14
+ 235               	.LBB4:
+ 236               	.LSM22:
+ 237 0128 8091 0000 		lds r24,PageBlock.4142
+ 238 012c C82E      		mov r12,r24
+ 239 012e DD24      		clr r13
+ 240 0130 D694      		lsr r13
+ 241 0132 DC2C      		mov r13,r12
+ 242 0134 CC24      		clr r12
+ 243 0136 D794      		ror r13
+ 244 0138 C794      		ror r12
+ 245 013a 80E0      		ldi r24,lo8(HTTPPage)
+ 246 013c 90E0      		ldi r25,hi8(HTTPPage)
+ 247 013e C80E      		add r12,r24
+ 248 0140 D91E      		adc r13,r25
+ 249 0142 C601      		movw r24,r12
+ 250 0144 0E94 0000 		call strlen_P
+ 251               	.LSM23:
+ 252 0148 7C01      		movw r14,r24
+ 253               	.LVL8:
+ 254 014a 91E8      		ldi r25,lo8(129)
+ 255 014c E916      		cp r14,r25
+ 256 014e F104      		cpc r15,__zero_reg__
+ 257 0150 00F0      		brlo .L13
+ 258               	.LVL9:
+ 259 0152 80E8      		ldi r24,lo8(128)
+ 260 0154 E82E      		mov r14,r24
+ 261 0156 F12C      		mov r15,__zero_reg__
+ 262               	.LVL10:
+ 263               	.L13:
+ 264               	.LSM24:
+ 265 0158 C801      		movw r24,r16
+ 266 015a B601      		movw r22,r12
+ 267 015c A701      		movw r20,r14
+ 268 015e 0E94 0000 		call strncpy_P
+ 269               	.LSM25:
+ 270 0162 CE5F      		subi r28,lo8(-(514))
+ 271 0164 DD4F      		sbci r29,hi8(-(514))
+ 272 0166 81E0      		ldi r24,lo8(1)
+ 273 0168 8883      		st Y,r24
+ 274 016a C250      		subi r28,lo8(-(-514))
+ 275 016c D240      		sbci r29,hi8(-(-514))
+ 276 016e F982      		std Y+1,r15
+ 277 0170 E882      		st Y,r14
+ 278 0172 CD5F      		subi r28,lo8(-(515))
+ 279 0174 DD4F      		sbci r29,hi8(-(515))
+ 280 0176 8883      		st Y,r24
+ 281 0178 C350      		subi r28,lo8(-(-515))
+ 282 017a D240      		sbci r29,hi8(-(-515))
+ 283               	.LSM26:
+ 284 017c 8091 0000 		lds r24,PageBlock.4142
+ 285 0180 8F5F      		subi r24,lo8(-(1))
+ 286 0182 8093 0000 		sts PageBlock.4142,r24
+ 287 0186 8150      		subi r24,lo8(-(-1))
+ 288 0188 8330      		cpi r24,lo8(3)
+ 289 018a 01F4      		brne .L14
+ 290               	.LSM27:
+ 291 018c CC5F      		subi r28,lo8(-(516))
+ 292 018e DD4F      		sbci r29,hi8(-(516))
+ 293 0190 1882      		st Y,__zero_reg__
+ 294               	.LSM28:
+ 295 0192 E5E1      		ldi r30,lo8(533)
+ 296 0194 F2E0      		ldi r31,hi8(533)
+ 297 0196 AE0E      		add r10,r30
+ 298 0198 BF1E      		adc r11,r31
+ 299               	.L16:
+ 300 019a 87E0      		ldi r24,lo8(7)
+ 301 019c F501      		movw r30,r10
+ 302 019e 8083      		st Z,r24
+ 303               	.LVL11:
+ 304               	.L14:
+ 305               	/* epilogue start */
+ 306               	.LBE4:
+ 307               	.LSM29:
+ 308 01a0 DF91      		pop r29
+ 309 01a2 CF91      		pop r28
+ 310               	.LVL12:
+ 311 01a4 1F91      		pop r17
+ 312 01a6 0F91      		pop r16
+ 313               	.LVL13:
+ 314 01a8 FF90      		pop r15
+ 315 01aa EF90      		pop r14
+ 316               	.LVL14:
+ 317 01ac DF90      		pop r13
+ 318 01ae CF90      		pop r12
+ 319 01b0 BF90      		pop r11
+ 320 01b2 AF90      		pop r10
+ 321               	.LVL15:
+ 322 01b4 0895      		ret
+ 323               	.LFE105:
+ 325               		.section	.text.Webserver_Init,"ax",@progbits
+ 326               	.global	Webserver_Init
+ 328               	Webserver_Init:
+ 329               	.LFB103:
+ 330               	.LSM30:
+ 331               	/* prologue: function */
+ 332               	/* frame size = 0 */
+ 333               	.LSM31:
+ 334 0000 80E0      		ldi r24,lo8(20480)
+ 335 0002 90E5      		ldi r25,hi8(20480)
+ 336 0004 61E0      		ldi r22,lo8(1)
+ 337 0006 40E0      		ldi r20,lo8(gs(Webserver_ApplicationCallback))
+ 338 0008 50E0      		ldi r21,hi8(gs(Webserver_ApplicationCallback))
+ 339 000a 0E94 0000 		call TCP_SetPortState
+ 340               	/* epilogue start */
+ 341               	.LSM32:
+ 342 000e 0895      		ret
+ 343               	.LFE103:
+ 345               	.global	HTTP200Header
+ 346               		.section	.progmem.data,"a",@progbits
+ 349               	HTTP200Header:
+ 350 0000 4854 5450 		.ascii	"HTTP/1.1 200 OK\r\nSe"
+ 350      2F31 2E31 
+ 350      2032 3030 
+ 350      204F 4B0D 
+ 350      0A53 65
+ 351 0013 7276 6572 		.string	"rver: LUFA RNDIS\r\nContent-type: text/html\r\nConnection: close\r\n\r\n"
+ 351      3A20 4C55 
+ 351      4641 2052 
+ 351      4E44 4953 
+ 351      0D0A 436F 
+ 352               	.global	HTTP404Header
+ 355               	HTTP404Header:
+ 356 0054 48        		.ascii	"H"
+ 357 0055 5454 502F 		.string	"TTP/1.1 404 Not Found\r\nServer: LUFA RNDIS\r\nConnection: close\r\n\r\n"
+ 357      312E 3120 
+ 357      3430 3420 
+ 357      4E6F 7420 
+ 357      466F 756E 
+ 358               	.global	HTTPPage
+ 361               	HTTPPage:
+ 362 0096 3C68 746D 		.ascii	"<html>\t<head>\t\t<title>\t\t\tLUFA Webserver Demo\t\t</titl"
+ 362      6C3E 093C 
+ 362      6865 6164 
+ 362      3E09 093C 
+ 362      7469 746C 
+ 363 00ca 653E 093C 		.ascii	"e>\t</head>\t<body>\t\t<h1>Hello from your USB AVR!</h1>\t\t"
+ 363      2F68 6561 
+ 363      643E 093C 
+ 363      626F 6479 
+ 363      3E09 093C 
+ 364 0100 3C70 3E09 		.ascii	"<p>\t\t\tHello! Welcome to the LUFA RNDIS Demo Webserver tes"
+ 364      0909 4865 
+ 364      6C6C 6F21 
+ 364      2057 656C 
+ 364      636F 6D65 
+ 365 0139 7420 7061 		.ascii	"t page, running on your USB AVR via the LUFA library. This d"
+ 365      6765 2C20 
+ 365      7275 6E6E 
+ 365      696E 6720 
+ 365      6F6E 2079 
+ 366 0175 656D 6F6E 		.ascii	"emonstrates the HTTP webserver, TCP/IP stack and RNDIS demo "
+ 366      7374 7261 
+ 366      7465 7320 
+ 366      7468 6520 
+ 366      4854 5450 
+ 367 01b1 616C 6C20 		.ascii	"all running atop the LUFA USB stack.\t\t\t<br /><br />\t\t\t"
+ 367      7275 6E6E 
+ 367      696E 6720 
+ 367      6174 6F70 
+ 367      2074 6865 
+ 368 01e7 3C73 6D61 		.ascii	"<small>Project Information: <a href=\"http://www.lufa-lib.or"
+ 368      6C6C 3E50 
+ 368      726F 6A65 
+ 368      6374 2049 
+ 368      6E66 6F72 
+ 369 0222 6722 3E68 		.ascii	"g\">http://www.lufa-lib.org</a>.</sm"
+ 369      7474 703A 
+ 369      2F2F 7777 
+ 369      772E 6C75 
+ 369      6661 2D6C 
+ 370 0245 616C 6C3E 		.string	"all>\t\t\t<hr />\t\t\t<i>LUFA Version: </i>111009\t\t</p>\t</body></html>"
+ 370      0909 093C 
+ 370      6872 202F 
+ 370      3E09 0909 
+ 370      3C69 3E4C 
+ 371               		.lcomm PageBlock.4142,1
+ 412               	.Letext0:
+DEFINED SYMBOLS
+                            *ABS*:00000000 Webserver.c
+C:\Users\Eddie\AppData\Local\Temp/ccrQyjUW.s:2      *ABS*:0000003f __SREG__
+C:\Users\Eddie\AppData\Local\Temp/ccrQyjUW.s:3      *ABS*:0000003e __SP_H__
+C:\Users\Eddie\AppData\Local\Temp/ccrQyjUW.s:4      *ABS*:0000003d __SP_L__
+C:\Users\Eddie\AppData\Local\Temp/ccrQyjUW.s:5      *ABS*:00000034 __CCP__
+C:\Users\Eddie\AppData\Local\Temp/ccrQyjUW.s:6      *ABS*:00000000 __tmp_reg__
+C:\Users\Eddie\AppData\Local\Temp/ccrQyjUW.s:7      *ABS*:00000001 __zero_reg__
+C:\Users\Eddie\AppData\Local\Temp/ccrQyjUW.s:18     .text.IsHTTPCommand:00000000 IsHTTPCommand
+C:\Users\Eddie\AppData\Local\Temp/ccrQyjUW.s:59     .text.Webserver_ApplicationCallback:00000000 Webserver_ApplicationCallback
+                             .bss:00000000 PageBlock.4142
+C:\Users\Eddie\AppData\Local\Temp/ccrQyjUW.s:349    .progmem.data:00000000 HTTP200Header
+C:\Users\Eddie\AppData\Local\Temp/ccrQyjUW.s:355    .progmem.data:00000054 HTTP404Header
+C:\Users\Eddie\AppData\Local\Temp/ccrQyjUW.s:361    .progmem.data:00000096 HTTPPage
+C:\Users\Eddie\AppData\Local\Temp/ccrQyjUW.s:328    .text.Webserver_Init:00000000 Webserver_Init
+
+UNDEFINED SYMBOLS
+strncmp
+strcpy_P
+strlen_P
+strncpy_P
+TCP_SetPortState
+__do_copy_data
+__do_clear_bss

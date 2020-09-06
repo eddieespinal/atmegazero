@@ -1,0 +1,309 @@
+   1               		.file	"Ethernet.c"
+   2               	__SREG__ = 0x3f
+   3               	__SP_H__ = 0x3e
+   4               	__SP_L__ = 0x3d
+   5               	__CCP__  = 0x34
+   6               	__tmp_reg__ = 0
+   7               	__zero_reg__ = 1
+  15               	.Ltext0:
+  16               		.section	.text.Ethernet_Checksum16,"ax",@progbits
+  17               	.global	Ethernet_Checksum16
+  19               	Ethernet_Checksum16:
+  20               	.LFB104:
+  21               	.LSM0:
+  22               	.LVL0:
+  23 0000 CF93      		push r28
+  24 0002 DF93      		push r29
+  25               	/* prologue: function */
+  26               	/* frame size = 0 */
+  27               	.LBB6:
+  28               	.LSM1:
+  29 0004 7695      		lsr r23
+  30 0006 6795      		ror r22
+  31               	.LVL1:
+  32 0008 EC01      		movw r28,r24
+  33               	.LVL2:
+  34 000a E0E0      		ldi r30,lo8(0)
+  35 000c F0E0      		ldi r31,hi8(0)
+  36               	.LVL3:
+  37 000e 20E0      		ldi r18,lo8(0)
+  38 0010 30E0      		ldi r19,hi8(0)
+  39 0012 40E0      		ldi r20,hlo8(0)
+  40 0014 50E0      		ldi r21,hhi8(0)
+  41               	.LVL4:
+  42 0016 00C0      		rjmp .L2
+  43               	.L3:
+  44               	.LSM2:
+  45 0018 8991      		ld r24,Y+
+  46 001a 9991      		ld r25,Y+
+  47 001c A0E0      		ldi r26,lo8(0)
+  48 001e B0E0      		ldi r27,hi8(0)
+  49 0020 280F      		add r18,r24
+  50 0022 391F      		adc r19,r25
+  51 0024 4A1F      		adc r20,r26
+  52 0026 5B1F      		adc r21,r27
+  53               	.LSM3:
+  54 0028 3196      		adiw r30,1
+  55               	.L2:
+  56 002a E617      		cp r30,r22
+  57 002c F707      		cpc r31,r23
+  58 002e 00F0      		brlo .L3
+  59 0030 00C0      		rjmp .L7
+  60               	.L5:
+  61               	.LBE6:
+  62               	.LSM4:
+  63 0032 DA01      		movw r26,r20
+  64 0034 C901      		movw r24,r18
+  65 0036 A070      		andi r26,hlo8(65535)
+  66 0038 B070      		andi r27,hhi8(65535)
+  67 003a 9A01      		movw r18,r20
+  68 003c 4427      		clr r20
+  69 003e 5527      		clr r21
+  70 0040 280F      		add r18,r24
+  71 0042 391F      		adc r19,r25
+  72 0044 4A1F      		adc r20,r26
+  73 0046 5B1F      		adc r21,r27
+  74               	.L7:
+  75               	.LSM5:
+  76 0048 DA01      		movw r26,r20
+  77 004a C901      		movw r24,r18
+  78 004c 8070      		andi r24,lo8(-65536)
+  79 004e 9070      		andi r25,hi8(-65536)
+  80 0050 0097      		sbiw r24,0
+  81 0052 A105      		cpc r26,__zero_reg__
+  82 0054 B105      		cpc r27,__zero_reg__
+  83 0056 01F4      		brne .L5
+  84 0058 2095      		com r18
+  85 005a 3095      		com r19
+  86               	.LVL5:
+  87               	.LSM6:
+  88 005c C901      		movw r24,r18
+  89               	/* epilogue start */
+  90 005e DF91      		pop r29
+  91 0060 CF91      		pop r28
+  92 0062 0895      		ret
+  93               	.LFE104:
+  95               		.section	.text.Ethernet_ProcessPacket,"ax",@progbits
+  96               	.global	Ethernet_ProcessPacket
+  98               	Ethernet_ProcessPacket:
+  99               	.LFB103:
+ 100               	.LSM7:
+ 101 0000 CF93      		push r28
+ 102 0002 DF93      		push r29
+ 103               	/* prologue: function */
+ 104               	/* frame size = 0 */
+ 105               	.LSM8:
+ 106 0004 C0E0      		ldi r28,lo8(FrameIN)
+ 107 0006 D0E0      		ldi r29,hi8(FrameIN)
+ 108 0008 CE01      		movw r24,r28
+ 109 000a 0E94 0000 		call DecodeEthernetFrameHeader
+ 110               	.LSM9:
+ 111 000e CE01      		movw r24,r28
+ 112 0010 60E0      		ldi r22,lo8(ServerMACAddress)
+ 113 0012 70E0      		ldi r23,hi8(ServerMACAddress)
+ 114 0014 46E0      		ldi r20,lo8(6)
+ 115 0016 50E0      		ldi r21,hi8(6)
+ 116 0018 0E94 0000 		call memcmp
+ 117 001c 0097      		sbiw r24,0
+ 118 001e 01F0      		breq .L9
+ 119 0020 CE01      		movw r24,r28
+ 120 0022 60E0      		ldi r22,lo8(BroadcastMACAddress)
+ 121 0024 70E0      		ldi r23,hi8(BroadcastMACAddress)
+ 122 0026 46E0      		ldi r20,lo8(6)
+ 123 0028 50E0      		ldi r21,hi8(6)
+ 124 002a 0E94 0000 		call memcmp
+ 125 002e 0097      		sbiw r24,0
+ 126 0030 01F0      		breq .+2
+ 127 0032 00C0      		rjmp .L10
+ 128               	.L9:
+ 129               	.LBB7:
+ 130               	.LBB8:
+ 131               	.LSM10:
+ 132 0034 8091 0000 		lds r24,FrameIN+1500
+ 133 0038 9091 0000 		lds r25,(FrameIN+1500)+1
+ 134               	.LVL6:
+ 135               	.LSM11:
+ 136 003c 282F      		mov r18,r24
+ 137               	.LVL7:
+ 138               	.LSM12:
+ 139 003e 892F      		mov r24,r25
+ 140               	.LVL8:
+ 141               	.LSM13:
+ 142 0040 922F      		mov r25,r18
+ 143               	.LVL9:
+ 144               	.LBE8:
+ 145               	.LBE7:
+ 146               	.LSM14:
+ 147 0042 8150      		subi r24,lo8(1537)
+ 148 0044 9640      		sbci r25,hi8(1537)
+ 149               	.LVL10:
+ 150 0046 00F4      		brsh .+2
+ 151 0048 00C0      		rjmp .L10
+ 152               	.LBB9:
+ 153               	.LBB10:
+ 154               	.LSM15:
+ 155 004a 2091 0000 		lds r18,FrameIN+12
+ 156 004e 3091 0000 		lds r19,(FrameIN+12)+1
+ 157               	.LVL11:
+ 158               	.LSM16:
+ 159 0052 822F      		mov r24,r18
+ 160               	.LVL12:
+ 161               	.LSM17:
+ 162 0054 232F      		mov r18,r19
+ 163               	.LVL13:
+ 164               	.LSM18:
+ 165 0056 382F      		mov r19,r24
+ 166               	.LVL14:
+ 167               	.LBE10:
+ 168               	.LBE9:
+ 169               	.LSM19:
+ 170 0058 88E0      		ldi r24,hi8(2048)
+ 171 005a 2030      		cpi r18,lo8(2048)
+ 172 005c 3807      		cpc r19,r24
+ 173               	.LVL15:
+ 174 005e 01F0      		breq .L11
+ 175 0060 2650      		subi r18,lo8(2054)
+ 176 0062 3840      		sbci r19,hi8(2054)
+ 177 0064 01F4      		brne .L10
+ 178               	.LSM20:
+ 179 0066 80E0      		ldi r24,lo8(FrameIN+14)
+ 180 0068 90E0      		ldi r25,hi8(FrameIN+14)
+ 181 006a 60E0      		ldi r22,lo8(FrameOUT+14)
+ 182 006c 70E0      		ldi r23,hi8(FrameOUT+14)
+ 183 006e 0E94 0000 		call ARP_ProcessARPPacket
+ 184               	.LVL16:
+ 185 0072 00C0      		rjmp .L21
+ 186               	.LVL17:
+ 187               	.L11:
+ 188               	.LSM21:
+ 189 0074 80E0      		ldi r24,lo8(FrameIN+14)
+ 190 0076 90E0      		ldi r25,hi8(FrameIN+14)
+ 191 0078 60E0      		ldi r22,lo8(FrameOUT+14)
+ 192 007a 70E0      		ldi r23,hi8(FrameOUT+14)
+ 193 007c 0E94 0000 		call IP_ProcessIPPacket
+ 194               	.LVL18:
+ 195               	.L21:
+ 196 0080 9C01      		movw r18,r24
+ 197               	.LVL19:
+ 198               	.LSM22:
+ 199 0082 1816      		cp __zero_reg__,r24
+ 200 0084 1906      		cpc __zero_reg__,r25
+ 201 0086 04F4      		brge .L14
+ 202               	.LVL20:
+ 203               	.LSM23:
+ 204 0088 A0E0      		ldi r26,lo8(FrameOUT+6)
+ 205 008a B0E0      		ldi r27,hi8(FrameOUT+6)
+ 206 008c E0E0      		ldi r30,lo8(ServerMACAddress)
+ 207 008e F0E0      		ldi r31,hi8(ServerMACAddress)
+ 208 0090 86E0      		ldi r24,lo8(6)
+ 209               	.LVL21:
+ 210               	.L15:
+ 211 0092 0190      		ld r0,Z+
+ 212 0094 0D92      		st X+,r0
+ 213 0096 8150      		subi r24,lo8(-(-1))
+ 214 0098 01F4      		brne .L15
+ 215               	.LSM24:
+ 216 009a A0E0      		ldi r26,lo8(FrameOUT)
+ 217 009c B0E0      		ldi r27,hi8(FrameOUT)
+ 218               	.LVL22:
+ 219 009e E0E0      		ldi r30,lo8(FrameIN+6)
+ 220 00a0 F0E0      		ldi r31,hi8(FrameIN+6)
+ 221 00a2 86E0      		ldi r24,lo8(6)
+ 222               	.L16:
+ 223 00a4 0190      		ld r0,Z+
+ 224 00a6 0D92      		st X+,r0
+ 225 00a8 8150      		subi r24,lo8(-(-1))
+ 226 00aa 01F4      		brne .L16
+ 227               	.LSM25:
+ 228 00ac 8091 0000 		lds r24,FrameIN+12
+ 229 00b0 9091 0000 		lds r25,(FrameIN+12)+1
+ 230 00b4 9093 0000 		sts (FrameOUT+12)+1,r25
+ 231 00b8 8093 0000 		sts FrameOUT+12,r24
+ 232               	.LSM26:
+ 233 00bc 225F      		subi r18,lo8(-(14))
+ 234 00be 3F4F      		sbci r19,hi8(-(14))
+ 235 00c0 3093 0000 		sts (FrameOUT+1500)+1,r19
+ 236 00c4 2093 0000 		sts FrameOUT+1500,r18
+ 237 00c8 00C0      		rjmp .L10
+ 238               	.LVL23:
+ 239               	.L14:
+ 240               	.LSM27:
+ 241 00ca 2F5F      		subi r18,lo8(-1)
+ 242 00cc 3F4F      		sbci r19,hi8(-1)
+ 243               	.LVL24:
+ 244 00ce 01F0      		breq .L18
+ 245               	.LVL25:
+ 246               	.L10:
+ 247               	.LSM28:
+ 248 00d0 1092 0000 		sts (FrameIN+1500)+1,__zero_reg__
+ 249 00d4 1092 0000 		sts FrameIN+1500,__zero_reg__
+ 250               	.L18:
+ 251               	/* epilogue start */
+ 252               	.LSM29:
+ 253 00d8 DF91      		pop r29
+ 254 00da CF91      		pop r28
+ 255 00dc 0895      		ret
+ 256               	.LFE103:
+ 258               	.global	ServerMACAddress
+ 259               		.data
+ 262               	ServerMACAddress:
+ 263 0000 00        		.byte	0
+ 264 0001 01        		.byte	1
+ 265 0002 00        		.byte	0
+ 266 0003 01        		.byte	1
+ 267 0004 00        		.byte	0
+ 268 0005 01        		.byte	1
+ 269               	.global	ServerIPAddress
+ 272               	ServerIPAddress:
+ 273 0006 0A        		.byte	10
+ 274 0007 00        		.byte	0
+ 275 0008 00        		.byte	0
+ 276 0009 02        		.byte	2
+ 277               	.global	BroadcastMACAddress
+ 280               	BroadcastMACAddress:
+ 281 000a FF        		.byte	-1
+ 282 000b FF        		.byte	-1
+ 283 000c FF        		.byte	-1
+ 284 000d FF        		.byte	-1
+ 285 000e FF        		.byte	-1
+ 286 000f FF        		.byte	-1
+ 287               	.global	BroadcastIPAddress
+ 290               	BroadcastIPAddress:
+ 291 0010 FF        		.byte	-1
+ 292 0011 FF        		.byte	-1
+ 293 0012 FF        		.byte	-1
+ 294 0013 FF        		.byte	-1
+ 295               	.global	ClientIPAddress
+ 298               	ClientIPAddress:
+ 299 0014 0A        		.byte	10
+ 300 0015 00        		.byte	0
+ 301 0016 00        		.byte	0
+ 302 0017 01        		.byte	1
+ 303               		.comm FrameIN,1502,1
+ 304               		.comm FrameOUT,1502,1
+ 337               	.Letext0:
+DEFINED SYMBOLS
+                            *ABS*:00000000 Ethernet.c
+C:\Users\Eddie\AppData\Local\Temp/ccqvP3Qe.s:2      *ABS*:0000003f __SREG__
+C:\Users\Eddie\AppData\Local\Temp/ccqvP3Qe.s:3      *ABS*:0000003e __SP_H__
+C:\Users\Eddie\AppData\Local\Temp/ccqvP3Qe.s:4      *ABS*:0000003d __SP_L__
+C:\Users\Eddie\AppData\Local\Temp/ccqvP3Qe.s:5      *ABS*:00000034 __CCP__
+C:\Users\Eddie\AppData\Local\Temp/ccqvP3Qe.s:6      *ABS*:00000000 __tmp_reg__
+C:\Users\Eddie\AppData\Local\Temp/ccqvP3Qe.s:7      *ABS*:00000001 __zero_reg__
+C:\Users\Eddie\AppData\Local\Temp/ccqvP3Qe.s:19     .text.Ethernet_Checksum16:00000000 Ethernet_Checksum16
+C:\Users\Eddie\AppData\Local\Temp/ccqvP3Qe.s:98     .text.Ethernet_ProcessPacket:00000000 Ethernet_ProcessPacket
+                            *COM*:000005de FrameIN
+C:\Users\Eddie\AppData\Local\Temp/ccqvP3Qe.s:262    .data:00000000 ServerMACAddress
+C:\Users\Eddie\AppData\Local\Temp/ccqvP3Qe.s:280    .data:0000000a BroadcastMACAddress
+                            *COM*:000005de FrameOUT
+C:\Users\Eddie\AppData\Local\Temp/ccqvP3Qe.s:272    .data:00000006 ServerIPAddress
+C:\Users\Eddie\AppData\Local\Temp/ccqvP3Qe.s:290    .data:00000010 BroadcastIPAddress
+C:\Users\Eddie\AppData\Local\Temp/ccqvP3Qe.s:298    .data:00000014 ClientIPAddress
+
+UNDEFINED SYMBOLS
+DecodeEthernetFrameHeader
+memcmp
+ARP_ProcessARPPacket
+IP_ProcessIPPacket
+__do_copy_data
+__do_clear_bss

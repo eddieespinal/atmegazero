@@ -1,0 +1,356 @@
+   1               		.file	"ConfigDescriptor.c"
+   2               	__SREG__ = 0x3f
+   3               	__SP_H__ = 0x3e
+   4               	__SP_L__ = 0x3d
+   5               	__CCP__  = 0x34
+   6               	__tmp_reg__ = 0
+   7               	__zero_reg__ = 1
+  15               	.Ltext0:
+  16               		.section	.text.DComp_NextAudioControlInterface,"ax",@progbits
+  17               	.global	DComp_NextAudioControlInterface
+  19               	DComp_NextAudioControlInterface:
+  20               	.LFB142:
+  21               	.LSM0:
+  22               	.LVL0:
+  23               	/* prologue: function */
+  24               	/* frame size = 0 */
+  25 0000 FC01      		movw r30,r24
+  26               	.LSM1:
+  27 0002 8181      		ldd r24,Z+1
+  28               	.LVL1:
+  29 0004 8430      		cpi r24,lo8(4)
+  30 0006 01F4      		brne .L2
+  31               	.LBB2:
+  32               	.LSM2:
+  33 0008 8581      		ldd r24,Z+5
+  34 000a 8130      		cpi r24,lo8(1)
+  35 000c 01F4      		brne .L2
+  36 000e 8681      		ldd r24,Z+6
+  37 0010 8130      		cpi r24,lo8(1)
+  38 0012 01F4      		brne .L2
+  39 0014 8781      		ldd r24,Z+7
+  40 0016 8111      		cpse r24,__zero_reg__
+  41               	.L2:
+  42 0018 82E0      		ldi r24,lo8(2)
+  43               	.L3:
+  44               	.LBE2:
+  45               	.LSM3:
+  46 001a 0895      		ret
+  47               	.LFE142:
+  49               		.section	.text.DComp_NextAudioStreamInterface,"ax",@progbits
+  50               	.global	DComp_NextAudioStreamInterface
+  52               	DComp_NextAudioStreamInterface:
+  53               	.LFB143:
+  54               	.LSM4:
+  55               	.LVL2:
+  56               	/* prologue: function */
+  57               	/* frame size = 0 */
+  58 0000 FC01      		movw r30,r24
+  59               	.LSM5:
+  60 0002 8181      		ldd r24,Z+1
+  61               	.LVL3:
+  62 0004 8430      		cpi r24,lo8(4)
+  63 0006 01F4      		brne .L6
+  64               	.LBB3:
+  65               	.LSM6:
+  66 0008 8581      		ldd r24,Z+5
+  67 000a 8130      		cpi r24,lo8(1)
+  68 000c 01F4      		brne .L6
+  69 000e 8681      		ldd r24,Z+6
+  70 0010 8230      		cpi r24,lo8(2)
+  71 0012 01F4      		brne .L6
+  72 0014 8781      		ldd r24,Z+7
+  73 0016 8111      		cpse r24,__zero_reg__
+  74               	.L6:
+  75 0018 82E0      		ldi r24,lo8(2)
+  76               	.L7:
+  77               	.LBE3:
+  78               	.LSM7:
+  79 001a 0895      		ret
+  80               	.LFE143:
+  82               		.section	.text.DComp_NextAudioInterfaceDataEndpoint,"ax",@progbits
+  83               	.global	DComp_NextAudioInterfaceDataEndpoint
+  85               	DComp_NextAudioInterfaceDataEndpoint:
+  86               	.LFB144:
+  87               	.LSM8:
+  88               	.LVL4:
+  89               	/* prologue: function */
+  90               	/* frame size = 0 */
+  91 0000 FC01      		movw r30,r24
+  92               	.LSM9:
+  93 0002 8181      		ldd r24,Z+1
+  94               	.LVL5:
+  95 0004 8530      		cpi r24,lo8(5)
+  96 0006 01F4      		brne .L10
+  97               	.LBB4:
+  98               	.LSM10:
+  99 0008 8381      		ldd r24,Z+3
+ 100 000a 8370      		andi r24,lo8(3)
+ 101 000c 8130      		cpi r24,lo8(1)
+ 102 000e 01F4      		brne .L11
+ 103 0010 80E0      		ldi r24,lo8(0)
+ 104 0012 0895      		ret
+ 105               	.L10:
+ 106               	.LBE4:
+ 107               	.LSM11:
+ 108 0014 8430      		cpi r24,lo8(4)
+ 109 0016 01F4      		brne .L11
+ 110 0018 81E0      		ldi r24,lo8(1)
+ 111 001a 0895      		ret
+ 112               	.L11:
+ 113 001c 82E0      		ldi r24,lo8(2)
+ 114               	.LSM12:
+ 115 001e 0895      		ret
+ 116               	.LFE144:
+ 118               		.section	.text.ProcessConfigurationDescriptor,"ax",@progbits
+ 119               	.global	ProcessConfigurationDescriptor
+ 121               	ProcessConfigurationDescriptor:
+ 122               	.LFB141:
+ 123               	.LSM13:
+ 124 0000 AF92      		push r10
+ 125 0002 BF92      		push r11
+ 126 0004 CF92      		push r12
+ 127 0006 DF92      		push r13
+ 128 0008 EF92      		push r14
+ 129 000a FF92      		push r15
+ 130 000c 0F93      		push r16
+ 131 000e 1F93      		push r17
+ 132 0010 DF93      		push r29
+ 133 0012 CF93      		push r28
+ 134 0014 CDB7      		in r28,__SP_L__
+ 135 0016 DEB7      		in r29,__SP_H__
+ 136 0018 C450      		subi r28,lo8(-(-516))
+ 137 001a D240      		sbci r29,hi8(-(-516))
+ 138 001c 0FB6      		in __tmp_reg__,__SREG__
+ 139 001e F894      		cli
+ 140 0020 DEBF      		out __SP_H__,r29
+ 141 0022 0FBE      		out __SREG__,__tmp_reg__
+ 142 0024 CDBF      		out __SP_L__,r28
+ 143               	/* prologue: function */
+ 144               	/* frame size = 516 */
+ 145               	.LSM14:
+ 146 0026 AE01      		movw r20,r28
+ 147 0028 4B5F      		subi r20,lo8(-(5))
+ 148 002a 5F4F      		sbci r21,hi8(-(5))
+ 149 002c 5A83      		std Y+2,r21
+ 150 002e 4983      		std Y+1,r20
+ 151               	.LVL6:
+ 152               	.LSM15:
+ 153 0030 23E0      		ldi r18,lo8(3)
+ 154 0032 E22E      		mov r14,r18
+ 155 0034 F12C      		mov r15,__zero_reg__
+ 156 0036 EC0E      		add r14,r28
+ 157 0038 FD1E      		adc r15,r29
+ 158 003a 81E0      		ldi r24,lo8(1)
+ 159 003c B701      		movw r22,r14
+ 160 003e 20E0      		ldi r18,lo8(512)
+ 161 0040 32E0      		ldi r19,hi8(512)
+ 162 0042 0E94 0000 		call USB_Host_GetDeviceConfigDescriptor
+ 163 0046 8530      		cpi r24,lo8(5)
+ 164 0048 01F0      		breq .L17
+ 165 004a 8630      		cpi r24,lo8(6)
+ 166 004c 01F0      		breq .L18
+ 167 004e 8823      		tst r24
+ 168 0050 01F0      		breq .L16
+ 169 0052 00C0      		rjmp .L32
+ 170               	.L17:
+ 171 0054 82E0      		ldi r24,lo8(2)
+ 172 0056 00C0      		rjmp .L19
+ 173               	.L16:
+ 174 0058 AA24      		clr r10
+ 175 005a BB24      		clr r11
+ 176               	.LVL7:
+ 177 005c 00E0      		ldi r16,lo8(0)
+ 178 005e 10E0      		ldi r17,hi8(0)
+ 179               	.LVL8:
+ 180               	.LBB5:
+ 181               	.LSM16:
+ 182 0060 6701      		movw r12,r14
+ 183 0062 7E01      		movw r14,r28
+ 184 0064 0894      		sec
+ 185 0066 E11C      		adc r14,__zero_reg__
+ 186 0068 F11C      		adc r15,__zero_reg__
+ 187 006a 00C0      		rjmp .L29
+ 188               	.LVL9:
+ 189               	.L18:
+ 190               	.LBE5:
+ 191               	.LSM17:
+ 192 006c 83E0      		ldi r24,lo8(3)
+ 193 006e 00C0      		rjmp .L19
+ 194               	.L32:
+ 195 0070 81E0      		ldi r24,lo8(1)
+ 196 0072 00C0      		rjmp .L19
+ 197               	.LVL10:
+ 198               	.L29:
+ 199               	.LBB6:
+ 200               	.LSM18:
+ 201 0074 A114      		cp r10,__zero_reg__
+ 202 0076 B104      		cpc r11,__zero_reg__
+ 203 0078 01F0      		breq .L21
+ 204 007a C601      		movw r24,r12
+ 205 007c B701      		movw r22,r14
+ 206 007e 40E0      		ldi r20,lo8(gs(DComp_NextAudioInterfaceDataEndpoint))
+ 207 0080 50E0      		ldi r21,hi8(gs(DComp_NextAudioInterfaceDataEndpoint))
+ 208 0082 0E94 0000 		call USB_GetNextDescriptorComp
+ 209               	.LVL11:
+ 210 0086 8823      		tst r24
+ 211 0088 01F0      		breq .+2
+ 212 008a 00C0      		rjmp .L22
+ 213 008c 00C0      		rjmp .L33
+ 214               	.LVL12:
+ 215               	.L21:
+ 216               	.LSM19:
+ 217 008e C601      		movw r24,r12
+ 218 0090 B701      		movw r22,r14
+ 219 0092 40E0      		ldi r20,lo8(gs(DComp_NextAudioControlInterface))
+ 220 0094 50E0      		ldi r21,hi8(gs(DComp_NextAudioControlInterface))
+ 221 0096 0E94 0000 		call USB_GetNextDescriptorComp
+ 222               	.LVL13:
+ 223 009a 8823      		tst r24
+ 224 009c 01F4      		brne .L24
+ 225               	.LSM20:
+ 226 009e 1981      		ldd r17,Y+1
+ 227 00a0 0A81      		ldd r16,Y+2
+ 228               	.LVL14:
+ 229               	.LSM21:
+ 230 00a2 C601      		movw r24,r12
+ 231 00a4 B701      		movw r22,r14
+ 232 00a6 40E0      		ldi r20,lo8(gs(DComp_NextAudioStreamInterface))
+ 233 00a8 50E0      		ldi r21,hi8(gs(DComp_NextAudioStreamInterface))
+ 234 00aa 0E94 0000 		call USB_GetNextDescriptorComp
+ 235 00ae 8823      		tst r24
+ 236 00b0 01F4      		brne .L24
+ 237               	.LVL15:
+ 238               	.LSM22:
+ 239 00b2 812F      		mov r24,r17
+ 240               	.LVL16:
+ 241 00b4 902F      		mov r25,r16
+ 242               	.LVL17:
+ 243 00b6 9C01      		movw r18,r24
+ 244               	.LVL18:
+ 245 00b8 5901      		movw r10,r18
+ 246               	.LVL19:
+ 247               	.L25:
+ 248               	.LSM23:
+ 249 00ba 0981      		ldd r16,Y+1
+ 250 00bc 1A81      		ldd r17,Y+2
+ 251 00be 00C0      		rjmp .L29
+ 252               	.LVL20:
+ 253               	.L33:
+ 254               	.LSM24:
+ 255 00c0 E981      		ldd r30,Y+1
+ 256 00c2 FA81      		ldd r31,Y+2
+ 257               	.LVL21:
+ 258               	.LSM25:
+ 259 00c4 8281      		ldd r24,Z+2
+ 260 00c6 87FF      		sbrs r24,7
+ 261 00c8 00C0      		rjmp .L29
+ 262               	.LBE6:
+ 263               	.LSM26:
+ 264 00ca 3097      		sbiw r30,0
+ 265 00cc 01F0      		breq .L29
+ 266               	.LSM27:
+ 267 00ce D801      		movw r26,r16
+ 268 00d0 1296      		adiw r26,2
+ 269 00d2 8C91      		ld r24,X
+ 270 00d4 1297      		sbiw r26,2
+ 271 00d6 8093 0000 		sts StreamingInterfaceIndex,r24
+ 272               	.LSM28:
+ 273 00da 1396      		adiw r26,3
+ 274 00dc 8C91      		ld r24,X
+ 275 00de 8093 0000 		sts StreamingInterfaceAltSetting,r24
+ 276               	.LSM29:
+ 277 00e2 8281      		ldd r24,Z+2
+ 278 00e4 8093 0000 		sts StreamingEndpointAddress,r24
+ 279               	.LSM30:
+ 280 00e8 0481      		ldd r16,Z+4
+ 281 00ea 1581      		ldd r17,Z+5
+ 282               	.LVL22:
+ 283 00ec 81E0      		ldi r24,lo8(1)
+ 284 00ee 61E0      		ldi r22,lo8(1)
+ 285 00f0 40E1      		ldi r20,lo8(16)
+ 286 00f2 2281      		ldd r18,Z+2
+ 287 00f4 94E0      		ldi r25,lo8(4)
+ 288 00f6 E92E      		mov r14,r25
+ 289 00f8 0E94 0000 		call Pipe_ConfigurePipe
+ 290               	.LVL23:
+ 291 00fc 80E0      		ldi r24,lo8(0)
+ 292 00fe 00C0      		rjmp .L19
+ 293               	.LVL24:
+ 294               	.L24:
+ 295               	.LSM31:
+ 296 0100 84E0      		ldi r24,lo8(4)
+ 297               	.LVL25:
+ 298               	.L19:
+ 299               	/* epilogue start */
+ 300               	.LSM32:
+ 301 0102 CC5F      		subi r28,lo8(-(516))
+ 302 0104 DD4F      		sbci r29,hi8(-(516))
+ 303 0106 0FB6      		in __tmp_reg__,__SREG__
+ 304 0108 F894      		cli
+ 305 010a DEBF      		out __SP_H__,r29
+ 306 010c 0FBE      		out __SREG__,__tmp_reg__
+ 307 010e CDBF      		out __SP_L__,r28
+ 308 0110 CF91      		pop r28
+ 309 0112 DF91      		pop r29
+ 310 0114 1F91      		pop r17
+ 311 0116 0F91      		pop r16
+ 312               	.LVL26:
+ 313 0118 FF90      		pop r15
+ 314 011a EF90      		pop r14
+ 315 011c DF90      		pop r13
+ 316 011e CF90      		pop r12
+ 317 0120 BF90      		pop r11
+ 318 0122 AF90      		pop r10
+ 319               	.LVL27:
+ 320 0124 0895      		ret
+ 321               	.LVL28:
+ 322               	.L22:
+ 323               	.LBB7:
+ 324               	.LSM33:
+ 325 0126 C601      		movw r24,r12
+ 326 0128 B701      		movw r22,r14
+ 327 012a 40E0      		ldi r20,lo8(gs(DComp_NextAudioStreamInterface))
+ 328 012c 50E0      		ldi r21,hi8(gs(DComp_NextAudioStreamInterface))
+ 329 012e 0E94 0000 		call USB_GetNextDescriptorComp
+ 330 0132 8823      		tst r24
+ 331 0134 01F0      		breq .+2
+ 332 0136 00C0      		rjmp .L21
+ 333 0138 00C0      		rjmp .L25
+ 334               	.LBE7:
+ 335               	.LFE141:
+ 337               	.global	StreamingInterfaceIndex
+ 338               	.global	StreamingInterfaceIndex
+ 339               		.section .bss
+ 342               	StreamingInterfaceIndex:
+ 343 0000 00        		.skip 1,0
+ 344               	.global	StreamingInterfaceAltSetting
+ 345               	.global	StreamingInterfaceAltSetting
+ 348               	StreamingInterfaceAltSetting:
+ 349 0001 00        		.skip 1,0
+ 350               	.global	StreamingEndpointAddress
+ 351               	.global	StreamingEndpointAddress
+ 354               	StreamingEndpointAddress:
+ 355 0002 00        		.skip 1,0
+ 404               	.Letext0:
+DEFINED SYMBOLS
+                            *ABS*:00000000 ConfigDescriptor.c
+C:\Users\Eddie\AppData\Local\Temp/cc6DoXS7.s:2      *ABS*:0000003f __SREG__
+C:\Users\Eddie\AppData\Local\Temp/cc6DoXS7.s:3      *ABS*:0000003e __SP_H__
+C:\Users\Eddie\AppData\Local\Temp/cc6DoXS7.s:4      *ABS*:0000003d __SP_L__
+C:\Users\Eddie\AppData\Local\Temp/cc6DoXS7.s:5      *ABS*:00000034 __CCP__
+C:\Users\Eddie\AppData\Local\Temp/cc6DoXS7.s:6      *ABS*:00000000 __tmp_reg__
+C:\Users\Eddie\AppData\Local\Temp/cc6DoXS7.s:7      *ABS*:00000001 __zero_reg__
+C:\Users\Eddie\AppData\Local\Temp/cc6DoXS7.s:19     .text.DComp_NextAudioControlInterface:00000000 DComp_NextAudioControlInterface
+C:\Users\Eddie\AppData\Local\Temp/cc6DoXS7.s:52     .text.DComp_NextAudioStreamInterface:00000000 DComp_NextAudioStreamInterface
+C:\Users\Eddie\AppData\Local\Temp/cc6DoXS7.s:85     .text.DComp_NextAudioInterfaceDataEndpoint:00000000 DComp_NextAudioInterfaceDataEndpoint
+C:\Users\Eddie\AppData\Local\Temp/cc6DoXS7.s:121    .text.ProcessConfigurationDescriptor:00000000 ProcessConfigurationDescriptor
+C:\Users\Eddie\AppData\Local\Temp/cc6DoXS7.s:342    .bss:00000000 StreamingInterfaceIndex
+C:\Users\Eddie\AppData\Local\Temp/cc6DoXS7.s:348    .bss:00000001 StreamingInterfaceAltSetting
+C:\Users\Eddie\AppData\Local\Temp/cc6DoXS7.s:354    .bss:00000002 StreamingEndpointAddress
+
+UNDEFINED SYMBOLS
+USB_Host_GetDeviceConfigDescriptor
+USB_GetNextDescriptorComp
+Pipe_ConfigurePipe
+__do_clear_bss

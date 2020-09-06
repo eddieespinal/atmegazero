@@ -1,0 +1,428 @@
+   1               		.file	"DualVirtualSerial.c"
+   2               	__SREG__ = 0x3f
+   3               	__SP_H__ = 0x3e
+   4               	__SP_L__ = 0x3d
+   5               	__CCP__  = 0x34
+   6               	__tmp_reg__ = 0
+   7               	__zero_reg__ = 1
+  15               	.Ltext0:
+  16               		.section	.text.EVENT_USB_Device_Connect,"ax",@progbits
+  17               	.global	EVENT_USB_Device_Connect
+  19               	EVENT_USB_Device_Connect:
+  20               	.LFB108:
+  21               	.LSM0:
+  22               	/* prologue: function */
+  23               	/* frame size = 0 */
+  24               	.LBB18:
+  25               	.LBB19:
+  26               	.LSM1:
+  27 0000 8BB1      		in r24,43-32
+  28 0002 8F70      		andi r24,lo8(15)
+  29 0004 806A      		ori r24,lo8(-96)
+  30 0006 8BB9      		out 43-32,r24
+  31               	/* epilogue start */
+  32               	.LBE19:
+  33               	.LBE18:
+  34               	.LSM2:
+  35 0008 0895      		ret
+  36               	.LFE108:
+  38               		.section	.text.EVENT_USB_Device_Disconnect,"ax",@progbits
+  39               	.global	EVENT_USB_Device_Disconnect
+  41               	EVENT_USB_Device_Disconnect:
+  42               	.LFB109:
+  43               	.LSM3:
+  44               	/* prologue: function */
+  45               	/* frame size = 0 */
+  46               	.LBB20:
+  47               	.LBB21:
+  48               	.LSM4:
+  49 0000 8BB1      		in r24,43-32
+  50 0002 8F70      		andi r24,lo8(15)
+  51 0004 8061      		ori r24,lo8(16)
+  52 0006 8BB9      		out 43-32,r24
+  53               	/* epilogue start */
+  54               	.LBE21:
+  55               	.LBE20:
+  56               	.LSM5:
+  57 0008 0895      		ret
+  58               	.LFE109:
+  60               		.section	.text.EVENT_USB_Device_ControlRequest,"ax",@progbits
+  61               	.global	EVENT_USB_Device_ControlRequest
+  63               	EVENT_USB_Device_ControlRequest:
+  64               	.LFB111:
+  65               	.LSM6:
+  66               	/* prologue: function */
+  67               	/* frame size = 0 */
+  68               	.LSM7:
+  69 0000 80E0      		ldi r24,lo8(VirtualSerial1_CDC_Interface)
+  70 0002 90E0      		ldi r25,hi8(VirtualSerial1_CDC_Interface)
+  71 0004 0E94 0000 		call CDC_Device_ProcessControlRequest
+  72               	.LSM8:
+  73 0008 80E0      		ldi r24,lo8(VirtualSerial2_CDC_Interface)
+  74 000a 90E0      		ldi r25,hi8(VirtualSerial2_CDC_Interface)
+  75 000c 0E94 0000 		call CDC_Device_ProcessControlRequest
+  76               	/* epilogue start */
+  77               	.LSM9:
+  78 0010 0895      		ret
+  79               	.LFE111:
+  81               		.section	.text.EVENT_USB_Device_ConfigurationChanged,"ax",@progbits
+  82               	.global	EVENT_USB_Device_ConfigurationChanged
+  84               	EVENT_USB_Device_ConfigurationChanged:
+  85               	.LFB110:
+  86               	.LSM10:
+  87 0000 0F93      		push r16
+  88 0002 1F93      		push r17
+  89               	/* prologue: function */
+  90               	/* frame size = 0 */
+  91               	.LSM11:
+  92 0004 80E0      		ldi r24,lo8(VirtualSerial1_CDC_Interface)
+  93 0006 90E0      		ldi r25,hi8(VirtualSerial1_CDC_Interface)
+  94 0008 0E94 0000 		call CDC_Device_ConfigureEndpoints
+  95 000c 082F      		mov r16,r24
+  96               	.LSM12:
+  97 000e 80E0      		ldi r24,lo8(VirtualSerial2_CDC_Interface)
+  98 0010 90E0      		ldi r25,hi8(VirtualSerial2_CDC_Interface)
+  99 0012 0E94 0000 		call CDC_Device_ConfigureEndpoints
+ 100               	.LSM13:
+ 101 0016 10E0      		ldi r17,lo8(0)
+ 102 0018 90E0      		ldi r25,lo8(0)
+ 103 001a 0823      		and r16,r24
+ 104 001c 1923      		and r17,r25
+ 105 001e 00FF      		sbrs r16,0
+ 106 0020 00C0      		rjmp .L8
+ 107 0022 90E6      		ldi r25,lo8(96)
+ 108 0024 00C0      		rjmp .L9
+ 109               	.L8:
+ 110 0026 90E9      		ldi r25,lo8(-112)
+ 111               	.L9:
+ 112               	.LBB22:
+ 113               	.LBB23:
+ 114               	.LSM14:
+ 115 0028 8BB1      		in r24,43-32
+ 116 002a 8F70      		andi r24,lo8(15)
+ 117 002c 982B      		or r25,r24
+ 118 002e 9BB9      		out 43-32,r25
+ 119               	/* epilogue start */
+ 120               	.LBE23:
+ 121               	.LBE22:
+ 122               	.LSM15:
+ 123 0030 1F91      		pop r17
+ 124 0032 0F91      		pop r16
+ 125 0034 0895      		ret
+ 126               	.LFE110:
+ 128               		.data
+ 129               	.LC0:
+ 130 0000 4A6F 7973 		.string	"Joystick Down\r\n"
+ 130      7469 636B 
+ 130      2044 6F77 
+ 130      6E0D 0A00 
+ 131               	.LC1:
+ 132 0010 4A6F 7973 		.string	"Joystick Left\r\n"
+ 132      7469 636B 
+ 132      204C 6566 
+ 132      740D 0A00 
+ 133               	.LC2:
+ 134 0020 4A6F 7973 		.string	"Joystick Right\r\n"
+ 134      7469 636B 
+ 134      2052 6967 
+ 134      6874 0D0A 
+ 134      00
+ 135               	.LC3:
+ 136 0031 4A6F 7973 		.string	"Joystick Pressed\r\n"
+ 136      7469 636B 
+ 136      2050 7265 
+ 136      7373 6564 
+ 136      0D0A 00
+ 137               	.LC4:
+ 138 0044 4A6F 7973 		.string	"Joystick Up\r\n"
+ 138      7469 636B 
+ 138      2055 700D 
+ 138      0A00 
+ 139               		.section	.text.CheckJoystickMovement,"ax",@progbits
+ 140               	.global	CheckJoystickMovement
+ 142               	CheckJoystickMovement:
+ 143               	.LFB107:
+ 144               	.LSM16:
+ 145               	/* prologue: function */
+ 146               	/* frame size = 0 */
+ 147               	.LBB24:
+ 148               	.LBB25:
+ 149               	.LSM17:
+ 150 0000 23B1      		in r18,35-32
+ 151 0002 8CB1      		in r24,44-32
+ 152 0004 8095      		com r24
+ 153 0006 90E0      		ldi r25,lo8(0)
+ 154 0008 8073      		andi r24,lo8(48)
+ 155 000a 9070      		andi r25,hi8(48)
+ 156 000c 9595      		asr r25
+ 157 000e 8795      		ror r24
+ 158 0010 2095      		com r18
+ 159 0012 207E      		andi r18,lo8(-32)
+ 160 0014 282B      		or r18,r24
+ 161               	.LBE25:
+ 162               	.LBE24:
+ 163               	.LSM18:
+ 164 0016 27FD      		sbrc r18,7
+ 165 0018 00C0      		rjmp .L12
+ 166               	.LSM19:
+ 167 001a 24FF      		sbrs r18,4
+ 168 001c 00C0      		rjmp .L13
+ 169 001e 60E0      		ldi r22,lo8(.LC0)
+ 170 0020 70E0      		ldi r23,hi8(.LC0)
+ 171               	.LVL0:
+ 172 0022 00C0      		rjmp .L14
+ 173               	.LVL1:
+ 174               	.L13:
+ 175               	.LSM20:
+ 176 0024 26FF      		sbrs r18,6
+ 177 0026 00C0      		rjmp .L15
+ 178 0028 60E0      		ldi r22,lo8(.LC1)
+ 179 002a 70E0      		ldi r23,hi8(.LC1)
+ 180               	.LVL2:
+ 181 002c 00C0      		rjmp .L14
+ 182               	.LVL3:
+ 183               	.L15:
+ 184               	.LSM21:
+ 185 002e 23FF      		sbrs r18,3
+ 186 0030 00C0      		rjmp .L16
+ 187 0032 60E0      		ldi r22,lo8(.LC2)
+ 188 0034 70E0      		ldi r23,hi8(.LC2)
+ 189               	.LVL4:
+ 190 0036 00C0      		rjmp .L14
+ 191               	.LVL5:
+ 192               	.L16:
+ 193               	.LSM22:
+ 194 0038 25FF      		sbrs r18,5
+ 195 003a 00C0      		rjmp .L17
+ 196 003c 60E0      		ldi r22,lo8(.LC3)
+ 197 003e 70E0      		ldi r23,hi8(.LC3)
+ 198               	.LVL6:
+ 199 0040 00C0      		rjmp .L14
+ 200               	.LVL7:
+ 201               	.L17:
+ 202               	.LSM23:
+ 203 0042 1092 0000 		sts ActionSent.3998,__zero_reg__
+ 204 0046 0895      		ret
+ 205               	.L12:
+ 206 0048 60E0      		ldi r22,lo8(.LC4)
+ 207 004a 70E0      		ldi r23,hi8(.LC4)
+ 208               	.LVL8:
+ 209               	.L14:
+ 210               	.LSM24:
+ 211 004c 8091 0000 		lds r24,ActionSent.3998
+ 212 0050 8823      		tst r24
+ 213 0052 01F4      		brne .L19
+ 214               	.LSM25:
+ 215 0054 81E0      		ldi r24,lo8(1)
+ 216 0056 8093 0000 		sts ActionSent.3998,r24
+ 217               	.LSM26:
+ 218 005a 80E0      		ldi r24,lo8(VirtualSerial1_CDC_Interface)
+ 219 005c 90E0      		ldi r25,hi8(VirtualSerial1_CDC_Interface)
+ 220 005e 0E94 0000 		call CDC_Device_SendString
+ 221               	.LVL9:
+ 222               	.L19:
+ 223 0062 0895      		ret
+ 224               	.LFE107:
+ 226               		.section	.text.SetupHardware,"ax",@progbits
+ 227               	.global	SetupHardware
+ 229               	SetupHardware:
+ 230               	.LFB106:
+ 231               	.LSM27:
+ 232               	/* prologue: function */
+ 233               	/* frame size = 0 */
+ 234               	.LSM28:
+ 235 0000 84B7      		in r24,84-32
+ 236 0002 877F      		andi r24,lo8(-9)
+ 237 0004 84BF      		out 84-32,r24
+ 238               	.LSM29:
+ 239 0006 88E1      		ldi r24,lo8(24)
+ 240               	/* #APP */
+ 241               	 ;  123 "DualVirtualSerial.c" 1
+ 242 0008 0FB6      		in __tmp_reg__, __SREG__
+ 243 000a F894      		cli
+ 244 000c 8093 6000 		sts 96, r24
+ 245 0010 1092 6000 		sts 96, __zero_reg__
+ 246 0014 0FBE      		out __SREG__,__tmp_reg__
+ 247               		
+ 248               	 ;  0 "" 2
+ 249               	/* #NOAPP */
+ 250               	.LBB26:
+ 251               	.LSM30:
+ 252 0016 80E0      		ldi r24,lo8(0)
+ 253 0018 90E0      		ldi r25,hi8(0)
+ 254 001a 20E8      		ldi r18,lo8(-128)
+ 255               	/* #APP */
+ 256               	 ;  126 "DualVirtualSerial.c" 1
+ 257 001c 0FB6      		in __tmp_reg__,__SREG__
+ 258 001e F894      		cli
+ 259 0020 2093 6100 		sts 97, r18
+ 260 0024 8093 6100 		sts 97, r24
+ 261 0028 0FBE      		out __SREG__, __tmp_reg__
+ 262               	 ;  0 "" 2
+ 263               	/* #NOAPP */
+ 264               	.LBE26:
+ 265               	.LBB27:
+ 266               	.LBB28:
+ 267               	.LSM31:
+ 268 002a 84B1      		in r24,36-32
+ 269 002c 8F71      		andi r24,lo8(31)
+ 270 002e 84B9      		out 36-32,r24
+ 271               	.LSM32:
+ 272 0030 8DB1      		in r24,45-32
+ 273 0032 8F7C      		andi r24,lo8(-49)
+ 274 0034 8DB9      		out 45-32,r24
+ 275               	.LSM33:
+ 276 0036 85B1      		in r24,37-32
+ 277 0038 806E      		ori r24,lo8(-32)
+ 278 003a 85B9      		out 37-32,r24
+ 279               	.LSM34:
+ 280 003c 8EB1      		in r24,46-32
+ 281 003e 8063      		ori r24,lo8(48)
+ 282 0040 8EB9      		out 46-32,r24
+ 283               	.LBE28:
+ 284               	.LBE27:
+ 285               	.LBB29:
+ 286               	.LBB30:
+ 287               	.LSM35:
+ 288 0042 8AB1      		in r24,42-32
+ 289 0044 806F      		ori r24,lo8(-16)
+ 290 0046 8AB9      		out 42-32,r24
+ 291               	.LSM36:
+ 292 0048 8BB1      		in r24,43-32
+ 293 004a 8F70      		andi r24,lo8(15)
+ 294 004c 8BB9      		out 43-32,r24
+ 295               	.LBE30:
+ 296               	.LBE29:
+ 297               	.LSM37:
+ 298 004e 0E94 0000 		call USB_Init
+ 299               	/* epilogue start */
+ 300               	.LSM38:
+ 301 0052 0895      		ret
+ 302               	.LFE106:
+ 304               		.section	.text.main,"ax",@progbits
+ 305               	.global	main
+ 307               	main:
+ 308               	.LFB105:
+ 309               	.LSM39:
+ 310               	/* prologue: function */
+ 311               	/* frame size = 0 */
+ 312               	.LSM40:
+ 313 0000 0E94 0000 		call SetupHardware
+ 314               	.LBB31:
+ 315               	.LBB32:
+ 316               	.LSM41:
+ 317 0004 8BB1      		in r24,43-32
+ 318 0006 8F70      		andi r24,lo8(15)
+ 319 0008 8061      		ori r24,lo8(16)
+ 320 000a 8BB9      		out 43-32,r24
+ 321               	.LBE32:
+ 322               	.LBE31:
+ 323               	.LSM42:
+ 324               	/* #APP */
+ 325               	 ;  98 "DualVirtualSerial.c" 1
+ 326 000c 7894      		sei
+ 327               	 ;  0 "" 2
+ 328               	/* #NOAPP */
+ 329               	.L24:
+ 330               	.LBB33:
+ 331               	.LSM43:
+ 332 000e 0E94 0000 		call CheckJoystickMovement
+ 333               	.LSM44:
+ 334 0012 80E0      		ldi r24,lo8(VirtualSerial1_CDC_Interface)
+ 335 0014 90E0      		ldi r25,hi8(VirtualSerial1_CDC_Interface)
+ 336 0016 0E94 0000 		call CDC_Device_ReceiveByte
+ 337               	.LSM45:
+ 338 001a 80E0      		ldi r24,lo8(VirtualSerial2_CDC_Interface)
+ 339 001c 90E0      		ldi r25,hi8(VirtualSerial2_CDC_Interface)
+ 340 001e 0E94 0000 		call CDC_Device_ReceiveByte
+ 341 0022 BC01      		movw r22,r24
+ 342               	.LVL10:
+ 343               	.LSM46:
+ 344 0024 97FD      		sbrc r25,7
+ 345 0026 00C0      		rjmp .L23
+ 346               	.LVL11:
+ 347               	.LSM47:
+ 348 0028 80E0      		ldi r24,lo8(VirtualSerial2_CDC_Interface)
+ 349 002a 90E0      		ldi r25,hi8(VirtualSerial2_CDC_Interface)
+ 350               	.LVL12:
+ 351 002c 0E94 0000 		call CDC_Device_SendByte
+ 352               	.LVL13:
+ 353               	.L23:
+ 354               	.LSM48:
+ 355 0030 80E0      		ldi r24,lo8(VirtualSerial1_CDC_Interface)
+ 356 0032 90E0      		ldi r25,hi8(VirtualSerial1_CDC_Interface)
+ 357               	.LVL14:
+ 358 0034 0E94 0000 		call CDC_Device_USBTask
+ 359               	.LVL15:
+ 360               	.LSM49:
+ 361 0038 80E0      		ldi r24,lo8(VirtualSerial2_CDC_Interface)
+ 362 003a 90E0      		ldi r25,hi8(VirtualSerial2_CDC_Interface)
+ 363 003c 0E94 0000 		call CDC_Device_USBTask
+ 364               	.LSM50:
+ 365 0040 0E94 0000 		call USB_USBTask
+ 366 0044 00C0      		rjmp .L24
+ 367               	.LBE33:
+ 368               	.LFE105:
+ 370               	.global	VirtualSerial1_CDC_Interface
+ 371               		.data
+ 374               	VirtualSerial1_CDC_Interface:
+ 375 0052 00        		.byte	0
+ 376 0053 01        		.byte	1
+ 377 0054 1000      		.word	16
+ 378 0056 00        		.byte	0
+ 379 0057 02        		.byte	2
+ 380 0058 1000      		.word	16
+ 381 005a 00        		.byte	0
+ 382 005b 03        		.byte	3
+ 383 005c 0800      		.word	8
+ 384 005e 00        		.byte	0
+ 385 005f 0000 0000 		.skip 9,0
+ 385      0000 0000 
+ 385      00
+ 386               	.global	VirtualSerial2_CDC_Interface
+ 389               	VirtualSerial2_CDC_Interface:
+ 390 0068 02        		.byte	2
+ 391 0069 04        		.byte	4
+ 392 006a 1000      		.word	16
+ 393 006c 00        		.byte	0
+ 394 006d 05        		.byte	5
+ 395 006e 1000      		.word	16
+ 396 0070 00        		.byte	0
+ 397 0071 06        		.byte	6
+ 398 0072 0800      		.word	8
+ 399 0074 00        		.byte	0
+ 400 0075 0000 0000 		.skip 9,0
+ 400      0000 0000 
+ 400      00
+ 401               		.lcomm ActionSent.3998,1
+ 474               	.Letext0:
+DEFINED SYMBOLS
+                            *ABS*:00000000 DualVirtualSerial.c
+C:\Users\Eddie\AppData\Local\Temp/ccoDd3es.s:2      *ABS*:0000003f __SREG__
+C:\Users\Eddie\AppData\Local\Temp/ccoDd3es.s:3      *ABS*:0000003e __SP_H__
+C:\Users\Eddie\AppData\Local\Temp/ccoDd3es.s:4      *ABS*:0000003d __SP_L__
+C:\Users\Eddie\AppData\Local\Temp/ccoDd3es.s:5      *ABS*:00000034 __CCP__
+C:\Users\Eddie\AppData\Local\Temp/ccoDd3es.s:6      *ABS*:00000000 __tmp_reg__
+C:\Users\Eddie\AppData\Local\Temp/ccoDd3es.s:7      *ABS*:00000001 __zero_reg__
+C:\Users\Eddie\AppData\Local\Temp/ccoDd3es.s:19     .text.EVENT_USB_Device_Connect:00000000 EVENT_USB_Device_Connect
+C:\Users\Eddie\AppData\Local\Temp/ccoDd3es.s:41     .text.EVENT_USB_Device_Disconnect:00000000 EVENT_USB_Device_Disconnect
+C:\Users\Eddie\AppData\Local\Temp/ccoDd3es.s:63     .text.EVENT_USB_Device_ControlRequest:00000000 EVENT_USB_Device_ControlRequest
+C:\Users\Eddie\AppData\Local\Temp/ccoDd3es.s:374    .data:00000052 VirtualSerial1_CDC_Interface
+C:\Users\Eddie\AppData\Local\Temp/ccoDd3es.s:389    .data:00000068 VirtualSerial2_CDC_Interface
+C:\Users\Eddie\AppData\Local\Temp/ccoDd3es.s:84     .text.EVENT_USB_Device_ConfigurationChanged:00000000 EVENT_USB_Device_ConfigurationChanged
+C:\Users\Eddie\AppData\Local\Temp/ccoDd3es.s:142    .text.CheckJoystickMovement:00000000 CheckJoystickMovement
+                             .bss:00000000 ActionSent.3998
+C:\Users\Eddie\AppData\Local\Temp/ccoDd3es.s:229    .text.SetupHardware:00000000 SetupHardware
+C:\Users\Eddie\AppData\Local\Temp/ccoDd3es.s:307    .text.main:00000000 main
+
+UNDEFINED SYMBOLS
+CDC_Device_ProcessControlRequest
+CDC_Device_ConfigureEndpoints
+CDC_Device_SendString
+USB_Init
+CDC_Device_ReceiveByte
+CDC_Device_SendByte
+CDC_Device_USBTask
+USB_USBTask
+__do_copy_data
+__do_clear_bss

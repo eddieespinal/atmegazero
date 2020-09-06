@@ -1,0 +1,1482 @@
+   1               		.file	"MassStorageHost.c"
+   2               	__SREG__ = 0x3f
+   3               	__SP_H__ = 0x3e
+   4               	__SP_L__ = 0x3d
+   5               	__CCP__  = 0x34
+   6               	__tmp_reg__ = 0
+   7               	__zero_reg__ = 1
+  15               	.Ltext0:
+  16               		.section	.text.ShowDiskReadError,"ax",@progbits
+  17               	.global	ShowDiskReadError
+  19               	ShowDiskReadError:
+  20               	.LFB151:
+  21               	.LSM0:
+  22               	.LVL0:
+  23 0000 1F93      		push r17
+  24               	/* prologue: function */
+  25               	/* frame size = 0 */
+  26 0002 9C01      		movw r18,r24
+  27 0004 162F      		mov r17,r22
+  28               	.LSM1:
+  29 0006 603C      		cpi r22,lo8(-64)
+  30 0008 01F4      		brne .L2
+  31               	.LVL1:
+  32               	.LSM2:
+  33 000a 00D0      		rcall .
+  34 000c 00D0      		rcall .
+  35 000e 80E0      		ldi r24,lo8(__c.4783)
+  36 0010 90E0      		ldi r25,hi8(__c.4783)
+  37 0012 ADB7      		in r26,__SP_L__
+  38 0014 BEB7      		in r27,__SP_H__
+  39 0016 1296      		adiw r26,1+1
+  40 0018 9C93      		st X,r25
+  41 001a 8E93      		st -X,r24
+  42 001c 1197      		sbiw r26,1
+  43 001e 1496      		adiw r26,3+1
+  44 0020 3C93      		st X,r19
+  45 0022 2E93      		st -X,r18
+  46 0024 1397      		sbiw r26,3
+  47 0026 00C0      		rjmp .L5
+  48               	.LVL2:
+  49               	.L2:
+  50               	.LSM3:
+  51 0028 00D0      		rcall .
+  52 002a 00D0      		rcall .
+  53 002c 80E0      		ldi r24,lo8(__c.4785)
+  54 002e 90E0      		ldi r25,hi8(__c.4785)
+  55 0030 EDB7      		in r30,__SP_L__
+  56 0032 FEB7      		in r31,__SP_H__
+  57 0034 9283      		std Z+2,r25
+  58 0036 8183      		std Z+1,r24
+  59 0038 3483      		std Z+4,r19
+  60 003a 2383      		std Z+3,r18
+  61 003c 0E94 0000 		call printf_P
+  62               	.LVL3:
+  63               	.LSM4:
+  64 0040 EDB7      		in r30,__SP_L__
+  65 0042 FEB7      		in r31,__SP_H__
+  66 0044 3196      		adiw r30,1
+  67 0046 80E0      		ldi r24,lo8(__c.4787)
+  68 0048 90E0      		ldi r25,hi8(__c.4787)
+  69 004a ADB7      		in r26,__SP_L__
+  70 004c BEB7      		in r27,__SP_H__
+  71 004e 1296      		adiw r26,1+1
+  72 0050 9C93      		st X,r25
+  73 0052 8E93      		st -X,r24
+  74 0054 1197      		sbiw r26,1
+  75 0056 1283      		std Z+2,r17
+  76 0058 1382      		std Z+3,__zero_reg__
+  77               	.LVL4:
+  78               	.L5:
+  79 005a 0E94 0000 		call printf_P
+  80               	.LVL5:
+  81 005e 0F90      		pop __tmp_reg__
+  82 0060 0F90      		pop __tmp_reg__
+  83 0062 0F90      		pop __tmp_reg__
+  84 0064 0F90      		pop __tmp_reg__
+  85               	.LBB81:
+  86               	.LBB82:
+  87               	.LSM5:
+  88 0066 8091 A900 		lds r24,169
+  89 006a 8064      		ori r24,lo8(64)
+  90 006c 8093 A900 		sts 169,r24
+  91               	.LBE82:
+  92               	.LBE81:
+  93               	.LBB83:
+  94               	.LBB84:
+  95               	.LSM6:
+  96 0070 8BB1      		in r24,43-32
+  97 0072 8F70      		andi r24,lo8(15)
+  98 0074 8069      		ori r24,lo8(-112)
+  99 0076 8BB9      		out 43-32,r24
+ 100               	/* epilogue start */
+ 101               	.LBE84:
+ 102               	.LBE83:
+ 103               	.LSM7:
+ 104 0078 1F91      		pop r17
+ 105               	.LVL6:
+ 106 007a 0895      		ret
+ 107               	.LFE151:
+ 109               		.section	.text.EVENT_USB_Host_DeviceEnumerationFailed,"ax",@progbits
+ 110               	.global	EVENT_USB_Host_DeviceEnumerationFailed
+ 112               	EVENT_USB_Host_DeviceEnumerationFailed:
+ 113               	.LFB149:
+ 114               	.LSM8:
+ 115               	.LVL7:
+ 116               	/* prologue: function */
+ 117               	/* frame size = 0 */
+ 118               	.LSM9:
+ 119 0000 9091 0000 		lds r25,USB_HostState
+ 120 0004 2DB7      		in r18,__SP_L__
+ 121 0006 3EB7      		in r19,__SP_H__
+ 122 0008 2850      		subi r18,lo8(-(-8))
+ 123 000a 3040      		sbci r19,hi8(-(-8))
+ 124 000c 0FB6      		in __tmp_reg__,__SREG__
+ 125 000e F894      		cli
+ 126 0010 3EBF      		out __SP_H__,r19
+ 127 0012 0FBE      		out __SREG__,__tmp_reg__
+ 128 0014 2DBF      		out __SP_L__,r18
+ 129 0016 EDB7      		in r30,__SP_L__
+ 130 0018 FEB7      		in r31,__SP_H__
+ 131 001a 3196      		adiw r30,1
+ 132 001c 20E0      		ldi r18,lo8(__c.4649)
+ 133 001e 30E0      		ldi r19,hi8(__c.4649)
+ 134 0020 ADB7      		in r26,__SP_L__
+ 135 0022 BEB7      		in r27,__SP_H__
+ 136 0024 1296      		adiw r26,1+1
+ 137 0026 3C93      		st X,r19
+ 138 0028 2E93      		st -X,r18
+ 139 002a 1197      		sbiw r26,1
+ 140 002c 8283      		std Z+2,r24
+ 141 002e 1382      		std Z+3,__zero_reg__
+ 142 0030 6483      		std Z+4,r22
+ 143 0032 1582      		std Z+5,__zero_reg__
+ 144 0034 9683      		std Z+6,r25
+ 145 0036 1782      		std Z+7,__zero_reg__
+ 146 0038 0E94 0000 		call printf_P
+ 147               	.LVL8:
+ 148               	.LBB85:
+ 149               	.LBB86:
+ 150               	.LSM10:
+ 151 003c 8BB1      		in r24,43-32
+ 152 003e 8F70      		andi r24,lo8(15)
+ 153 0040 8069      		ori r24,lo8(-112)
+ 154 0042 8BB9      		out 43-32,r24
+ 155 0044 2DB7      		in r18,__SP_L__
+ 156 0046 3EB7      		in r19,__SP_H__
+ 157 0048 285F      		subi r18,lo8(-(8))
+ 158 004a 3F4F      		sbci r19,hi8(-(8))
+ 159 004c 0FB6      		in __tmp_reg__,__SREG__
+ 160 004e F894      		cli
+ 161 0050 3EBF      		out __SP_H__,r19
+ 162 0052 0FBE      		out __SREG__,__tmp_reg__
+ 163 0054 2DBF      		out __SP_L__,r18
+ 164               	/* epilogue start */
+ 165               	.LBE86:
+ 166               	.LBE85:
+ 167               	.LSM11:
+ 168 0056 0895      		ret
+ 169               	.LFE149:
+ 171               		.section	.text.EVENT_USB_Host_DeviceUnattached,"ax",@progbits
+ 172               	.global	EVENT_USB_Host_DeviceUnattached
+ 174               	EVENT_USB_Host_DeviceUnattached:
+ 175               	.LFB146:
+ 176               	.LSM12:
+ 177               	/* prologue: function */
+ 178               	/* frame size = 0 */
+ 179               	.LSM13:
+ 180 0000 80E0      		ldi r24,lo8(__c.4617)
+ 181 0002 90E0      		ldi r25,hi8(__c.4617)
+ 182 0004 0E94 0000 		call puts_P
+ 183               	.LBB87:
+ 184               	.LBB88:
+ 185               	.LSM14:
+ 186 0008 8BB1      		in r24,43-32
+ 187 000a 8F70      		andi r24,lo8(15)
+ 188 000c 8061      		ori r24,lo8(16)
+ 189 000e 8BB9      		out 43-32,r24
+ 190               	/* epilogue start */
+ 191               	.LBE88:
+ 192               	.LBE87:
+ 193               	.LSM15:
+ 194 0010 0895      		ret
+ 195               	.LFE146:
+ 197               		.section	.text.EVENT_USB_Host_DeviceAttached,"ax",@progbits
+ 198               	.global	EVENT_USB_Host_DeviceAttached
+ 200               	EVENT_USB_Host_DeviceAttached:
+ 201               	.LFB145:
+ 202               	.LSM16:
+ 203               	/* prologue: function */
+ 204               	/* frame size = 0 */
+ 205               	.LSM17:
+ 206 0000 80E0      		ldi r24,lo8(__c.4612)
+ 207 0002 90E0      		ldi r25,hi8(__c.4612)
+ 208 0004 0E94 0000 		call puts_P
+ 209               	.LBB89:
+ 210               	.LBB90:
+ 211               	.LSM18:
+ 212 0008 8BB1      		in r24,43-32
+ 213 000a 8F70      		andi r24,lo8(15)
+ 214 000c 806A      		ori r24,lo8(-96)
+ 215 000e 8BB9      		out 43-32,r24
+ 216               	/* epilogue start */
+ 217               	.LBE90:
+ 218               	.LBE89:
+ 219               	.LSM19:
+ 220 0010 0895      		ret
+ 221               	.LFE145:
+ 223               		.section	.text.MassStorageHost_Task,"ax",@progbits
+ 224               	.global	MassStorageHost_Task
+ 226               	MassStorageHost_Task:
+ 227               	.LFB150:
+ 228               	.LSM20:
+ 229 0000 2F92      		push r2
+ 230 0002 3F92      		push r3
+ 231 0004 4F92      		push r4
+ 232 0006 5F92      		push r5
+ 233 0008 6F92      		push r6
+ 234 000a 7F92      		push r7
+ 235 000c 8F92      		push r8
+ 236 000e 9F92      		push r9
+ 237 0010 AF92      		push r10
+ 238 0012 BF92      		push r11
+ 239 0014 CF92      		push r12
+ 240 0016 DF92      		push r13
+ 241 0018 EF92      		push r14
+ 242 001a FF92      		push r15
+ 243 001c 0F93      		push r16
+ 244 001e 1F93      		push r17
+ 245 0020 DF93      		push r29
+ 246 0022 CF93      		push r28
+ 247 0024 CDB7      		in r28,__SP_L__
+ 248 0026 DEB7      		in r29,__SP_H__
+ 249 0028 C054      		subi r28,lo8(-(-64))
+ 250 002a D040      		sbci r29,hi8(-(-64))
+ 251 002c 0FB6      		in __tmp_reg__,__SREG__
+ 252 002e F894      		cli
+ 253 0030 DEBF      		out __SP_H__,r29
+ 254 0032 0FBE      		out __SREG__,__tmp_reg__
+ 255 0034 CDBF      		out __SP_L__,r28
+ 256               	/* prologue: function */
+ 257               	/* frame size = 64 */
+ 258               	.LSM21:
+ 259 0036 2DB6      		in r2,__SP_L__
+ 260 0038 3EB6      		in r3,__SP_H__
+ 261               	.LSM22:
+ 262 003a 2FAE      		std Y+63,r2
+ 263 003c 9EB7      		in r25,__SP_H__
+ 264 003e 2196      		adiw r28,64-63
+ 265 0040 9FAF      		std Y+63,r25
+ 266 0042 2197      		sbiw r28,64-63
+ 267               	.LSM23:
+ 268 0044 8091 0000 		lds r24,USB_HostState
+ 269 0048 8B30      		cpi r24,lo8(11)
+ 270 004a 01F0      		breq .+2
+ 271 004c 00C0      		rjmp .L13
+ 272               	.LBB91:
+ 273               	.LBB92:
+ 274               	.LSM24:
+ 275 004e 8BB1      		in r24,43-32
+ 276 0050 8F70      		andi r24,lo8(15)
+ 277 0052 8062      		ori r24,lo8(32)
+ 278 0054 8BB9      		out 43-32,r24
+ 279               	.LBE92:
+ 280               	.LBE91:
+ 281               	.LSM25:
+ 282 0056 80E0      		ldi r24,lo8(MassStore_MaxLUNIndex)
+ 283 0058 90E0      		ldi r25,hi8(MassStore_MaxLUNIndex)
+ 284 005a 0E94 0000 		call MassStore_GetMaxLUN
+ 285 005e 682F      		mov r22,r24
+ 286               	.LVL9:
+ 287 0060 8823      		tst r24
+ 288 0062 01F0      		breq .L14
+ 289               	.LVL10:
+ 290               	.LSM26:
+ 291 0064 80E0      		ldi r24,lo8(__c.4659)
+ 292 0066 90E0      		ldi r25,hi8(__c.4659)
+ 293               	.LVL11:
+ 294 0068 00C0      		rjmp .L43
+ 295               	.LVL12:
+ 296               	.L14:
+ 297               	.LSM27:
+ 298 006a 00D0      		rcall .
+ 299 006c 00D0      		rcall .
+ 300 006e 80E0      		ldi r24,lo8(__c.4661)
+ 301 0070 90E0      		ldi r25,hi8(__c.4661)
+ 302               	.LVL13:
+ 303 0072 ADB7      		in r26,__SP_L__
+ 304 0074 BEB7      		in r27,__SP_H__
+ 305 0076 1296      		adiw r26,1+1
+ 306 0078 9C93      		st X,r25
+ 307 007a 8E93      		st -X,r24
+ 308 007c 1197      		sbiw r26,1
+ 309 007e 8091 0000 		lds r24,MassStore_MaxLUNIndex
+ 310 0082 90E0      		ldi r25,lo8(0)
+ 311 0084 0196      		adiw r24,1
+ 312 0086 1496      		adiw r26,3+1
+ 313 0088 9C93      		st X,r25
+ 314 008a 8E93      		st -X,r24
+ 315 008c 1397      		sbiw r26,3
+ 316 008e 0E94 0000 		call printf_P
+ 317               	.LVL14:
+ 318               	.LSM28:
+ 319 0092 0F90      		pop __tmp_reg__
+ 320 0094 0F90      		pop __tmp_reg__
+ 321 0096 0F90      		pop __tmp_reg__
+ 322 0098 0F90      		pop __tmp_reg__
+ 323 009a 0E94 0000 		call MassStore_MassStorageReset
+ 324 009e 682F      		mov r22,r24
+ 325               	.LVL15:
+ 326 00a0 8823      		tst r24
+ 327 00a2 01F0      		breq .L15
+ 328               	.LVL16:
+ 329               	.LSM29:
+ 330 00a4 80E0      		ldi r24,lo8(__c.4663)
+ 331 00a6 90E0      		ldi r25,hi8(__c.4663)
+ 332               	.LVL17:
+ 333 00a8 00C0      		rjmp .L43
+ 334               	.LVL18:
+ 335               	.L15:
+ 336               	.LSM30:
+ 337 00aa 80E0      		ldi r24,lo8(0)
+ 338               	.LVL19:
+ 339 00ac BE01      		movw r22,r28
+ 340               	.LVL20:
+ 341 00ae 675F      		subi r22,lo8(-(9))
+ 342 00b0 7F4F      		sbci r23,hi8(-(9))
+ 343 00b2 0E94 0000 		call MassStore_RequestSense
+ 344 00b6 682F      		mov r22,r24
+ 345               	.LVL21:
+ 346 00b8 8823      		tst r24
+ 347 00ba 01F0      		breq .L16
+ 348               	.LVL22:
+ 349               	.LSM31:
+ 350 00bc 80E0      		ldi r24,lo8(__c.4666)
+ 351 00be 90E0      		ldi r25,hi8(__c.4666)
+ 352               	.LVL23:
+ 353 00c0 00C0      		rjmp .L43
+ 354               	.LVL24:
+ 355               	.L16:
+ 356               	.LSM32:
+ 357 00c2 80E0      		ldi r24,lo8(0)
+ 358               	.LVL25:
+ 359 00c4 61E0      		ldi r22,lo8(1)
+ 360               	.LVL26:
+ 361 00c6 0E94 0000 		call MassStore_PreventAllowMediumRemoval
+ 362 00ca 682F      		mov r22,r24
+ 363               	.LVL27:
+ 364 00cc 8823      		tst r24
+ 365 00ce 01F0      		breq .L17
+ 366               	.LVL28:
+ 367               	.LSM33:
+ 368 00d0 80E0      		ldi r24,lo8(__c.4668)
+ 369 00d2 90E0      		ldi r25,hi8(__c.4668)
+ 370               	.LVL29:
+ 371 00d4 00C0      		rjmp .L43
+ 372               	.LVL30:
+ 373               	.L17:
+ 374               	.LSM34:
+ 375 00d6 80E0      		ldi r24,lo8(0)
+ 376               	.LVL31:
+ 377 00d8 BE01      		movw r22,r28
+ 378               	.LVL32:
+ 379 00da 655E      		subi r22,lo8(-(27))
+ 380 00dc 7F4F      		sbci r23,hi8(-(27))
+ 381 00de 0E94 0000 		call MassStore_Inquiry
+ 382 00e2 682F      		mov r22,r24
+ 383               	.LVL33:
+ 384 00e4 8823      		tst r24
+ 385 00e6 01F0      		breq .L18
+ 386               	.LVL34:
+ 387               	.LSM35:
+ 388 00e8 80E0      		ldi r24,lo8(__c.4671)
+ 389 00ea 90E0      		ldi r25,hi8(__c.4671)
+ 390               	.LVL35:
+ 391 00ec 00C0      		rjmp .L43
+ 392               	.LVL36:
+ 393               	.L18:
+ 394               	.LSM36:
+ 395 00ee 00D0      		rcall .
+ 396 00f0 00D0      		rcall .
+ 397 00f2 00D0      		rcall .
+ 398 00f4 EDB7      		in r30,__SP_L__
+ 399 00f6 FEB7      		in r31,__SP_H__
+ 400 00f8 3196      		adiw r30,1
+ 401 00fa 80E0      		ldi r24,lo8(__c.4673)
+ 402 00fc 90E0      		ldi r25,hi8(__c.4673)
+ 403               	.LVL37:
+ 404 00fe ADB7      		in r26,__SP_L__
+ 405 0100 BEB7      		in r27,__SP_H__
+ 406 0102 1296      		adiw r26,1+1
+ 407 0104 9C93      		st X,r25
+ 408 0106 8E93      		st -X,r24
+ 409 0108 1197      		sbiw r26,1
+ 410 010a CE01      		movw r24,r28
+ 411 010c 8396      		adiw r24,35
+ 412 010e 9383      		std Z+3,r25
+ 413 0110 8283      		std Z+2,r24
+ 414 0112 CE01      		movw r24,r28
+ 415 0114 8B96      		adiw r24,43
+ 416 0116 9583      		std Z+5,r25
+ 417 0118 8483      		std Z+4,r24
+ 418 011a 0E94 0000 		call printf_P
+ 419               	.LVL38:
+ 420               	.LSM37:
+ 421 011e EDB7      		in r30,__SP_L__
+ 422 0120 FEB7      		in r31,__SP_H__
+ 423 0122 3696      		adiw r30,6
+ 424 0124 0FB6      		in __tmp_reg__,__SREG__
+ 425 0126 F894      		cli
+ 426 0128 FEBF      		out __SP_H__,r31
+ 427 012a 0FBE      		out __SREG__,__tmp_reg__
+ 428 012c EDBF      		out __SP_L__,r30
+ 429 012e 80E0      		ldi r24,lo8(__c.4675)
+ 430 0130 90E0      		ldi r25,hi8(__c.4675)
+ 431 0132 0E94 0000 		call puts_P
+ 432               	.LBB93:
+ 433               	.LBB94:
+ 434               	.LSM38:
+ 435 0136 1EE2      		ldi r17,lo8(46)
+ 436               	.LVL39:
+ 437               	.L42:
+ 438               	.LSM39:
+ 439 0138 8091 C800 		lds r24,200
+ 440               	.LVL40:
+ 441 013c 85FF      		sbrs r24,5
+ 442 013e 00C0      		rjmp .L42
+ 443               	.LSM40:
+ 444 0140 1093 CE00 		sts 206,r17
+ 445               	.LBE94:
+ 446               	.LBE93:
+ 447               	.LSM41:
+ 448 0144 8091 0000 		lds r24,USB_HostState
+ 449 0148 8130      		cpi r24,lo8(1)
+ 450 014a 01F0      		breq .L20
+ 451               	.LSM42:
+ 452 014c 80E0      		ldi r24,lo8(0)
+ 453 014e 0E94 0000 		call MassStore_TestUnitReady
+ 454               	.LVL41:
+ 455 0152 682F      		mov r22,r24
+ 456               	.LVL42:
+ 457               	.LSM43:
+ 458 0154 8823      		tst r24
+ 459 0156 01F0      		breq .L20
+ 460               	.LVL43:
+ 461               	.LSM44:
+ 462 0158 803C      		cpi r24,lo8(-64)
+ 463 015a 01F0      		breq .L42
+ 464               	.LSM45:
+ 465 015c 80E0      		ldi r24,lo8(__c.4678)
+ 466 015e 90E0      		ldi r25,hi8(__c.4678)
+ 467               	.LVL44:
+ 468 0160 00C0      		rjmp .L43
+ 469               	.LVL45:
+ 470               	.L20:
+ 471               	.LSM46:
+ 472 0162 80E0      		ldi r24,lo8(__c.4681)
+ 473 0164 90E0      		ldi r25,hi8(__c.4681)
+ 474 0166 0E94 0000 		call puts_P
+ 475               	.LVL46:
+ 476               	.LSM47:
+ 477 016a 80E0      		ldi r24,lo8(0)
+ 478 016c BE01      		movw r22,r28
+ 479 016e 6F5F      		subi r22,lo8(-(1))
+ 480 0170 7F4F      		sbci r23,hi8(-(1))
+ 481 0172 0E94 0000 		call MassStore_ReadCapacity
+ 482 0176 682F      		mov r22,r24
+ 483               	.LVL47:
+ 484 0178 8823      		tst r24
+ 485 017a 01F0      		breq .L21
+ 486               	.LVL48:
+ 487               	.LSM48:
+ 488 017c 80E0      		ldi r24,lo8(__c.4684)
+ 489 017e 90E0      		ldi r25,hi8(__c.4684)
+ 490               	.LVL49:
+ 491 0180 00C0      		rjmp .L43
+ 492               	.LVL50:
+ 493               	.L21:
+ 494               	.LSM49:
+ 495 0182 8DB7      		in r24,__SP_L__
+ 496 0184 9EB7      		in r25,__SP_H__
+ 497               	.LVL51:
+ 498 0186 0A97      		sbiw r24,10
+ 499 0188 0FB6      		in __tmp_reg__,__SREG__
+ 500 018a F894      		cli
+ 501 018c 9EBF      		out __SP_H__,r25
+ 502 018e 0FBE      		out __SREG__,__tmp_reg__
+ 503 0190 8DBF      		out __SP_L__,r24
+ 504 0192 EDB7      		in r30,__SP_L__
+ 505 0194 FEB7      		in r31,__SP_H__
+ 506 0196 3196      		adiw r30,1
+ 507 0198 80E0      		ldi r24,lo8(__c.4686)
+ 508 019a 90E0      		ldi r25,hi8(__c.4686)
+ 509 019c ADB7      		in r26,__SP_L__
+ 510 019e BEB7      		in r27,__SP_H__
+ 511 01a0 1296      		adiw r26,1+1
+ 512 01a2 9C93      		st X,r25
+ 513 01a4 8E93      		st -X,r24
+ 514 01a6 1197      		sbiw r26,1
+ 515 01a8 8981      		ldd r24,Y+1
+ 516 01aa 9A81      		ldd r25,Y+2
+ 517 01ac AB81      		ldd r26,Y+3
+ 518 01ae BC81      		ldd r27,Y+4
+ 519 01b0 8283      		std Z+2,r24
+ 520 01b2 9383      		std Z+3,r25
+ 521 01b4 A483      		std Z+4,r26
+ 522 01b6 B583      		std Z+5,r27
+ 523 01b8 8D81      		ldd r24,Y+5
+ 524 01ba 9E81      		ldd r25,Y+6
+ 525 01bc AF81      		ldd r26,Y+7
+ 526 01be B885      		ldd r27,Y+8
+ 527 01c0 8683      		std Z+6,r24
+ 528 01c2 9783      		std Z+7,r25
+ 529 01c4 A087      		std Z+8,r26
+ 530 01c6 B187      		std Z+9,r27
+ 531 01c8 0E94 0000 		call printf_P
+ 532               	.LVL52:
+ 533               	.LSM50:
+ 534 01cc EDB7      		in r30,__SP_L__
+ 535 01ce FEB7      		in r31,__SP_H__
+ 536 01d0 3A96      		adiw r30,10
+ 537 01d2 0FB6      		in __tmp_reg__,__SREG__
+ 538 01d4 F894      		cli
+ 539 01d6 FEBF      		out __SP_H__,r31
+ 540 01d8 0FBE      		out __SREG__,__tmp_reg__
+ 541 01da EDBF      		out __SP_L__,r30
+ 542 01dc 0D81      		ldd r16,Y+5
+ 543 01de 1E81      		ldd r17,Y+6
+ 544 01e0 8DB7      		in r24,__SP_L__
+ 545 01e2 9EB7      		in r25,__SP_H__
+ 546 01e4 801B      		sub r24,r16
+ 547 01e6 910B      		sbc r25,r17
+ 548 01e8 0FB6      		in __tmp_reg__,__SREG__
+ 549 01ea F894      		cli
+ 550 01ec 9EBF      		out __SP_H__,r25
+ 551 01ee 0FBE      		out __SREG__,__tmp_reg__
+ 552 01f0 8DBF      		out __SP_L__,r24
+ 553 01f2 8DB6      		in r8,__SP_L__
+ 554 01f4 9EB6      		in r9,__SP_H__
+ 555 01f6 0894      		sec
+ 556 01f8 811C      		adc r8,__zero_reg__
+ 557 01fa 911C      		adc r9,__zero_reg__
+ 558               	.LSM51:
+ 559 01fc 2401      		movw r4,r8
+ 560 01fe 80E0      		ldi r24,lo8(0)
+ 561 0200 40E0      		ldi r20,lo8(0)
+ 562 0202 50E0      		ldi r21,hi8(0)
+ 563 0204 60E0      		ldi r22,hlo8(0)
+ 564 0206 70E0      		ldi r23,hhi8(0)
+ 565 0208 21E0      		ldi r18,lo8(1)
+ 566 020a 7401      		movw r14,r8
+ 567 020c 0E94 0000 		call MassStore_ReadDeviceBlock
+ 568 0210 682F      		mov r22,r24
+ 569               	.LVL53:
+ 570 0212 8823      		tst r24
+ 571 0214 01F0      		breq .L22
+ 572               	.LVL54:
+ 573               	.LSM52:
+ 574 0216 80E0      		ldi r24,lo8(__c.4689)
+ 575 0218 90E0      		ldi r25,hi8(__c.4689)
+ 576               	.LVL55:
+ 577 021a 00C0      		rjmp .L43
+ 578               	.LVL56:
+ 579               	.L22:
+ 580               	.LSM53:
+ 581 021c 80E0      		ldi r24,lo8(__c.4691)
+ 582 021e 90E0      		ldi r25,hi8(__c.4691)
+ 583               	.LVL57:
+ 584 0220 0E94 0000 		call puts_P
+ 585               	.LVL58:
+ 586 0224 AA24      		clr r10
+ 587 0226 BB24      		clr r11
+ 588               	.LVL59:
+ 589               	.LBB95:
+ 590               	.LBB96:
+ 591               	.LBB97:
+ 592               	.LBB98:
+ 593               	.LSM54:
+ 594 0228 E0E0      		ldi r30,lo8(__c.4697)
+ 595 022a 6E2E      		mov r6,r30
+ 596 022c E0E0      		ldi r30,hi8(__c.4697)
+ 597 022e 7E2E      		mov r7,r30
+ 598 0230 00C0      		rjmp .L23
+ 599               	.LVL60:
+ 600               	.L27:
+ 601               	.LBE98:
+ 602               	.LBE97:
+ 603               	.LSM55:
+ 604 0232 6501      		movw r12,r10
+ 605 0234 74E0      		ldi r23,4
+ 606 0236 CC0C      	1:	lsl r12
+ 607 0238 DD1C      		rol r13
+ 608 023a 7A95      		dec r23
+ 609 023c 01F4      		brne 1b
+ 610 023e C80C      		add r12,r8
+ 611 0240 D91C      		adc r13,r9
+ 612 0242 00E0      		ldi r16,lo8(0)
+ 613 0244 10E0      		ldi r17,hi8(0)
+ 614               	.LVL61:
+ 615               	.L24:
+ 616               	.LBB100:
+ 617               	.LBB99:
+ 618               	.LSM56:
+ 619 0246 00D0      		rcall .
+ 620 0248 00D0      		rcall .
+ 621 024a EDB7      		in r30,__SP_L__
+ 622 024c FEB7      		in r31,__SP_H__
+ 623 024e 3196      		adiw r30,1
+ 624 0250 ADB7      		in r26,__SP_L__
+ 625 0252 BEB7      		in r27,__SP_H__
+ 626 0254 1296      		adiw r26,1+1
+ 627 0256 7C92      		st X,r7
+ 628 0258 6E92      		st -X,r6
+ 629 025a 1197      		sbiw r26,1
+ 630 025c D601      		movw r26,r12
+ 631 025e A00F      		add r26,r16
+ 632 0260 B11F      		adc r27,r17
+ 633 0262 8C91      		ld r24,X
+ 634 0264 8283      		std Z+2,r24
+ 635 0266 1382      		std Z+3,__zero_reg__
+ 636 0268 0E94 0000 		call printf_P
+ 637               	.LVL62:
+ 638 026c 0F5F      		subi r16,lo8(-(1))
+ 639 026e 1F4F      		sbci r17,hi8(-(1))
+ 640               	.LBE99:
+ 641               	.LSM57:
+ 642 0270 0F90      		pop __tmp_reg__
+ 643 0272 0F90      		pop __tmp_reg__
+ 644 0274 0F90      		pop __tmp_reg__
+ 645 0276 0F90      		pop __tmp_reg__
+ 646 0278 0031      		cpi r16,16
+ 647 027a 1105      		cpc r17,__zero_reg__
+ 648 027c 01F4      		brne .L24
+ 649               	.LBE100:
+ 650               	.LSM58:
+ 651 027e 80E0      		ldi r24,lo8(__c.4702)
+ 652 0280 90E0      		ldi r25,hi8(__c.4702)
+ 653 0282 0E94 0000 		call puts_P
+ 654 0286 EE24      		clr r14
+ 655 0288 FF24      		clr r15
+ 656               	.L26:
+ 657               	.LBB101:
+ 658               	.LBB102:
+ 659               	.LSM59:
+ 660 028a F601      		movw r30,r12
+ 661 028c EE0D      		add r30,r14
+ 662 028e FF1D      		adc r31,r15
+ 663 0290 8081      		ld r24,Z
+ 664 0292 082F      		mov r16,r24
+ 665 0294 10E0      		ldi r17,lo8(0)
+ 666 0296 C801      		movw r24,r16
+ 667 0298 0E94 0000 		call isprint
+ 668 029c 892B      		or r24,r25
+ 669 029e 01F4      		brne .L25
+ 670 02a0 0EE2      		ldi r16,lo8(46)
+ 671 02a2 10E0      		ldi r17,hi8(46)
+ 672               	.L25:
+ 673 02a4 6091 0000 		lds r22,__iob+2
+ 674 02a8 7091 0000 		lds r23,(__iob+2)+1
+ 675 02ac C801      		movw r24,r16
+ 676 02ae 0E94 0000 		call fputc
+ 677 02b2 0894      		sec
+ 678 02b4 E11C      		adc r14,__zero_reg__
+ 679 02b6 F11C      		adc r15,__zero_reg__
+ 680               	.LBE102:
+ 681               	.LSM60:
+ 682 02b8 B0E1      		ldi r27,lo8(16)
+ 683 02ba EB16      		cp r14,r27
+ 684 02bc F104      		cpc r15,__zero_reg__
+ 685 02be 01F4      		brne .L26
+ 686               	.LBE101:
+ 687               	.LSM61:
+ 688 02c0 80E0      		ldi r24,lo8(__c.4709)
+ 689 02c2 90E0      		ldi r25,hi8(__c.4709)
+ 690 02c4 0E94 0000 		call puts_P
+ 691               	.LBE96:
+ 692               	.LSM62:
+ 693 02c8 0894      		sec
+ 694 02ca A11C      		adc r10,__zero_reg__
+ 695 02cc B11C      		adc r11,__zero_reg__
+ 696               	.L23:
+ 697 02ce 9501      		movw r18,r10
+ 698 02d0 40E0      		ldi r20,lo8(0)
+ 699 02d2 50E0      		ldi r21,hi8(0)
+ 700               	.LVL63:
+ 701 02d4 8D81      		ldd r24,Y+5
+ 702 02d6 9E81      		ldd r25,Y+6
+ 703 02d8 AF81      		ldd r26,Y+7
+ 704 02da B885      		ldd r27,Y+8
+ 705 02dc 64E0      		ldi r22,4
+ 706 02de B695      	1:	lsr r27
+ 707 02e0 A795      		ror r26
+ 708 02e2 9795      		ror r25
+ 709 02e4 8795      		ror r24
+ 710 02e6 6A95      		dec r22
+ 711 02e8 01F4      		brne 1b
+ 712 02ea 2817      		cp r18,r24
+ 713 02ec 3907      		cpc r19,r25
+ 714 02ee 4A07      		cpc r20,r26
+ 715 02f0 5B07      		cpc r21,r27
+ 716 02f2 00F4      		brsh .+2
+ 717 02f4 00C0      		rjmp .L27
+ 718               	.LVL64:
+ 719               	.LBE95:
+ 720               	.LSM63:
+ 721 02f6 80E0      		ldi r24,lo8(__c.4714)
+ 722 02f8 90E0      		ldi r25,hi8(__c.4714)
+ 723 02fa 0E94 0000 		call puts_P
+ 724               	.LVL65:
+ 725 02fe 00C0      		rjmp .L28
+ 726               	.L29:
+ 727               	.LSM64:
+ 728 0300 8091 0000 		lds r24,USB_HostState
+ 729 0304 8130      		cpi r24,lo8(1)
+ 730 0306 01F4      		brne .+2
+ 731 0308 00C0      		rjmp .L13
+ 732               	.L28:
+ 733               	.LSM65:
+ 734 030a 6299      		sbic 44-32,2
+ 735 030c 00C0      		rjmp .L29
+ 736 030e AA24      		clr r10
+ 737 0310 BB24      		clr r11
+ 738 0312 6501      		movw r12,r10
+ 739               	.LVL66:
+ 740 0314 00C0      		rjmp .L30
+ 741               	.LVL67:
+ 742               	.L35:
+ 743               	.LBB103:
+ 744               	.LSM66:
+ 745 0316 0D81      		ldd r16,Y+5
+ 746 0318 1E81      		ldd r17,Y+6
+ 747 031a 80E0      		ldi r24,lo8(0)
+ 748 031c B601      		movw r22,r12
+ 749 031e A501      		movw r20,r10
+ 750               	.LVL68:
+ 751 0320 21E0      		ldi r18,lo8(1)
+ 752               	.LVL69:
+ 753 0322 7201      		movw r14,r4
+ 754               	.LVL70:
+ 755 0324 0E94 0000 		call MassStore_ReadDeviceBlock
+ 756               	.LVL71:
+ 757 0328 682F      		mov r22,r24
+ 758               	.LVL72:
+ 759 032a 8823      		tst r24
+ 760 032c 01F4      		brne .L31
+ 761               	.LVL73:
+ 762 032e EE24      		clr r14
+ 763 0330 FF24      		clr r15
+ 764               	.LVL74:
+ 765 0332 00C0      		rjmp .L32
+ 766               	.LVL75:
+ 767               	.L31:
+ 768               	.LSM67:
+ 769 0334 80E0      		ldi r24,lo8(__c.4720)
+ 770 0336 90E0      		ldi r25,hi8(__c.4720)
+ 771               	.LVL76:
+ 772               	.L43:
+ 773 0338 0E94 0000 		call ShowDiskReadError
+ 774               	.LVL77:
+ 775               	.LSM68:
+ 776 033c 80E0      		ldi r24,lo8(0)
+ 777 033e 0E94 0000 		call USB_Host_SetDeviceConfiguration
+ 778 0342 00C0      		rjmp .L13
+ 779               	.LVL78:
+ 780               	.L34:
+ 781               	.LBB104:
+ 782               	.LBB105:
+ 783               	.LSM69:
+ 784 0344 F401      		movw r30,r8
+ 785 0346 EE0D      		add r30,r14
+ 786 0348 FF1D      		adc r31,r15
+ 787 034a 8081      		ld r24,Z
+ 788 034c 082F      		mov r16,r24
+ 789 034e 10E0      		ldi r17,lo8(0)
+ 790 0350 C801      		movw r24,r16
+ 791 0352 0E94 0000 		call isprint
+ 792               	.LVL79:
+ 793 0356 892B      		or r24,r25
+ 794 0358 01F4      		brne .L33
+ 795 035a 0EE2      		ldi r16,lo8(46)
+ 796 035c 10E0      		ldi r17,hi8(46)
+ 797               	.L33:
+ 798 035e 6091 0000 		lds r22,__iob+2
+ 799 0362 7091 0000 		lds r23,(__iob+2)+1
+ 800 0366 C801      		movw r24,r16
+ 801 0368 0E94 0000 		call fputc
+ 802               	.LBE105:
+ 803               	.LSM70:
+ 804 036c 0894      		sec
+ 805 036e E11C      		adc r14,__zero_reg__
+ 806 0370 F11C      		adc r15,__zero_reg__
+ 807               	.LVL80:
+ 808               	.L32:
+ 809 0372 9701      		movw r18,r14
+ 810 0374 40E0      		ldi r20,lo8(0)
+ 811 0376 50E0      		ldi r21,hi8(0)
+ 812               	.LVL81:
+ 813 0378 8D81      		ldd r24,Y+5
+ 814 037a 9E81      		ldd r25,Y+6
+ 815 037c AF81      		ldd r26,Y+7
+ 816 037e B885      		ldd r27,Y+8
+ 817               	.LVL82:
+ 818 0380 2817      		cp r18,r24
+ 819 0382 3907      		cpc r19,r25
+ 820 0384 4A07      		cpc r20,r26
+ 821 0386 5B07      		cpc r21,r27
+ 822 0388 00F0      		brlo .L34
+ 823               	.LVL83:
+ 824               	.LBE104:
+ 825               	.LSM71:
+ 826 038a 0894      		sec
+ 827 038c A11C      		adc r10,__zero_reg__
+ 828 038e B11C      		adc r11,__zero_reg__
+ 829 0390 C11C      		adc r12,__zero_reg__
+ 830 0392 D11C      		adc r13,__zero_reg__
+ 831               	.L30:
+ 832 0394 8981      		ldd r24,Y+1
+ 833 0396 9A81      		ldd r25,Y+2
+ 834 0398 AB81      		ldd r26,Y+3
+ 835 039a BC81      		ldd r27,Y+4
+ 836 039c A816      		cp r10,r24
+ 837 039e B906      		cpc r11,r25
+ 838 03a0 CA06      		cpc r12,r26
+ 839 03a2 DB06      		cpc r13,r27
+ 840 03a4 00F4      		brsh .+2
+ 841 03a6 00C0      		rjmp .L35
+ 842               	.LBE103:
+ 843               	.LBB106:
+ 844               	.LBB107:
+ 845               	.LSM72:
+ 846 03a8 8BB1      		in r24,43-32
+ 847 03aa 8F70      		andi r24,lo8(15)
+ 848 03ac 8066      		ori r24,lo8(96)
+ 849 03ae 8BB9      		out 43-32,r24
+ 850               	.LBE107:
+ 851               	.LBE106:
+ 852               	.LSM73:
+ 853 03b0 80E0      		ldi r24,lo8(0)
+ 854 03b2 0E94 0000 		call USB_Host_SetDeviceConfiguration
+ 855               	.LVL84:
+ 856 03b6 2FAD      		ldd r18,Y+63
+ 857 03b8 2196      		adiw r28,64-63
+ 858 03ba 3FAD      		ldd r19,Y+63
+ 859 03bc 2197      		sbiw r28,64-63
+ 860 03be C901      		movw r24,r18
+ 861 03c0 0FB6      		in __tmp_reg__,__SREG__
+ 862 03c2 F894      		cli
+ 863 03c4 9EBF      		out __SP_H__,r25
+ 864 03c6 0FBE      		out __SREG__,__tmp_reg__
+ 865 03c8 8DBF      		out __SP_L__,r24
+ 866 03ca 00C0      		rjmp .L37
+ 867               	.LVL85:
+ 868               	.L13:
+ 869 03cc 8FAD      		ldd r24,Y+63
+ 870 03ce 2196      		adiw r28,64-63
+ 871 03d0 9FAD      		ldd r25,Y+63
+ 872 03d2 2197      		sbiw r28,64-63
+ 873 03d4 9C01      		movw r18,r24
+ 874 03d6 0FB6      		in __tmp_reg__,__SREG__
+ 875 03d8 F894      		cli
+ 876 03da 3EBF      		out __SP_H__,r19
+ 877 03dc 0FBE      		out __SREG__,__tmp_reg__
+ 878 03de 2DBF      		out __SP_L__,r18
+ 879               	.LVL86:
+ 880               	.L37:
+ 881               	.LSM74:
+ 882 03e0 0FB6      		in __tmp_reg__,__SREG__
+ 883 03e2 F894      		cli
+ 884 03e4 3EBE      		out __SP_H__,r3
+ 885 03e6 0FBE      		out __SREG__,__tmp_reg__
+ 886 03e8 2DBE      		out __SP_L__,r2
+ 887               	/* epilogue start */
+ 888 03ea C05C      		subi r28,lo8(-(64))
+ 889 03ec DF4F      		sbci r29,hi8(-(64))
+ 890 03ee 0FB6      		in __tmp_reg__,__SREG__
+ 891 03f0 F894      		cli
+ 892 03f2 DEBF      		out __SP_H__,r29
+ 893 03f4 0FBE      		out __SREG__,__tmp_reg__
+ 894 03f6 CDBF      		out __SP_L__,r28
+ 895 03f8 CF91      		pop r28
+ 896 03fa DF91      		pop r29
+ 897 03fc 1F91      		pop r17
+ 898 03fe 0F91      		pop r16
+ 899 0400 FF90      		pop r15
+ 900 0402 EF90      		pop r14
+ 901               	.LVL87:
+ 902 0404 DF90      		pop r13
+ 903 0406 CF90      		pop r12
+ 904               	.LVL88:
+ 905 0408 BF90      		pop r11
+ 906 040a AF90      		pop r10
+ 907               	.LVL89:
+ 908 040c 9F90      		pop r9
+ 909 040e 8F90      		pop r8
+ 910 0410 7F90      		pop r7
+ 911 0412 6F90      		pop r6
+ 912 0414 5F90      		pop r5
+ 913 0416 4F90      		pop r4
+ 914 0418 3F90      		pop r3
+ 915 041a 2F90      		pop r2
+ 916 041c 0895      		ret
+ 917               	.LFE150:
+ 919               		.section	.text.EVENT_USB_Host_HostError,"ax",@progbits
+ 920               	.global	EVENT_USB_Host_HostError
+ 922               	EVENT_USB_Host_HostError:
+ 923               	.LFB148:
+ 924               	.LSM75:
+ 925               	.LVL90:
+ 926 0000 1F93      		push r17
+ 927               	/* prologue: function */
+ 928               	/* frame size = 0 */
+ 929 0002 182F      		mov r17,r24
+ 930               	.LSM76:
+ 931 0004 0E94 0000 		call USB_Disable
+ 932               	.LVL91:
+ 933               	.LSM77:
+ 934 0008 00D0      		rcall .
+ 935 000a 00D0      		rcall .
+ 936 000c EDB7      		in r30,__SP_L__
+ 937 000e FEB7      		in r31,__SP_H__
+ 938 0010 3196      		adiw r30,1
+ 939 0012 80E0      		ldi r24,lo8(__c.4641)
+ 940 0014 90E0      		ldi r25,hi8(__c.4641)
+ 941 0016 ADB7      		in r26,__SP_L__
+ 942 0018 BEB7      		in r27,__SP_H__
+ 943 001a 1296      		adiw r26,1+1
+ 944 001c 9C93      		st X,r25
+ 945 001e 8E93      		st -X,r24
+ 946 0020 1197      		sbiw r26,1
+ 947 0022 1283      		std Z+2,r17
+ 948 0024 1382      		std Z+3,__zero_reg__
+ 949 0026 0E94 0000 		call printf_P
+ 950               	.LBB108:
+ 951               	.LBB109:
+ 952               	.LSM78:
+ 953 002a 8BB1      		in r24,43-32
+ 954 002c 8F70      		andi r24,lo8(15)
+ 955 002e 8069      		ori r24,lo8(-112)
+ 956 0030 8BB9      		out 43-32,r24
+ 957 0032 0F90      		pop __tmp_reg__
+ 958 0034 0F90      		pop __tmp_reg__
+ 959 0036 0F90      		pop __tmp_reg__
+ 960 0038 0F90      		pop __tmp_reg__
+ 961               	.L45:
+ 962 003a 00C0      		rjmp .L45
+ 963               	.LBE109:
+ 964               	.LBE108:
+ 965               	.LFE148:
+ 967               		.section	.text.EVENT_USB_Host_DeviceEnumerationComplete,"ax",@progbits
+ 968               	.global	EVENT_USB_Host_DeviceEnumerationComplete
+ 970               	EVENT_USB_Host_DeviceEnumerationComplete:
+ 971               	.LFB147:
+ 972               	.LSM79:
+ 973 0000 1F93      		push r17
+ 974               	/* prologue: function */
+ 975               	/* frame size = 0 */
+ 976               	.LSM80:
+ 977 0002 80E0      		ldi r24,lo8(__c.4622)
+ 978 0004 90E0      		ldi r25,hi8(__c.4622)
+ 979 0006 0E94 0000 		call puts_P
+ 980               	.LSM81:
+ 981 000a 0E94 0000 		call ProcessConfigurationDescriptor
+ 982 000e 182F      		mov r17,r24
+ 983               	.LVL92:
+ 984 0010 8823      		tst r24
+ 985 0012 01F0      		breq .L48
+ 986               	.LVL93:
+ 987               	.LSM82:
+ 988 0014 8130      		cpi r24,lo8(1)
+ 989 0016 01F4      		brne .L49
+ 990               	.LSM83:
+ 991 0018 80E0      		ldi r24,lo8(__c.4625)
+ 992 001a 90E0      		ldi r25,hi8(__c.4625)
+ 993               	.LVL94:
+ 994 001c 00C0      		rjmp .L54
+ 995               	.LVL95:
+ 996               	.L49:
+ 997               	.LSM84:
+ 998 001e 80E0      		ldi r24,lo8(__c.4627)
+ 999 0020 90E0      		ldi r25,hi8(__c.4627)
+ 1000               	.LVL96:
+ 1001               	.L54:
+ 1002 0022 0E94 0000 		call puts_P
+ 1003               	.LSM85:
+ 1004 0026 00D0      		rcall .
+ 1005 0028 00D0      		rcall .
+ 1006 002a EDB7      		in r30,__SP_L__
+ 1007 002c FEB7      		in r31,__SP_H__
+ 1008 002e 3196      		adiw r30,1
+ 1009 0030 80E0      		ldi r24,lo8(__c.4629)
+ 1010 0032 90E0      		ldi r25,hi8(__c.4629)
+ 1011 0034 ADB7      		in r26,__SP_L__
+ 1012 0036 BEB7      		in r27,__SP_H__
+ 1013 0038 1296      		adiw r26,1+1
+ 1014 003a 9C93      		st X,r25
+ 1015 003c 8E93      		st -X,r24
+ 1016 003e 1197      		sbiw r26,1
+ 1017 0040 1283      		std Z+2,r17
+ 1018 0042 00C0      		rjmp .L55
+ 1019               	.LVL97:
+ 1020               	.L48:
+ 1021               	.LSM86:
+ 1022 0044 81E0      		ldi r24,lo8(1)
+ 1023               	.LVL98:
+ 1024 0046 0E94 0000 		call USB_Host_SetDeviceConfiguration
+ 1025 004a 282F      		mov r18,r24
+ 1026               	.LVL99:
+ 1027 004c 8823      		tst r24
+ 1028 004e 01F0      		breq .L52
+ 1029               	.LVL100:
+ 1030               	.LSM87:
+ 1031 0050 00D0      		rcall .
+ 1032 0052 00D0      		rcall .
+ 1033 0054 EDB7      		in r30,__SP_L__
+ 1034 0056 FEB7      		in r31,__SP_H__
+ 1035 0058 3196      		adiw r30,1
+ 1036 005a 80E0      		ldi r24,lo8(__c.4631)
+ 1037 005c 90E0      		ldi r25,hi8(__c.4631)
+ 1038               	.LVL101:
+ 1039 005e ADB7      		in r26,__SP_L__
+ 1040 0060 BEB7      		in r27,__SP_H__
+ 1041 0062 1296      		adiw r26,1+1
+ 1042 0064 9C93      		st X,r25
+ 1043 0066 8E93      		st -X,r24
+ 1044 0068 1197      		sbiw r26,1
+ 1045 006a 2283      		std Z+2,r18
+ 1046               	.LVL102:
+ 1047               	.L55:
+ 1048 006c 1382      		std Z+3,__zero_reg__
+ 1049 006e 0E94 0000 		call printf_P
+ 1050               	.LVL103:
+ 1051               	.LBB110:
+ 1052               	.LBB111:
+ 1053               	.LSM88:
+ 1054 0072 8BB1      		in r24,43-32
+ 1055 0074 8F70      		andi r24,lo8(15)
+ 1056 0076 8069      		ori r24,lo8(-112)
+ 1057 0078 8BB9      		out 43-32,r24
+ 1058 007a 0F90      		pop __tmp_reg__
+ 1059 007c 0F90      		pop __tmp_reg__
+ 1060 007e 0F90      		pop __tmp_reg__
+ 1061 0080 0F90      		pop __tmp_reg__
+ 1062 0082 00C0      		rjmp .L53
+ 1063               	.LVL104:
+ 1064               	.L52:
+ 1065               	.LBE111:
+ 1066               	.LBE110:
+ 1067               	.LSM89:
+ 1068 0084 80E0      		ldi r24,lo8(__c.4633)
+ 1069 0086 90E0      		ldi r25,hi8(__c.4633)
+ 1070               	.LVL105:
+ 1071 0088 0E94 0000 		call puts_P
+ 1072               	.LVL106:
+ 1073               	.LBB112:
+ 1074               	.LBB113:
+ 1075               	.LSM90:
+ 1076 008c 8BB1      		in r24,43-32
+ 1077 008e 8F70      		andi r24,lo8(15)
+ 1078 0090 8066      		ori r24,lo8(96)
+ 1079 0092 8BB9      		out 43-32,r24
+ 1080               	.LVL107:
+ 1081               	.L53:
+ 1082               	/* epilogue start */
+ 1083               	.LBE113:
+ 1084               	.LBE112:
+ 1085               	.LSM91:
+ 1086 0094 1F91      		pop r17
+ 1087               	.LVL108:
+ 1088 0096 0895      		ret
+ 1089               	.LFE147:
+ 1091               		.section	.text.SetupHardware,"ax",@progbits
+ 1092               	.global	SetupHardware
+ 1094               	SetupHardware:
+ 1095               	.LFB144:
+ 1096               	.LSM92:
+ 1097               	/* prologue: function */
+ 1098               	/* frame size = 0 */
+ 1099               	.LSM93:
+ 1100 0000 84B7      		in r24,84-32
+ 1101 0002 877F      		andi r24,lo8(-9)
+ 1102 0004 84BF      		out 84-32,r24
+ 1103               	.LSM94:
+ 1104 0006 38E1      		ldi r19,lo8(24)
+ 1105               	/* #APP */
+ 1106               	 ;  68 "MassStorageHost.c" 1
+ 1107 0008 0FB6      		in __tmp_reg__, __SREG__
+ 1108 000a F894      		cli
+ 1109 000c 3093 6000 		sts 96, r19
+ 1110 0010 1092 6000 		sts 96, __zero_reg__
+ 1111 0014 0FBE      		out __SREG__,__tmp_reg__
+ 1112               		
+ 1113               	 ;  0 "" 2
+ 1114               	/* #NOAPP */
+ 1115               	.LBB114:
+ 1116               	.LSM95:
+ 1117 0016 80E0      		ldi r24,lo8(0)
+ 1118 0018 90E0      		ldi r25,hi8(0)
+ 1119 001a 20E8      		ldi r18,lo8(-128)
+ 1120               	/* #APP */
+ 1121               	 ;  71 "MassStorageHost.c" 1
+ 1122 001c 0FB6      		in __tmp_reg__,__SREG__
+ 1123 001e F894      		cli
+ 1124 0020 2093 6100 		sts 97, r18
+ 1125 0024 8093 6100 		sts 97, r24
+ 1126 0028 0FBE      		out __SREG__, __tmp_reg__
+ 1127               	 ;  0 "" 2
+ 1128               	/* #NOAPP */
+ 1129               	.LBE114:
+ 1130               	.LBB115:
+ 1131               	.LBB116:
+ 1132               	.LSM96:
+ 1133 002a 83E3      		ldi r24,lo8(51)
+ 1134 002c 90E0      		ldi r25,hi8(51)
+ 1135 002e 9093 CD00 		sts (204)+1,r25
+ 1136 0032 8093 CC00 		sts 204,r24
+ 1137               	.LSM97:
+ 1138 0036 86E0      		ldi r24,lo8(6)
+ 1139 0038 8093 CA00 		sts 202,r24
+ 1140               	.LSM98:
+ 1141 003c 1092 C800 		sts 200,__zero_reg__
+ 1142               	.LSM99:
+ 1143 0040 3093 C900 		sts 201,r19
+ 1144               	.LSM100:
+ 1145 0044 539A      		sbi 42-32,3
+ 1146               	.LSM101:
+ 1147 0046 5A9A      		sbi 43-32,2
+ 1148               	.LBE116:
+ 1149               	.LBE115:
+ 1150               	.LBB117:
+ 1151               	.LBB118:
+ 1152               	.LSM102:
+ 1153 0048 8AB1      		in r24,42-32
+ 1154 004a 806F      		ori r24,lo8(-16)
+ 1155 004c 8AB9      		out 42-32,r24
+ 1156               	.LSM103:
+ 1157 004e 8BB1      		in r24,43-32
+ 1158 0050 8F70      		andi r24,lo8(15)
+ 1159 0052 8BB9      		out 43-32,r24
+ 1160               	.LBE118:
+ 1161               	.LBE117:
+ 1162               	.LBB119:
+ 1163               	.LBB120:
+ 1164               	.LSM104:
+ 1165 0054 6A98      		cbi 45-32,2
+ 1166               	.LSM105:
+ 1167 0056 729A      		sbi 46-32,2
+ 1168               	.LBE120:
+ 1169               	.LBE119:
+ 1170               	.LSM106:
+ 1171 0058 0E94 0000 		call USB_Init
+ 1172               	.LBB121:
+ 1173               	.LBB122:
+ 1174               	.LSM107:
+ 1175 005c E0E0      		ldi r30,lo8(USARTSerialStream)
+ 1176 005e F0E0      		ldi r31,hi8(USARTSerialStream)
+ 1177 0060 F093 0000 		sts (__iob)+1,r31
+ 1178 0064 E093 0000 		sts __iob,r30
+ 1179               	.LSM108:
+ 1180 0068 F093 0000 		sts (__iob+2)+1,r31
+ 1181 006c E093 0000 		sts __iob+2,r30
+ 1182               	.LSM109:
+ 1183 0070 8EE0      		ldi r24,lo8(14)
+ 1184 0072 DF01      		movw r26,r30
+ 1185 0074 1D92      		st X+,__zero_reg__
+ 1186 0076 8A95      	        dec r24
+ 1187 0078 01F4      		brne .-6
+ 1188 007a 83E0      		ldi r24,lo8(3)
+ 1189 007c 8093 0000 		sts USARTSerialStream+3,r24
+ 1190 0080 80E0      		ldi r24,lo8(gs(Serial_putchar))
+ 1191 0082 90E0      		ldi r25,hi8(gs(Serial_putchar))
+ 1192 0084 9093 0000 		sts (USARTSerialStream+8)+1,r25
+ 1193 0088 8093 0000 		sts USARTSerialStream+8,r24
+ 1194 008c 80E0      		ldi r24,lo8(gs(Serial_getchar))
+ 1195 008e 90E0      		ldi r25,hi8(gs(Serial_getchar))
+ 1196 0090 9093 0000 		sts (USARTSerialStream+10)+1,r25
+ 1197 0094 8093 0000 		sts USARTSerialStream+10,r24
+ 1198               	/* epilogue start */
+ 1199               	.LBE122:
+ 1200               	.LBE121:
+ 1201               	.LSM110:
+ 1202 0098 0895      		ret
+ 1203               	.LFE144:
+ 1205               		.section	.text.main,"ax",@progbits
+ 1206               	.global	main
+ 1208               	main:
+ 1209               	.LFB143:
+ 1210               	.LSM111:
+ 1211               	/* prologue: function */
+ 1212               	/* frame size = 0 */
+ 1213               	.LSM112:
+ 1214 0000 0E94 0000 		call SetupHardware
+ 1215               	.LSM113:
+ 1216 0004 80E0      		ldi r24,lo8(__c.4598)
+ 1217 0006 90E0      		ldi r25,hi8(__c.4598)
+ 1218 0008 0E94 0000 		call puts_P
+ 1219               	.LBB123:
+ 1220               	.LBB124:
+ 1221               	.LSM114:
+ 1222 000c 8BB1      		in r24,43-32
+ 1223 000e 8F70      		andi r24,lo8(15)
+ 1224 0010 8061      		ori r24,lo8(16)
+ 1225 0012 8BB9      		out 43-32,r24
+ 1226               	.LBE124:
+ 1227               	.LBE123:
+ 1228               	.LSM115:
+ 1229               	/* #APP */
+ 1230               	 ;  53 "MassStorageHost.c" 1
+ 1231 0014 7894      		sei
+ 1232               	 ;  0 "" 2
+ 1233               	/* #NOAPP */
+ 1234               	.L59:
+ 1235               	.LSM116:
+ 1236 0016 0E94 0000 		call MassStorageHost_Task
+ 1237               	.LSM117:
+ 1238 001a 0E94 0000 		call USB_USBTask
+ 1239 001e 00C0      		rjmp .L59
+ 1240               	.LFE143:
+ 1242               		.section	.progmem.data,"a",@progbits
+ 1245               	__c.4787:
+ 1246 0000 2020 2D2D 		.string	"  -- Error Code: %d\033[37m"
+ 1246      2045 7272 
+ 1246      6F72 2043 
+ 1246      6F64 653A 
+ 1246      2025 641B 
+ 1249               	__c.4785:
+ 1250 0019 1B5B 3331 		.string	"\033[31mCommand error (%S).\r\n"
+ 1250      6D43 6F6D 
+ 1250      6D61 6E64 
+ 1250      2065 7272 
+ 1250      6F72 2028 
+ 1253               	__c.4783:
+ 1254 0034 1B5B 3331 		.string	"\033[31mSCSI command error (%S).\r\n"
+ 1254      6D53 4353 
+ 1254      4920 636F 
+ 1254      6D6D 616E 
+ 1254      6420 6572 
+ 1257               	__c.4720:
+ 1258 0054 5265 6164 		.string	"Read Device Block"
+ 1258      2044 6576 
+ 1258      6963 6520 
+ 1258      426C 6F63 
+ 1258      6B00 
+ 1261               	__c.4714:
+ 1262 0066 0D0A 0D   		.ascii	"\r\n\r"
+ 1263 0069 0A50 7265 		.string	"\nPress board button to read entire ASCII contents of disk...\r\n\r\n"
+ 1263      7373 2062 
+ 1263      6F61 7264 
+ 1263      2062 7574 
+ 1263      746F 6E20 
+ 1266               	__c.4709:
+ 1267 00aa 0D0A 00   		.string	"\r\n"
+ 1270               	__c.4702:
+ 1271 00ad 2020 2020 		.string	"    "
+ 1271      00
+ 1274               	__c.4697:
+ 1275 00b2 252E 3258 		.string	"%.2X "
+ 1275      2000 
+ 1278               	__c.4691:
+ 1279 00b8 0D0A 436F 		.string	"\r\nContents of first block:\r\n"
+ 1279      6E74 656E 
+ 1279      7473 206F 
+ 1279      6620 6669 
+ 1279      7273 7420 
+ 1282               	__c.4689:
+ 1283 00d5 5265 6164 		.string	"Read Device Block"
+ 1283      2044 6576 
+ 1283      6963 6520 
+ 1283      426C 6F63 
+ 1283      6B00 
+ 1286               	__c.4686:
+ 1287 00e7 256C 7520 		.string	"%lu blocks of %lu bytes.\r\n"
+ 1287      626C 6F63 
+ 1287      6B73 206F 
+ 1287      6620 256C 
+ 1287      7520 6279 
+ 1290               	__c.4684:
+ 1291 0102 5265 6164 		.string	"Read Capacity"
+ 1291      2043 6170 
+ 1291      6163 6974 
+ 1291      7900 
+ 1294               	__c.4681:
+ 1295 0110 0D0A 5265 		.string	"\r\nRetrieving Capacity... "
+ 1295      7472 6965 
+ 1295      7669 6E67 
+ 1295      2043 6170 
+ 1295      6163 6974 
+ 1298               	__c.4678:
+ 1299 012a 5465 7374 		.string	"Test Unit Ready"
+ 1299      2055 6E69 
+ 1299      7420 5265 
+ 1299      6164 7900 
+ 1302               	__c.4675:
+ 1303 013a 5761 6974 		.string	"Waiting until ready.."
+ 1303      696E 6720 
+ 1303      756E 7469 
+ 1303      6C20 7265 
+ 1303      6164 792E 
+ 1306               	__c.4673:
+ 1307 0150 5665 6E64 		.string	"Vendor \"%.8s\", Product \"%.16s\"\r\n"
+ 1307      6F72 2022 
+ 1307      252E 3873 
+ 1307      222C 2050 
+ 1307      726F 6475 
+ 1310               	__c.4671:
+ 1311 0171 496E 7175 		.string	"Inquiry"
+ 1311      6972 7900 
+ 1314               	__c.4668:
+ 1315 0179 5072 6576 		.string	"Prevent/Allow Medium Removal"
+ 1315      656E 742F 
+ 1315      416C 6C6F 
+ 1315      7720 4D65 
+ 1315      6469 756D 
+ 1318               	__c.4666:
+ 1319 0196 5265 7175 		.string	"Request Sense"
+ 1319      6573 7420 
+ 1319      5365 6E73 
+ 1319      6500 
+ 1322               	__c.4663:
+ 1323 01a4 4D61 7373 		.string	"Mass Storage Reset"
+ 1323      2053 746F 
+ 1323      7261 6765 
+ 1323      2052 6573 
+ 1323      6574 00
+ 1326               	__c.4661:
+ 1327 01b7 546F 7461 		.string	"Total LUNs: %d - Using first LUN in device.\r\n"
+ 1327      6C20 4C55 
+ 1327      4E73 3A20 
+ 1327      2564 202D 
+ 1327      2055 7369 
+ 1330               	__c.4659:
+ 1331 01e5 4765 7420 		.string	"Get Max LUN"
+ 1331      4D61 7820 
+ 1331      4C55 4E00 
+ 1334               	__c.4649:
+ 1335 01f1 1B5B 3331 		.ascii	"\033[31mDev Enum Error\r\n"
+ 1335      6D44 6576 
+ 1335      2045 6E75 
+ 1335      6D20 4572 
+ 1335      726F 720D 
+ 1336 0206 202D 2D20 		.string	" -- Error Code %d\r\n -- Sub Error Code %d\r\n -- In State %d\r\n\033[37m"
+ 1336      4572 726F 
+ 1336      7220 436F 
+ 1336      6465 2025 
+ 1336      640D 0A20 
+ 1339               	__c.4641:
+ 1340 0247 1B5B 3331 		.string	"\033[31mHost Mode Error\r\n -- Error Code %d\r\n\033[37m"
+ 1340      6D48 6F73 
+ 1340      7420 4D6F 
+ 1340      6465 2045 
+ 1340      7272 6F72 
+ 1343               	__c.4633:
+ 1344 0276 4D61 7373 		.string	"Mass Storage Disk Enumerated.\r\n"
+ 1344      2053 746F 
+ 1344      7261 6765 
+ 1344      2044 6973 
+ 1344      6B20 456E 
+ 1347               	__c.4631:
+ 1348 0296 1B5B      		.ascii	"\033["
+ 1349 0298 3331 6D43 		.string	"31mControl Error (Set Configuration).\r\n -- Error Code: %d\r\n\033[37m"
+ 1349      6F6E 7472 
+ 1349      6F6C 2045 
+ 1349      7272 6F72 
+ 1349      2028 5365 
+ 1352               	__c.4629:
+ 1353 02d9 202D 2D20 		.string	" -- Error Code: %d\r\n\033[37m"
+ 1353      4572 726F 
+ 1353      7220 436F 
+ 1353      6465 3A20 
+ 1353      2564 0D0A 
+ 1356               	__c.4627:
+ 1357 02f3 1B5B 3331 		.string	"\033[31mInvalid Device.\r\n"
+ 1357      6D49 6E76 
+ 1357      616C 6964 
+ 1357      2044 6576 
+ 1357      6963 652E 
+ 1360               	__c.4625:
+ 1361 030a 1B5B 3331 		.string	"\033[31mControl Error (Get Configuration).\r\n"
+ 1361      6D43 6F6E 
+ 1361      7472 6F6C 
+ 1361      2045 7272 
+ 1361      6F72 2028 
+ 1364               	__c.4622:
+ 1365 0334 4765 7474 		.string	"Getting Config Data.\r\n"
+ 1365      696E 6720 
+ 1365      436F 6E66 
+ 1365      6967 2044 
+ 1365      6174 612E 
+ 1368               	__c.4617:
+ 1369 034b 1B5B 3332 		.string	"\033[32m\r\nDevice Unattached.\r\n\033[37m"
+ 1369      6D0D 0A44 
+ 1369      6576 6963 
+ 1369      6520 556E 
+ 1369      6174 7461 
+ 1372               	__c.4612:
+ 1373 036c 1B5B 3332 		.string	"\033[32mDevice Attached.\r\n\033[37m"
+ 1373      6D44 6576 
+ 1373      6963 6520 
+ 1373      4174 7461 
+ 1373      6368 6564 
+ 1376               	__c.4598:
+ 1377 0389 1B5B 3336 		.string	"\033[36mMass Storage Host Demo running.\r\n\033[37m"
+ 1377      6D4D 6173 
+ 1377      7320 5374 
+ 1377      6F72 6167 
+ 1377      6520 486F 
+ 1378               		.comm MassStore_MaxLUNIndex,1,1
+ 1467               	.Letext0:
+DEFINED SYMBOLS
+                            *ABS*:00000000 MassStorageHost.c
+C:\Users\Eddie\AppData\Local\Temp/ccHXDDfm.s:2      *ABS*:0000003f __SREG__
+C:\Users\Eddie\AppData\Local\Temp/ccHXDDfm.s:3      *ABS*:0000003e __SP_H__
+C:\Users\Eddie\AppData\Local\Temp/ccHXDDfm.s:4      *ABS*:0000003d __SP_L__
+C:\Users\Eddie\AppData\Local\Temp/ccHXDDfm.s:5      *ABS*:00000034 __CCP__
+C:\Users\Eddie\AppData\Local\Temp/ccHXDDfm.s:6      *ABS*:00000000 __tmp_reg__
+C:\Users\Eddie\AppData\Local\Temp/ccHXDDfm.s:7      *ABS*:00000001 __zero_reg__
+C:\Users\Eddie\AppData\Local\Temp/ccHXDDfm.s:19     .text.ShowDiskReadError:00000000 ShowDiskReadError
+C:\Users\Eddie\AppData\Local\Temp/ccHXDDfm.s:1253   .progmem.data:00000034 __c.4783
+C:\Users\Eddie\AppData\Local\Temp/ccHXDDfm.s:1249   .progmem.data:00000019 __c.4785
+C:\Users\Eddie\AppData\Local\Temp/ccHXDDfm.s:1245   .progmem.data:00000000 __c.4787
+C:\Users\Eddie\AppData\Local\Temp/ccHXDDfm.s:112    .text.EVENT_USB_Host_DeviceEnumerationFailed:00000000 EVENT_USB_Host_DeviceEnumerationFailed
+C:\Users\Eddie\AppData\Local\Temp/ccHXDDfm.s:1334   .progmem.data:000001f1 __c.4649
+C:\Users\Eddie\AppData\Local\Temp/ccHXDDfm.s:174    .text.EVENT_USB_Host_DeviceUnattached:00000000 EVENT_USB_Host_DeviceUnattached
+C:\Users\Eddie\AppData\Local\Temp/ccHXDDfm.s:1368   .progmem.data:0000034b __c.4617
+C:\Users\Eddie\AppData\Local\Temp/ccHXDDfm.s:200    .text.EVENT_USB_Host_DeviceAttached:00000000 EVENT_USB_Host_DeviceAttached
+C:\Users\Eddie\AppData\Local\Temp/ccHXDDfm.s:1372   .progmem.data:0000036c __c.4612
+C:\Users\Eddie\AppData\Local\Temp/ccHXDDfm.s:226    .text.MassStorageHost_Task:00000000 MassStorageHost_Task
+                            *COM*:00000001 MassStore_MaxLUNIndex
+C:\Users\Eddie\AppData\Local\Temp/ccHXDDfm.s:1330   .progmem.data:000001e5 __c.4659
+C:\Users\Eddie\AppData\Local\Temp/ccHXDDfm.s:1326   .progmem.data:000001b7 __c.4661
+C:\Users\Eddie\AppData\Local\Temp/ccHXDDfm.s:1322   .progmem.data:000001a4 __c.4663
+C:\Users\Eddie\AppData\Local\Temp/ccHXDDfm.s:1318   .progmem.data:00000196 __c.4666
+C:\Users\Eddie\AppData\Local\Temp/ccHXDDfm.s:1314   .progmem.data:00000179 __c.4668
+C:\Users\Eddie\AppData\Local\Temp/ccHXDDfm.s:1310   .progmem.data:00000171 __c.4671
+C:\Users\Eddie\AppData\Local\Temp/ccHXDDfm.s:1306   .progmem.data:00000150 __c.4673
+C:\Users\Eddie\AppData\Local\Temp/ccHXDDfm.s:1302   .progmem.data:0000013a __c.4675
+C:\Users\Eddie\AppData\Local\Temp/ccHXDDfm.s:1298   .progmem.data:0000012a __c.4678
+C:\Users\Eddie\AppData\Local\Temp/ccHXDDfm.s:1294   .progmem.data:00000110 __c.4681
+C:\Users\Eddie\AppData\Local\Temp/ccHXDDfm.s:1290   .progmem.data:00000102 __c.4684
+C:\Users\Eddie\AppData\Local\Temp/ccHXDDfm.s:1286   .progmem.data:000000e7 __c.4686
+C:\Users\Eddie\AppData\Local\Temp/ccHXDDfm.s:1282   .progmem.data:000000d5 __c.4689
+C:\Users\Eddie\AppData\Local\Temp/ccHXDDfm.s:1278   .progmem.data:000000b8 __c.4691
+C:\Users\Eddie\AppData\Local\Temp/ccHXDDfm.s:1274   .progmem.data:000000b2 __c.4697
+C:\Users\Eddie\AppData\Local\Temp/ccHXDDfm.s:1270   .progmem.data:000000ad __c.4702
+C:\Users\Eddie\AppData\Local\Temp/ccHXDDfm.s:1266   .progmem.data:000000aa __c.4709
+C:\Users\Eddie\AppData\Local\Temp/ccHXDDfm.s:1261   .progmem.data:00000066 __c.4714
+C:\Users\Eddie\AppData\Local\Temp/ccHXDDfm.s:1257   .progmem.data:00000054 __c.4720
+C:\Users\Eddie\AppData\Local\Temp/ccHXDDfm.s:922    .text.EVENT_USB_Host_HostError:00000000 EVENT_USB_Host_HostError
+C:\Users\Eddie\AppData\Local\Temp/ccHXDDfm.s:1339   .progmem.data:00000247 __c.4641
+C:\Users\Eddie\AppData\Local\Temp/ccHXDDfm.s:970    .text.EVENT_USB_Host_DeviceEnumerationComplete:00000000 EVENT_USB_Host_DeviceEnumerationComplete
+C:\Users\Eddie\AppData\Local\Temp/ccHXDDfm.s:1364   .progmem.data:00000334 __c.4622
+C:\Users\Eddie\AppData\Local\Temp/ccHXDDfm.s:1360   .progmem.data:0000030a __c.4625
+C:\Users\Eddie\AppData\Local\Temp/ccHXDDfm.s:1356   .progmem.data:000002f3 __c.4627
+C:\Users\Eddie\AppData\Local\Temp/ccHXDDfm.s:1352   .progmem.data:000002d9 __c.4629
+C:\Users\Eddie\AppData\Local\Temp/ccHXDDfm.s:1347   .progmem.data:00000296 __c.4631
+C:\Users\Eddie\AppData\Local\Temp/ccHXDDfm.s:1343   .progmem.data:00000276 __c.4633
+C:\Users\Eddie\AppData\Local\Temp/ccHXDDfm.s:1094   .text.SetupHardware:00000000 SetupHardware
+C:\Users\Eddie\AppData\Local\Temp/ccHXDDfm.s:1208   .text.main:00000000 main
+C:\Users\Eddie\AppData\Local\Temp/ccHXDDfm.s:1376   .progmem.data:00000389 __c.4598
+
+UNDEFINED SYMBOLS
+printf_P
+USB_HostState
+puts_P
+MassStore_GetMaxLUN
+MassStore_MassStorageReset
+MassStore_RequestSense
+MassStore_PreventAllowMediumRemoval
+MassStore_Inquiry
+MassStore_TestUnitReady
+MassStore_ReadCapacity
+MassStore_ReadDeviceBlock
+isprint
+__iob
+fputc
+USB_Host_SetDeviceConfiguration
+USB_Disable
+ProcessConfigurationDescriptor
+USB_Init
+USARTSerialStream
+Serial_putchar
+Serial_getchar
+USB_USBTask
+__do_clear_bss

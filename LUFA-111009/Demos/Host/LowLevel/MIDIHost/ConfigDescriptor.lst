@@ -1,0 +1,283 @@
+   1               		.file	"ConfigDescriptor.c"
+   2               	__SREG__ = 0x3f
+   3               	__SP_H__ = 0x3e
+   4               	__SP_L__ = 0x3d
+   5               	__CCP__  = 0x34
+   6               	__tmp_reg__ = 0
+   7               	__zero_reg__ = 1
+  15               	.Ltext0:
+  16               		.section	.text.DComp_NextMIDIStreamingInterface,"ax",@progbits
+  17               	.global	DComp_NextMIDIStreamingInterface
+  19               	DComp_NextMIDIStreamingInterface:
+  20               	.LFB146:
+  21               	.LSM0:
+  22               	.LVL0:
+  23               	/* prologue: function */
+  24               	/* frame size = 0 */
+  25 0000 FC01      		movw r30,r24
+  26               	.LSM1:
+  27 0002 8181      		ldd r24,Z+1
+  28               	.LVL1:
+  29 0004 8430      		cpi r24,lo8(4)
+  30 0006 01F4      		brne .L2
+  31               	.LBB2:
+  32               	.LSM2:
+  33 0008 8581      		ldd r24,Z+5
+  34 000a 8130      		cpi r24,lo8(1)
+  35 000c 01F4      		brne .L2
+  36 000e 8681      		ldd r24,Z+6
+  37 0010 8330      		cpi r24,lo8(3)
+  38 0012 01F4      		brne .L2
+  39 0014 8781      		ldd r24,Z+7
+  40 0016 8111      		cpse r24,__zero_reg__
+  41               	.L2:
+  42 0018 82E0      		ldi r24,lo8(2)
+  43               	.L3:
+  44               	.LBE2:
+  45               	.LSM3:
+  46 001a 0895      		ret
+  47               	.LFE146:
+  49               		.section	.text.DComp_NextMIDIStreamingDataEndpoint,"ax",@progbits
+  50               	.global	DComp_NextMIDIStreamingDataEndpoint
+  52               	DComp_NextMIDIStreamingDataEndpoint:
+  53               	.LFB147:
+  54               	.LSM4:
+  55               	.LVL2:
+  56               	/* prologue: function */
+  57               	/* frame size = 0 */
+  58 0000 FC01      		movw r30,r24
+  59               	.LSM5:
+  60 0002 8181      		ldd r24,Z+1
+  61               	.LVL3:
+  62 0004 8530      		cpi r24,lo8(5)
+  63 0006 01F4      		brne .L6
+  64               	.LBB3:
+  65               	.LSM6:
+  66 0008 8381      		ldd r24,Z+3
+  67 000a 8370      		andi r24,lo8(3)
+  68 000c 8230      		cpi r24,lo8(2)
+  69 000e 01F4      		brne .L7
+  70 0010 80E0      		ldi r24,lo8(0)
+  71 0012 0895      		ret
+  72               	.L6:
+  73               	.LBE3:
+  74               	.LSM7:
+  75 0014 8430      		cpi r24,lo8(4)
+  76 0016 01F4      		brne .L7
+  77 0018 81E0      		ldi r24,lo8(1)
+  78 001a 0895      		ret
+  79               	.L7:
+  80 001c 82E0      		ldi r24,lo8(2)
+  81               	.LSM8:
+  82 001e 0895      		ret
+  83               	.LFE147:
+  85               		.section	.text.ProcessConfigurationDescriptor,"ax",@progbits
+  86               	.global	ProcessConfigurationDescriptor
+  88               	ProcessConfigurationDescriptor:
+  89               	.LFB145:
+  90               	.LSM9:
+  91 0000 8F92      		push r8
+  92 0002 9F92      		push r9
+  93 0004 AF92      		push r10
+  94 0006 BF92      		push r11
+  95 0008 CF92      		push r12
+  96 000a DF92      		push r13
+  97 000c EF92      		push r14
+  98 000e FF92      		push r15
+  99 0010 0F93      		push r16
+ 100 0012 1F93      		push r17
+ 101 0014 DF93      		push r29
+ 102 0016 CF93      		push r28
+ 103 0018 CDB7      		in r28,__SP_L__
+ 104 001a DEB7      		in r29,__SP_H__
+ 105 001c C450      		subi r28,lo8(-(-516))
+ 106 001e D240      		sbci r29,hi8(-(-516))
+ 107 0020 0FB6      		in __tmp_reg__,__SREG__
+ 108 0022 F894      		cli
+ 109 0024 DEBF      		out __SP_H__,r29
+ 110 0026 0FBE      		out __SREG__,__tmp_reg__
+ 111 0028 CDBF      		out __SP_L__,r28
+ 112               	/* prologue: function */
+ 113               	/* frame size = 516 */
+ 114               	.LSM10:
+ 115 002a AE01      		movw r20,r28
+ 116 002c 4B5F      		subi r20,lo8(-(5))
+ 117 002e 5F4F      		sbci r21,hi8(-(5))
+ 118 0030 5A83      		std Y+2,r21
+ 119 0032 4983      		std Y+1,r20
+ 120               	.LVL4:
+ 121               	.LSM11:
+ 122 0034 83E0      		ldi r24,lo8(3)
+ 123 0036 A82E      		mov r10,r24
+ 124 0038 B12C      		mov r11,__zero_reg__
+ 125 003a AC0E      		add r10,r28
+ 126 003c BD1E      		adc r11,r29
+ 127 003e 81E0      		ldi r24,lo8(1)
+ 128 0040 B501      		movw r22,r10
+ 129 0042 20E0      		ldi r18,lo8(512)
+ 130 0044 32E0      		ldi r19,hi8(512)
+ 131 0046 0E94 0000 		call USB_Host_GetDeviceConfigDescriptor
+ 132 004a 8530      		cpi r24,lo8(5)
+ 133 004c 01F0      		breq .L13
+ 134 004e 8630      		cpi r24,lo8(6)
+ 135 0050 01F0      		breq .L14
+ 136 0052 8823      		tst r24
+ 137 0054 01F0      		breq .L12
+ 138 0056 00C0      		rjmp .L27
+ 139               	.L13:
+ 140 0058 82E0      		ldi r24,lo8(2)
+ 141 005a 00C0      		rjmp .L15
+ 142               	.L12:
+ 143 005c 00E0      		ldi r16,lo8(0)
+ 144 005e 10E0      		ldi r17,hi8(0)
+ 145               	.LVL5:
+ 146 0060 EE24      		clr r14
+ 147 0062 FF24      		clr r15
+ 148               	.LVL6:
+ 149 0064 CC24      		clr r12
+ 150 0066 DD24      		clr r13
+ 151               	.LVL7:
+ 152               	.LBB4:
+ 153               	.LSM12:
+ 154 0068 4501      		movw r8,r10
+ 155 006a 5E01      		movw r10,r28
+ 156 006c 0894      		sec
+ 157 006e A11C      		adc r10,__zero_reg__
+ 158 0070 B11C      		adc r11,__zero_reg__
+ 159 0072 00C0      		rjmp .L25
+ 160               	.LVL8:
+ 161               	.L14:
+ 162               	.LBE4:
+ 163               	.LSM13:
+ 164 0074 83E0      		ldi r24,lo8(3)
+ 165 0076 00C0      		rjmp .L15
+ 166               	.L27:
+ 167 0078 81E0      		ldi r24,lo8(1)
+ 168 007a 00C0      		rjmp .L15
+ 169               	.LVL9:
+ 170               	.L25:
+ 171               	.LBB5:
+ 172               	.LSM14:
+ 173 007c 0115      		cp r16,__zero_reg__
+ 174 007e 1105      		cpc r17,__zero_reg__
+ 175 0080 01F0      		breq .L17
+ 176 0082 C401      		movw r24,r8
+ 177 0084 B501      		movw r22,r10
+ 178 0086 40E0      		ldi r20,lo8(gs(DComp_NextMIDIStreamingDataEndpoint))
+ 179 0088 50E0      		ldi r21,hi8(gs(DComp_NextMIDIStreamingDataEndpoint))
+ 180 008a 0E94 0000 		call USB_GetNextDescriptorComp
+ 181               	.LVL10:
+ 182 008e 8823      		tst r24
+ 183 0090 01F0      		breq .L18
+ 184               	.LVL11:
+ 185               	.L17:
+ 186               	.LSM15:
+ 187 0092 C401      		movw r24,r8
+ 188 0094 B501      		movw r22,r10
+ 189 0096 40E0      		ldi r20,lo8(gs(DComp_NextMIDIStreamingInterface))
+ 190 0098 50E0      		ldi r21,hi8(gs(DComp_NextMIDIStreamingInterface))
+ 191 009a 0E94 0000 		call USB_GetNextDescriptorComp
+ 192               	.LVL12:
+ 193 009e 8823      		tst r24
+ 194 00a0 01F0      		breq .L19
+ 195 00a2 84E0      		ldi r24,lo8(4)
+ 196 00a4 00C0      		rjmp .L15
+ 197               	.L19:
+ 198               	.LSM16:
+ 199 00a6 0981      		ldd r16,Y+1
+ 200 00a8 1A81      		ldd r17,Y+2
+ 201 00aa CC24      		clr r12
+ 202 00ac DD24      		clr r13
+ 203 00ae EE24      		clr r14
+ 204 00b0 FF24      		clr r15
+ 205 00b2 00C0      		rjmp .L25
+ 206               	.L18:
+ 207               	.LSM17:
+ 208 00b4 E981      		ldd r30,Y+1
+ 209 00b6 FA81      		ldd r31,Y+2
+ 210               	.LVL13:
+ 211               	.LSM18:
+ 212 00b8 8281      		ldd r24,Z+2
+ 213 00ba 87FD      		sbrc r24,7
+ 214 00bc 00C0      		rjmp .L20
+ 215 00be 6F01      		movw r12,r30
+ 216 00c0 00C0      		rjmp .L21
+ 217               	.L20:
+ 218 00c2 7F01      		movw r14,r30
+ 219               	.L21:
+ 220               	.LBE5:
+ 221               	.LSM19:
+ 222 00c4 E114      		cp r14,__zero_reg__
+ 223 00c6 F104      		cpc r15,__zero_reg__
+ 224 00c8 01F0      		breq .L25
+ 225 00ca C114      		cp r12,__zero_reg__
+ 226 00cc D104      		cpc r13,__zero_reg__
+ 227 00ce 01F0      		breq .L25
+ 228               	.LSM20:
+ 229 00d0 F701      		movw r30,r14
+ 230               	.LVL14:
+ 231 00d2 0481      		ldd r16,Z+4
+ 232 00d4 1581      		ldd r17,Z+5
+ 233               	.LVL15:
+ 234 00d6 81E0      		ldi r24,lo8(1)
+ 235 00d8 62E0      		ldi r22,lo8(2)
+ 236 00da 40E1      		ldi r20,lo8(16)
+ 237 00dc 2281      		ldd r18,Z+2
+ 238 00de EE24      		clr r14
+ 239               	.LVL16:
+ 240 00e0 0E94 0000 		call Pipe_ConfigurePipe
+ 241               	.LSM21:
+ 242 00e4 F601      		movw r30,r12
+ 243 00e6 0481      		ldd r16,Z+4
+ 244 00e8 1581      		ldd r17,Z+5
+ 245 00ea 82E0      		ldi r24,lo8(2)
+ 246 00ec 62E0      		ldi r22,lo8(2)
+ 247 00ee 40E2      		ldi r20,lo8(32)
+ 248 00f0 2281      		ldd r18,Z+2
+ 249 00f2 0E94 0000 		call Pipe_ConfigurePipe
+ 250 00f6 80E0      		ldi r24,lo8(0)
+ 251               	.LVL17:
+ 252               	.L15:
+ 253               	/* epilogue start */
+ 254               	.LSM22:
+ 255 00f8 CC5F      		subi r28,lo8(-(516))
+ 256 00fa DD4F      		sbci r29,hi8(-(516))
+ 257 00fc 0FB6      		in __tmp_reg__,__SREG__
+ 258 00fe F894      		cli
+ 259 0100 DEBF      		out __SP_H__,r29
+ 260 0102 0FBE      		out __SREG__,__tmp_reg__
+ 261 0104 CDBF      		out __SP_L__,r28
+ 262 0106 CF91      		pop r28
+ 263 0108 DF91      		pop r29
+ 264 010a 1F91      		pop r17
+ 265 010c 0F91      		pop r16
+ 266               	.LVL18:
+ 267 010e FF90      		pop r15
+ 268 0110 EF90      		pop r14
+ 269               	.LVL19:
+ 270 0112 DF90      		pop r13
+ 271 0114 CF90      		pop r12
+ 272               	.LVL20:
+ 273 0116 BF90      		pop r11
+ 274 0118 AF90      		pop r10
+ 275 011a 9F90      		pop r9
+ 276 011c 8F90      		pop r8
+ 277 011e 0895      		ret
+ 278               	.LFE145:
+ 320               	.Letext0:
+DEFINED SYMBOLS
+                            *ABS*:00000000 ConfigDescriptor.c
+C:\Users\Eddie\AppData\Local\Temp/ccBXWNAk.s:2      *ABS*:0000003f __SREG__
+C:\Users\Eddie\AppData\Local\Temp/ccBXWNAk.s:3      *ABS*:0000003e __SP_H__
+C:\Users\Eddie\AppData\Local\Temp/ccBXWNAk.s:4      *ABS*:0000003d __SP_L__
+C:\Users\Eddie\AppData\Local\Temp/ccBXWNAk.s:5      *ABS*:00000034 __CCP__
+C:\Users\Eddie\AppData\Local\Temp/ccBXWNAk.s:6      *ABS*:00000000 __tmp_reg__
+C:\Users\Eddie\AppData\Local\Temp/ccBXWNAk.s:7      *ABS*:00000001 __zero_reg__
+C:\Users\Eddie\AppData\Local\Temp/ccBXWNAk.s:19     .text.DComp_NextMIDIStreamingInterface:00000000 DComp_NextMIDIStreamingInterface
+C:\Users\Eddie\AppData\Local\Temp/ccBXWNAk.s:52     .text.DComp_NextMIDIStreamingDataEndpoint:00000000 DComp_NextMIDIStreamingDataEndpoint
+C:\Users\Eddie\AppData\Local\Temp/ccBXWNAk.s:88     .text.ProcessConfigurationDescriptor:00000000 ProcessConfigurationDescriptor
+
+UNDEFINED SYMBOLS
+USB_Host_GetDeviceConfigDescriptor
+USB_GetNextDescriptorComp
+Pipe_ConfigurePipe

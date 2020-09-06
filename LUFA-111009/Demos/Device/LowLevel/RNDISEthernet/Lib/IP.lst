@@ -1,0 +1,216 @@
+   1               		.file	"IP.c"
+   2               	__SREG__ = 0x3f
+   3               	__SP_H__ = 0x3e
+   4               	__SP_L__ = 0x3d
+   5               	__CCP__  = 0x34
+   6               	__tmp_reg__ = 0
+   7               	__zero_reg__ = 1
+  15               	.Ltext0:
+  16               		.section	.text.IP_ProcessIPPacket,"ax",@progbits
+  17               	.global	IP_ProcessIPPacket
+  19               	IP_ProcessIPPacket:
+  20               	.LFB103:
+  21               	.LSM0:
+  22               	.LVL0:
+  23 0000 DF92      		push r13
+  24 0002 EF92      		push r14
+  25 0004 FF92      		push r15
+  26 0006 0F93      		push r16
+  27 0008 1F93      		push r17
+  28 000a CF93      		push r28
+  29 000c DF93      		push r29
+  30               	/* prologue: function */
+  31               	/* frame size = 0 */
+  32 000e 7C01      		movw r14,r24
+  33 0010 EB01      		movw r28,r22
+  34               	.LSM1:
+  35 0012 0E94 0000 		call DecodeIPHeader
+  36               	.LVL1:
+  37               	.LSM2:
+  38 0016 F701      		movw r30,r14
+  39 0018 D080      		ld r13,Z
+  40 001a FFE0      		ldi r31,lo8(15)
+  41 001c DF22      		and r13,r31
+  42               	.LSM3:
+  43 001e 8701      		movw r16,r14
+  44 0020 005F      		subi r16,lo8(-(16))
+  45 0022 1F4F      		sbci r17,hi8(-(16))
+  46 0024 C801      		movw r24,r16
+  47 0026 60E0      		ldi r22,lo8(ServerIPAddress)
+  48 0028 70E0      		ldi r23,hi8(ServerIPAddress)
+  49 002a 44E0      		ldi r20,lo8(4)
+  50 002c 50E0      		ldi r21,hi8(4)
+  51 002e 0E94 0000 		call memcmp
+  52 0032 0097      		sbiw r24,0
+  53 0034 01F0      		breq .L2
+  54 0036 C801      		movw r24,r16
+  55 0038 60E0      		ldi r22,lo8(BroadcastIPAddress)
+  56 003a 70E0      		ldi r23,hi8(BroadcastIPAddress)
+  57 003c 44E0      		ldi r20,lo8(4)
+  58 003e 50E0      		ldi r21,hi8(4)
+  59 0040 0E94 0000 		call memcmp
+  60 0044 0097      		sbiw r24,0
+  61 0046 01F4      		brne .L11
+  62               	.L2:
+  63               	.LSM4:
+  64 0048 2D2D      		mov r18,r13
+  65               	.LVL2:
+  66 004a 30E0      		ldi r19,lo8(0)
+  67               	.LVL3:
+  68 004c 220F      		lsl r18
+  69 004e 331F      		rol r19
+  70 0050 220F      		lsl r18
+  71 0052 331F      		rol r19
+  72               	.LVL4:
+  73               	.LSM5:
+  74 0054 F701      		movw r30,r14
+  75 0056 8185      		ldd r24,Z+9
+  76 0058 8630      		cpi r24,lo8(6)
+  77 005a 01F0      		breq .L6
+  78 005c 8131      		cpi r24,lo8(17)
+  79 005e 01F0      		breq .L7
+  80 0060 8130      		cpi r24,lo8(1)
+  81 0062 01F0      		breq .L5
+  82               	.L11:
+  83 0064 20E0      		ldi r18,lo8(0)
+  84 0066 30E0      		ldi r19,hi8(0)
+  85               	.LVL5:
+  86 0068 00C0      		rjmp .L3
+  87               	.LVL6:
+  88               	.L5:
+  89               	.LSM6:
+  90 006a BE01      		movw r22,r28
+  91 006c 6C5E      		subi r22,lo8(-(20))
+  92 006e 7F4F      		sbci r23,hi8(-(20))
+  93 0070 C701      		movw r24,r14
+  94 0072 820F      		add r24,r18
+  95 0074 931F      		adc r25,r19
+  96 0076 0E94 0000 		call ICMP_ProcessICMPPacket
+  97               	.LVL7:
+  98 007a 00C0      		rjmp .L10
+  99               	.LVL8:
+ 100               	.L6:
+ 101               	.LSM7:
+ 102 007c 2E0D      		add r18,r14
+ 103 007e 3F1D      		adc r19,r15
+ 104 0080 AE01      		movw r20,r28
+ 105 0082 4C5E      		subi r20,lo8(-(20))
+ 106 0084 5F4F      		sbci r21,hi8(-(20))
+ 107 0086 C701      		movw r24,r14
+ 108 0088 B901      		movw r22,r18
+ 109 008a 0E94 0000 		call TCP_ProcessTCPPacket
+ 110               	.LVL9:
+ 111 008e 00C0      		rjmp .L10
+ 112               	.LVL10:
+ 113               	.L7:
+ 114               	.LSM8:
+ 115 0090 2E0D      		add r18,r14
+ 116 0092 3F1D      		adc r19,r15
+ 117 0094 AE01      		movw r20,r28
+ 118 0096 4C5E      		subi r20,lo8(-(20))
+ 119 0098 5F4F      		sbci r21,hi8(-(20))
+ 120 009a C701      		movw r24,r14
+ 121 009c B901      		movw r22,r18
+ 122 009e 0E94 0000 		call UDP_ProcessUDPPacket
+ 123               	.LVL11:
+ 124               	.L10:
+ 125 00a2 9C01      		movw r18,r24
+ 126               	.LVL12:
+ 127               	.LSM9:
+ 128 00a4 1816      		cp __zero_reg__,r24
+ 129 00a6 1906      		cpc __zero_reg__,r25
+ 130 00a8 04F4      		brge .L3
+ 131               	.LVL13:
+ 132               	.LSM10:
+ 133 00aa 8C01      		movw r16,r24
+ 134 00ac 0C5E      		subi r16,lo8(-(20))
+ 135 00ae 1F4F      		sbci r17,hi8(-(20))
+ 136 00b0 1A83      		std Y+2,r17
+ 137 00b2 0B83      		std Y+3,r16
+ 138               	.LSM11:
+ 139 00b4 1982      		std Y+1,__zero_reg__
+ 140               	.LSM12:
+ 141 00b6 85E4      		ldi r24,lo8(69)
+ 142               	.LVL14:
+ 143 00b8 8883      		st Y,r24
+ 144               	.LSM13:
+ 145 00ba 1E82      		std Y+6,__zero_reg__
+ 146 00bc 1F82      		std Y+7,__zero_reg__
+ 147               	.LSM14:
+ 148 00be 1D82      		std Y+5,__zero_reg__
+ 149 00c0 1C82      		std Y+4,__zero_reg__
+ 150               	.LSM15:
+ 151 00c2 1B86      		std Y+11,__zero_reg__
+ 152 00c4 1A86      		std Y+10,__zero_reg__
+ 153               	.LSM16:
+ 154 00c6 F701      		movw r30,r14
+ 155 00c8 8185      		ldd r24,Z+9
+ 156 00ca 8987      		std Y+9,r24
+ 157               	.LSM17:
+ 158 00cc 80E8      		ldi r24,lo8(-128)
+ 159 00ce 8887      		std Y+8,r24
+ 160               	.LSM18:
+ 161 00d0 8089      		ldd r24,Z+16
+ 162 00d2 9189      		ldd r25,Z+17
+ 163 00d4 A289      		ldd r26,Z+18
+ 164 00d6 B389      		ldd r27,Z+19
+ 165 00d8 8C87      		std Y+12,r24
+ 166 00da 9D87      		std Y+13,r25
+ 167 00dc AE87      		std Y+14,r26
+ 168 00de BF87      		std Y+15,r27
+ 169               	.LSM19:
+ 170 00e0 8485      		ldd r24,Z+12
+ 171 00e2 9585      		ldd r25,Z+13
+ 172 00e4 A685      		ldd r26,Z+14
+ 173 00e6 B785      		ldd r27,Z+15
+ 174 00e8 888B      		std Y+16,r24
+ 175 00ea 998B      		std Y+17,r25
+ 176 00ec AA8B      		std Y+18,r26
+ 177 00ee BB8B      		std Y+19,r27
+ 178               	.LSM20:
+ 179 00f0 CE01      		movw r24,r28
+ 180 00f2 64E1      		ldi r22,lo8(20)
+ 181 00f4 70E0      		ldi r23,hi8(20)
+ 182 00f6 0E94 0000 		call Ethernet_Checksum16
+ 183               	.LVL15:
+ 184 00fa 9B87      		std Y+11,r25
+ 185 00fc 8A87      		std Y+10,r24
+ 186               	.LSM21:
+ 187 00fe 9801      		movw r18,r16
+ 188               	.LVL16:
+ 189               	.L3:
+ 190               	.LSM22:
+ 191 0100 C901      		movw r24,r18
+ 192               	.LVL17:
+ 193               	/* epilogue start */
+ 194 0102 DF91      		pop r29
+ 195 0104 CF91      		pop r28
+ 196               	.LVL18:
+ 197 0106 1F91      		pop r17
+ 198 0108 0F91      		pop r16
+ 199 010a FF90      		pop r15
+ 200 010c EF90      		pop r14
+ 201               	.LVL19:
+ 202 010e DF90      		pop r13
+ 203 0110 0895      		ret
+ 204               	.LFE103:
+ 230               	.Letext0:
+DEFINED SYMBOLS
+                            *ABS*:00000000 IP.c
+C:\Users\Eddie\AppData\Local\Temp/ccYrrXVf.s:2      *ABS*:0000003f __SREG__
+C:\Users\Eddie\AppData\Local\Temp/ccYrrXVf.s:3      *ABS*:0000003e __SP_H__
+C:\Users\Eddie\AppData\Local\Temp/ccYrrXVf.s:4      *ABS*:0000003d __SP_L__
+C:\Users\Eddie\AppData\Local\Temp/ccYrrXVf.s:5      *ABS*:00000034 __CCP__
+C:\Users\Eddie\AppData\Local\Temp/ccYrrXVf.s:6      *ABS*:00000000 __tmp_reg__
+C:\Users\Eddie\AppData\Local\Temp/ccYrrXVf.s:7      *ABS*:00000001 __zero_reg__
+C:\Users\Eddie\AppData\Local\Temp/ccYrrXVf.s:19     .text.IP_ProcessIPPacket:00000000 IP_ProcessIPPacket
+
+UNDEFINED SYMBOLS
+DecodeIPHeader
+ServerIPAddress
+memcmp
+BroadcastIPAddress
+ICMP_ProcessICMPPacket
+TCP_ProcessTCPPacket
+UDP_ProcessUDPPacket
+Ethernet_Checksum16

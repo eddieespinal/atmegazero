@@ -1,0 +1,177 @@
+   1               		.file	"HIDReport.c"
+   2               	__SREG__ = 0x3f
+   3               	__SP_H__ = 0x3e
+   4               	__SP_L__ = 0x3d
+   5               	__CCP__  = 0x34
+   6               	__tmp_reg__ = 0
+   7               	__zero_reg__ = 1
+  15               	.Ltext0:
+  16               		.section	.text.CALLBACK_HIDParser_FilterHIDReportItem,"ax",@progbits
+  17               	.global	CALLBACK_HIDParser_FilterHIDReportItem
+  19               	CALLBACK_HIDParser_FilterHIDReportItem:
+  20               	.LFB142:
+  21               	.LSM0:
+  22               	.LVL0:
+  23               	/* prologue: function */
+  24               	/* frame size = 0 */
+  25 0000 DC01      		movw r26,r24
+  26               	.LBB4:
+  27               	.LSM1:
+  28 0002 1696      		adiw r26,6
+  29 0004 ED91      		ld r30,X+
+  30 0006 FC91      		ld r31,X
+  31 0008 1797      		sbiw r26,6+1
+  32               	.LVL1:
+  33 000a 00C0      		rjmp .L2
+  34               	.LVL2:
+  35               	.L5:
+  36               	.LSM2:
+  37 000c 8181      		ldd r24,Z+1
+  38 000e 9281      		ldd r25,Z+2
+  39 0010 0197      		sbiw r24,1
+  40 0012 01F4      		brne .L3
+  41 0014 8381      		ldd r24,Z+3
+  42 0016 9481      		ldd r25,Z+4
+  43 0018 0497      		sbiw r24,4
+  44 001a 01F0      		breq .L4
+  45               	.L3:
+  46               	.LSM3:
+  47 001c 0580      		ldd __tmp_reg__,Z+5
+  48 001e F681      		ldd r31,Z+6
+  49 0020 E02D      		mov r30,__tmp_reg__
+  50               	.LVL3:
+  51               	.L2:
+  52 0022 3097      		sbiw r30,0
+  53 0024 01F4      		brne .L5
+  54 0026 80E0      		ldi r24,lo8(0)
+  55 0028 0895      		ret
+  56               	.L4:
+  57               	.LBE4:
+  58               	.LSM4:
+  59 002a 1996      		adiw r26,9
+  60 002c 8D91      		ld r24,X+
+  61 002e 9C91      		ld r25,X
+  62 0030 1A97      		sbiw r26,9+1
+  63 0032 8930      		cpi r24,9
+  64 0034 9105      		cpc r25,__zero_reg__
+  65 0036 01F0      		breq .L11
+  66               	.L7:
+  67 0038 20E0      		ldi r18,lo8(0)
+  68 003a 30E0      		ldi r19,hi8(0)
+  69 003c 0197      		sbiw r24,1
+  70 003e 01F4      		brne .L8
+  71               	.L11:
+  72 0040 21E0      		ldi r18,lo8(1)
+  73 0042 30E0      		ldi r19,hi8(1)
+  74               	.L8:
+  75 0044 822F      		mov r24,r18
+  76               	.LSM5:
+  77 0046 0895      		ret
+  78               	.LFE142:
+  80               		.section	.text.GetHIDReportData,"ax",@progbits
+  81               	.global	GetHIDReportData
+  83               	GetHIDReportData:
+  84               	.LFB141:
+  85               	.LSM6:
+  86 0000 EF92      		push r14
+  87 0002 FF92      		push r15
+  88 0004 0F93      		push r16
+  89 0006 1F93      		push r17
+  90 0008 DF93      		push r29
+  91 000a CF93      		push r28
+  92 000c CDB7      		in r28,__SP_L__
+  93 000e DEB7      		in r29,__SP_H__
+  94               	/* prologue: function */
+  95               	/* frame size = 0 */
+  96               	.LSM7:
+  97 0010 EDB6      		in r14,__SP_L__
+  98 0012 FEB6      		in r15,__SP_H__
+  99               	.LSM8:
+ 100 0014 2091 0000 		lds r18,HIDReportSize
+ 101 0018 3091 0000 		lds r19,(HIDReportSize)+1
+ 102 001c 8DB7      		in r24,__SP_L__
+ 103 001e 9EB7      		in r25,__SP_H__
+ 104 0020 821B      		sub r24,r18
+ 105 0022 930B      		sbc r25,r19
+ 106 0024 0FB6      		in __tmp_reg__,__SREG__
+ 107 0026 F894      		cli
+ 108 0028 9EBF      		out __SP_H__,r25
+ 109 002a 0FBE      		out __SREG__,__tmp_reg__
+ 110 002c 8DBF      		out __SP_L__,r24
+ 111 002e 0DB7      		in r16,__SP_L__
+ 112 0030 1EB7      		in r17,__SP_H__
+ 113 0032 0F5F      		subi r16,lo8(-(1))
+ 114 0034 1F4F      		sbci r17,hi8(-(1))
+ 115               	.LSM9:
+ 116 0036 81E8      		ldi r24,lo8(-127)
+ 117 0038 8093 0000 		sts USB_ControlRequest,r24
+ 118 003c 86E0      		ldi r24,lo8(6)
+ 119 003e 8093 0000 		sts USB_ControlRequest+1,r24
+ 120 0042 80E0      		ldi r24,lo8(8704)
+ 121 0044 92E2      		ldi r25,hi8(8704)
+ 122 0046 9093 0000 		sts (USB_ControlRequest+2)+1,r25
+ 123 004a 8093 0000 		sts USB_ControlRequest+2,r24
+ 124 004e 1092 0000 		sts (USB_ControlRequest+4)+1,__zero_reg__
+ 125 0052 1092 0000 		sts USB_ControlRequest+4,__zero_reg__
+ 126 0056 3093 0000 		sts (USB_ControlRequest+6)+1,r19
+ 127 005a 2093 0000 		sts USB_ControlRequest+6,r18
+ 128               	.LBB5:
+ 129               	.LBB6:
+ 130               	.LSM10:
+ 131 005e 1092 A700 		sts 167,__zero_reg__
+ 132               	.LBE6:
+ 133               	.LBE5:
+ 134               	.LSM11:
+ 135 0062 C801      		movw r24,r16
+ 136 0064 0E94 0000 		call USB_Host_SendControlRequest
+ 137 0068 8823      		tst r24
+ 138 006a 01F0      		breq .L13
+ 139 006c 82E0      		ldi r24,lo8(2)
+ 140 006e 00C0      		rjmp .L14
+ 141               	.L13:
+ 142               	.LSM12:
+ 143 0070 6091 0000 		lds r22,HIDReportSize
+ 144 0074 7091 0000 		lds r23,(HIDReportSize)+1
+ 145 0078 C801      		movw r24,r16
+ 146 007a 40E0      		ldi r20,lo8(HIDReportInfo)
+ 147 007c 50E0      		ldi r21,hi8(HIDReportInfo)
+ 148 007e 0E94 0000 		call USB_ProcessHIDReport
+ 149 0082 8111      		cpse r24,__zero_reg__
+ 150 0084 81E0      		ldi r24,lo8(1)
+ 151               	.L14:
+ 152               	.LSM13:
+ 153 0086 0FB6      		in __tmp_reg__,__SREG__
+ 154 0088 F894      		cli
+ 155 008a FEBE      		out __SP_H__,r15
+ 156 008c 0FBE      		out __SREG__,__tmp_reg__
+ 157 008e EDBE      		out __SP_L__,r14
+ 158               	/* epilogue start */
+ 159 0090 CF91      		pop r28
+ 160 0092 DF91      		pop r29
+ 161 0094 1F91      		pop r17
+ 162 0096 0F91      		pop r16
+ 163 0098 FF90      		pop r15
+ 164 009a EF90      		pop r14
+ 165 009c 0895      		ret
+ 166               	.LFE141:
+ 168               		.comm HIDReportSize,2,1
+ 169               		.comm HIDReportInfo,985,1
+ 202               	.Letext0:
+DEFINED SYMBOLS
+                            *ABS*:00000000 HIDReport.c
+C:\Users\Eddie\AppData\Local\Temp/cc0sDrqg.s:2      *ABS*:0000003f __SREG__
+C:\Users\Eddie\AppData\Local\Temp/cc0sDrqg.s:3      *ABS*:0000003e __SP_H__
+C:\Users\Eddie\AppData\Local\Temp/cc0sDrqg.s:4      *ABS*:0000003d __SP_L__
+C:\Users\Eddie\AppData\Local\Temp/cc0sDrqg.s:5      *ABS*:00000034 __CCP__
+C:\Users\Eddie\AppData\Local\Temp/cc0sDrqg.s:6      *ABS*:00000000 __tmp_reg__
+C:\Users\Eddie\AppData\Local\Temp/cc0sDrqg.s:7      *ABS*:00000001 __zero_reg__
+C:\Users\Eddie\AppData\Local\Temp/cc0sDrqg.s:19     .text.CALLBACK_HIDParser_FilterHIDReportItem:00000000 CALLBACK_HIDParser_FilterHIDReportItem
+C:\Users\Eddie\AppData\Local\Temp/cc0sDrqg.s:83     .text.GetHIDReportData:00000000 GetHIDReportData
+                            *COM*:00000002 HIDReportSize
+                            *COM*:000003d9 HIDReportInfo
+
+UNDEFINED SYMBOLS
+USB_ControlRequest
+USB_Host_SendControlRequest
+USB_ProcessHIDReport
+__do_clear_bss

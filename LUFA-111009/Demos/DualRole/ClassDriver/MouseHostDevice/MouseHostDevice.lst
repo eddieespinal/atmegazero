@@ -1,0 +1,284 @@
+   1               		.file	"MouseHostDevice.c"
+   2               	__SREG__ = 0x3f
+   3               	__SP_H__ = 0x3e
+   4               	__SP_L__ = 0x3d
+   5               	__CCP__  = 0x34
+   6               	__tmp_reg__ = 0
+   7               	__zero_reg__ = 1
+  15               	.Ltext0:
+  16               		.section	.text.EVENT_USB_UIDChange,"ax",@progbits
+  17               	.global	EVENT_USB_UIDChange
+  19               	EVENT_USB_UIDChange:
+  20               	.LFB207:
+  21               	.LSM0:
+  22               	/* prologue: function */
+  23               	/* frame size = 0 */
+  24               	.LSM1:
+  25 0000 8091 0000 		lds r24,USB_CurrentMode
+  26 0004 8130      		cpi r24,lo8(1)
+  27 0006 01F0      		breq .L2
+  28               	.LSM2:
+  29 0008 20E0      		ldi r18,lo8(__c.5653)
+  30 000a 30E0      		ldi r19,hi8(__c.5653)
+  31 000c 00C0      		rjmp .L3
+  32               	.L2:
+  33 000e 20E0      		ldi r18,lo8(__c.5651)
+  34 0010 30E0      		ldi r19,hi8(__c.5651)
+  35               	.L3:
+  36               	.LSM3:
+  37 0012 00D0      		rcall .
+  38 0014 00D0      		rcall .
+  39 0016 80E0      		ldi r24,lo8(__c.5649)
+  40 0018 90E0      		ldi r25,hi8(__c.5649)
+  41 001a EDB7      		in r30,__SP_L__
+  42 001c FEB7      		in r31,__SP_H__
+  43 001e 9283      		std Z+2,r25
+  44 0020 8183      		std Z+1,r24
+  45 0022 3483      		std Z+4,r19
+  46 0024 2383      		std Z+3,r18
+  47 0026 0E94 0000 		call printf_P
+  48               	.LBB23:
+  49               	.LBB24:
+  50               	.LSM4:
+  51 002a 8BB1      		in r24,43-32
+  52 002c 8F70      		andi r24,lo8(15)
+  53 002e 8061      		ori r24,lo8(16)
+  54 0030 8BB9      		out 43-32,r24
+  55 0032 0F90      		pop __tmp_reg__
+  56 0034 0F90      		pop __tmp_reg__
+  57 0036 0F90      		pop __tmp_reg__
+  58 0038 0F90      		pop __tmp_reg__
+  59               	/* epilogue start */
+  60               	.LBE24:
+  61               	.LBE23:
+  62               	.LSM5:
+  63 003a 0895      		ret
+  64               	.LFE207:
+  66               		.section	.text.SetupHardware,"ax",@progbits
+  67               	.global	SetupHardware
+  69               	SetupHardware:
+  70               	.LFB206:
+  71               	.LSM6:
+  72               	/* prologue: function */
+  73               	/* frame size = 0 */
+  74               	.LSM7:
+  75 0000 84B7      		in r24,84-32
+  76 0002 877F      		andi r24,lo8(-9)
+  77 0004 84BF      		out 84-32,r24
+  78               	.LSM8:
+  79 0006 38E1      		ldi r19,lo8(24)
+  80               	/* #APP */
+  81               	 ;  73 "MouseHostDevice.c" 1
+  82 0008 0FB6      		in __tmp_reg__, __SREG__
+  83 000a F894      		cli
+  84 000c 3093 6000 		sts 96, r19
+  85 0010 1092 6000 		sts 96, __zero_reg__
+  86 0014 0FBE      		out __SREG__,__tmp_reg__
+  87               		
+  88               	 ;  0 "" 2
+  89               	/* #NOAPP */
+  90               	.LBB25:
+  91               	.LSM9:
+  92 0016 80E0      		ldi r24,lo8(0)
+  93 0018 90E0      		ldi r25,hi8(0)
+  94 001a 20E8      		ldi r18,lo8(-128)
+  95               	/* #APP */
+  96               	 ;  76 "MouseHostDevice.c" 1
+  97 001c 0FB6      		in __tmp_reg__,__SREG__
+  98 001e F894      		cli
+  99 0020 2093 6100 		sts 97, r18
+ 100 0024 8093 6100 		sts 97, r24
+ 101 0028 0FBE      		out __SREG__, __tmp_reg__
+ 102               	 ;  0 "" 2
+ 103               	/* #NOAPP */
+ 104               	.LBE25:
+ 105               	.LBB26:
+ 106               	.LBB27:
+ 107               	.LSM10:
+ 108 002a 83E3      		ldi r24,lo8(51)
+ 109 002c 90E0      		ldi r25,hi8(51)
+ 110 002e 9093 CD00 		sts (204)+1,r25
+ 111 0032 8093 CC00 		sts 204,r24
+ 112               	.LSM11:
+ 113 0036 86E0      		ldi r24,lo8(6)
+ 114 0038 8093 CA00 		sts 202,r24
+ 115               	.LSM12:
+ 116 003c 1092 C800 		sts 200,__zero_reg__
+ 117               	.LSM13:
+ 118 0040 3093 C900 		sts 201,r19
+ 119               	.LSM14:
+ 120 0044 539A      		sbi 42-32,3
+ 121               	.LSM15:
+ 122 0046 5A9A      		sbi 43-32,2
+ 123               	.LBE27:
+ 124               	.LBE26:
+ 125               	.LBB28:
+ 126               	.LBB29:
+ 127               	.LSM16:
+ 128 0048 8AB1      		in r24,42-32
+ 129 004a 806F      		ori r24,lo8(-16)
+ 130 004c 8AB9      		out 42-32,r24
+ 131               	.LSM17:
+ 132 004e 8BB1      		in r24,43-32
+ 133 0050 8F70      		andi r24,lo8(15)
+ 134 0052 8BB9      		out 43-32,r24
+ 135               	.LBE29:
+ 136               	.LBE28:
+ 137               	.LBB30:
+ 138               	.LBB31:
+ 139               	.LSM18:
+ 140 0054 84B1      		in r24,36-32
+ 141 0056 8F71      		andi r24,lo8(31)
+ 142 0058 84B9      		out 36-32,r24
+ 143               	.LSM19:
+ 144 005a 8DB1      		in r24,45-32
+ 145 005c 8F7C      		andi r24,lo8(-49)
+ 146 005e 8DB9      		out 45-32,r24
+ 147               	.LSM20:
+ 148 0060 85B1      		in r24,37-32
+ 149 0062 806E      		ori r24,lo8(-32)
+ 150 0064 85B9      		out 37-32,r24
+ 151               	.LSM21:
+ 152 0066 8EB1      		in r24,46-32
+ 153 0068 8063      		ori r24,lo8(48)
+ 154 006a 8EB9      		out 46-32,r24
+ 155               	.LBE31:
+ 156               	.LBE30:
+ 157               	.LBB32:
+ 158               	.LBB33:
+ 159               	.LSM22:
+ 160 006c 6A98      		cbi 45-32,2
+ 161               	.LSM23:
+ 162 006e 729A      		sbi 46-32,2
+ 163               	.LBE33:
+ 164               	.LBE32:
+ 165               	.LSM24:
+ 166 0070 83E0      		ldi r24,lo8(3)
+ 167 0072 0E94 0000 		call USB_Init
+ 168               	.LBB34:
+ 169               	.LBB35:
+ 170               	.LSM25:
+ 171 0076 E0E0      		ldi r30,lo8(USARTSerialStream)
+ 172 0078 F0E0      		ldi r31,hi8(USARTSerialStream)
+ 173 007a F093 0000 		sts (__iob)+1,r31
+ 174 007e E093 0000 		sts __iob,r30
+ 175               	.LSM26:
+ 176 0082 F093 0000 		sts (__iob+2)+1,r31
+ 177 0086 E093 0000 		sts __iob+2,r30
+ 178               	.LSM27:
+ 179 008a 8EE0      		ldi r24,lo8(14)
+ 180 008c DF01      		movw r26,r30
+ 181 008e 1D92      		st X+,__zero_reg__
+ 182 0090 8A95      	        dec r24
+ 183 0092 01F4      		brne .-6
+ 184 0094 83E0      		ldi r24,lo8(3)
+ 185 0096 8093 0000 		sts USARTSerialStream+3,r24
+ 186 009a 80E0      		ldi r24,lo8(gs(Serial_putchar))
+ 187 009c 90E0      		ldi r25,hi8(gs(Serial_putchar))
+ 188 009e 9093 0000 		sts (USARTSerialStream+8)+1,r25
+ 189 00a2 8093 0000 		sts USARTSerialStream+8,r24
+ 190 00a6 80E0      		ldi r24,lo8(gs(Serial_getchar))
+ 191 00a8 90E0      		ldi r25,hi8(gs(Serial_getchar))
+ 192 00aa 9093 0000 		sts (USARTSerialStream+10)+1,r25
+ 193 00ae 8093 0000 		sts USARTSerialStream+10,r24
+ 194               	/* epilogue start */
+ 195               	.LBE35:
+ 196               	.LBE34:
+ 197               	.LSM28:
+ 198 00b2 0895      		ret
+ 199               	.LFE206:
+ 201               		.section	.text.main,"ax",@progbits
+ 202               	.global	main
+ 204               	main:
+ 205               	.LFB205:
+ 206               	.LSM29:
+ 207               	/* prologue: function */
+ 208               	/* frame size = 0 */
+ 209               	.LSM30:
+ 210 0000 0E94 0000 		call SetupHardware
+ 211               	.LSM31:
+ 212 0004 80E0      		ldi r24,lo8(__c.5634)
+ 213 0006 90E0      		ldi r25,hi8(__c.5634)
+ 214 0008 0E94 0000 		call puts_P
+ 215               	.LBB36:
+ 216               	.LBB37:
+ 217               	.LSM32:
+ 218 000c 8BB1      		in r24,43-32
+ 219 000e 8F70      		andi r24,lo8(15)
+ 220 0010 8061      		ori r24,lo8(16)
+ 221 0012 8BB9      		out 43-32,r24
+ 222               	.LBE37:
+ 223               	.LBE36:
+ 224               	.LSM33:
+ 225               	/* #APP */
+ 226               	 ;  49 "MouseHostDevice.c" 1
+ 227 0014 7894      		sei
+ 228               	 ;  0 "" 2
+ 229               	/* #NOAPP */
+ 230               	.L10:
+ 231               	.LSM34:
+ 232 0016 8091 0000 		lds r24,USB_CurrentMode
+ 233 001a 8230      		cpi r24,lo8(2)
+ 234 001c 01F4      		brne .L8
+ 235               	.LSM35:
+ 236 001e 0E94 0000 		call MouseHost_Task
+ 237 0022 00C0      		rjmp .L9
+ 238               	.L8:
+ 239               	.LSM36:
+ 240 0024 80E0      		ldi r24,lo8(Mouse_HID_Device_Interface)
+ 241 0026 90E0      		ldi r25,hi8(Mouse_HID_Device_Interface)
+ 242 0028 0E94 0000 		call HID_Device_USBTask
+ 243               	.L9:
+ 244               	.LSM37:
+ 245 002c 0E94 0000 		call USB_USBTask
+ 246 0030 00C0      		rjmp .L10
+ 247               	.LFE205:
+ 249               		.section	.progmem.data,"a",@progbits
+ 252               	__c.5653:
+ 253 0000 486F 7374 		.string	"Host"
+ 253      00
+ 256               	__c.5651:
+ 257 0005 4465 7669 		.string	"Device"
+ 257      6365 00
+ 260               	__c.5649:
+ 261 000c 1B5B 3333 		.string	"\033[33mUID Change to %S mode\r\n\033[37m"
+ 261      6D55 4944 
+ 261      2043 6861 
+ 261      6E67 6520 
+ 261      746F 2025 
+ 264               	__c.5634:
+ 265 002e 1B5B 3336 		.string	"\033[36mMouse Host/Device Demo running.\r\n\033[37m"
+ 265      6D4D 6F75 
+ 265      7365 2048 
+ 265      6F73 742F 
+ 265      4465 7669 
+ 306               	.Letext0:
+DEFINED SYMBOLS
+                            *ABS*:00000000 MouseHostDevice.c
+C:\Users\Eddie\AppData\Local\Temp/ccMFufjj.s:2      *ABS*:0000003f __SREG__
+C:\Users\Eddie\AppData\Local\Temp/ccMFufjj.s:3      *ABS*:0000003e __SP_H__
+C:\Users\Eddie\AppData\Local\Temp/ccMFufjj.s:4      *ABS*:0000003d __SP_L__
+C:\Users\Eddie\AppData\Local\Temp/ccMFufjj.s:5      *ABS*:00000034 __CCP__
+C:\Users\Eddie\AppData\Local\Temp/ccMFufjj.s:6      *ABS*:00000000 __tmp_reg__
+C:\Users\Eddie\AppData\Local\Temp/ccMFufjj.s:7      *ABS*:00000001 __zero_reg__
+C:\Users\Eddie\AppData\Local\Temp/ccMFufjj.s:19     .text.EVENT_USB_UIDChange:00000000 EVENT_USB_UIDChange
+C:\Users\Eddie\AppData\Local\Temp/ccMFufjj.s:252    .progmem.data:00000000 __c.5653
+C:\Users\Eddie\AppData\Local\Temp/ccMFufjj.s:256    .progmem.data:00000005 __c.5651
+C:\Users\Eddie\AppData\Local\Temp/ccMFufjj.s:260    .progmem.data:0000000c __c.5649
+C:\Users\Eddie\AppData\Local\Temp/ccMFufjj.s:69     .text.SetupHardware:00000000 SetupHardware
+C:\Users\Eddie\AppData\Local\Temp/ccMFufjj.s:204    .text.main:00000000 main
+C:\Users\Eddie\AppData\Local\Temp/ccMFufjj.s:264    .progmem.data:0000002e __c.5634
+
+UNDEFINED SYMBOLS
+USB_CurrentMode
+printf_P
+USB_Init
+USARTSerialStream
+__iob
+Serial_putchar
+Serial_getchar
+puts_P
+MouseHost_Task
+Mouse_HID_Device_Interface
+HID_Device_USBTask
+USB_USBTask

@@ -1,0 +1,298 @@
+   1               		.file	"DHCP.c"
+   2               	__SREG__ = 0x3f
+   3               	__SP_H__ = 0x3e
+   4               	__SP_L__ = 0x3d
+   5               	__CCP__  = 0x34
+   6               	__tmp_reg__ = 0
+   7               	__zero_reg__ = 1
+  15               	.Ltext0:
+  16               		.section	.text.DHCP_ProcessDHCPPacket,"ax",@progbits
+  17               	.global	DHCP_ProcessDHCPPacket
+  19               	DHCP_ProcessDHCPPacket:
+  20               	.LFB103:
+  21               	.LSM0:
+  22               	.LVL0:
+  23 0000 8F92      		push r8
+  24 0002 9F92      		push r9
+  25 0004 AF92      		push r10
+  26 0006 BF92      		push r11
+  27 0008 CF92      		push r12
+  28 000a DF92      		push r13
+  29 000c EF92      		push r14
+  30 000e FF92      		push r15
+  31 0010 0F93      		push r16
+  32 0012 1F93      		push r17
+  33 0014 CF93      		push r28
+  34 0016 DF93      		push r29
+  35               	/* prologue: function */
+  36               	/* frame size = 0 */
+  37 0018 8B01      		movw r16,r22
+  38 001a EA01      		movw r28,r20
+  39               	.LSM1:
+  40 001c 5C01      		movw r10,r24
+  41               	.LVL1:
+  42               	.LSM2:
+  43 001e 80EF      		ldi r24,lo8(240)
+  44 0020 882E      		mov r8,r24
+  45 0022 912C      		mov r9,__zero_reg__
+  46               	.LVL2:
+  47 0024 860E      		add r8,r22
+  48 0026 971E      		adc r9,r23
+  49               	.LSM3:
+  50 0028 CB01      		movw r24,r22
+  51 002a 0E94 0000 		call DecodeDHCPHeader
+  52               	.LVL3:
+  53               	.LSM4:
+  54 002e 80EF      		ldi r24,lo8(-16)
+  55 0030 FE01      		movw r30,r28
+  56 0032 1192      		st Z+,__zero_reg__
+  57 0034 8A95      	        dec r24
+  58 0036 01F4      		brne .-6
+  59               	.LSM5:
+  60 0038 F801      		movw r30,r16
+  61 003a 8181      		ldd r24,Z+1
+  62 003c 8983      		std Y+1,r24
+  63               	.LSM6:
+  64 003e 82E0      		ldi r24,lo8(2)
+  65 0040 8883      		st Y,r24
+  66               	.LSM7:
+  67 0042 8281      		ldd r24,Z+2
+  68 0044 8A83      		std Y+2,r24
+  69               	.LSM8:
+  70 0046 1B82      		std Y+3,__zero_reg__
+  71               	.LSM9:
+  72 0048 8481      		ldd r24,Z+4
+  73 004a 9581      		ldd r25,Z+5
+  74 004c A681      		ldd r26,Z+6
+  75 004e B781      		ldd r27,Z+7
+  76 0050 8C83      		std Y+4,r24
+  77 0052 9D83      		std Y+5,r25
+  78 0054 AE83      		std Y+6,r26
+  79 0056 BF83      		std Y+7,r27
+  80               	.LSM10:
+  81 0058 1986      		std Y+9,__zero_reg__
+  82 005a 1886      		std Y+8,__zero_reg__
+  83               	.LSM11:
+  84 005c 8285      		ldd r24,Z+10
+  85 005e 9385      		ldd r25,Z+11
+  86 0060 9B87      		std Y+11,r25
+  87 0062 8A87      		std Y+10,r24
+  88               	.LSM12:
+  89 0064 C090 0000 		lds r12,ClientIPAddress
+  90 0068 D090 0000 		lds r13,(ClientIPAddress)+1
+  91 006c E090 0000 		lds r14,(ClientIPAddress)+2
+  92 0070 F090 0000 		lds r15,(ClientIPAddress)+3
+  93 0074 C88A      		std Y+16,r12
+  94 0076 D98A      		std Y+17,r13
+  95 0078 EA8A      		std Y+18,r14
+  96 007a FB8A      		std Y+19,r15
+  97               	.LSM13:
+  98 007c 045E      		subi r16,lo8(-(28))
+  99 007e 1F4F      		sbci r17,hi8(-(28))
+ 100 0080 CE01      		movw r24,r28
+ 101 0082 4C96      		adiw r24,28
+ 102 0084 B801      		movw r22,r16
+ 103 0086 46E0      		ldi r20,lo8(6)
+ 104 0088 50E0      		ldi r21,hi8(6)
+ 105 008a 0E94 0000 		call memmove
+ 106               	.LSM14:
+ 107 008e C451      		subi r28,lo8(-(236))
+ 108 0090 DF4F      		sbci r29,hi8(-(236))
+ 109 0092 83E6      		ldi r24,lo8(1666417251)
+ 110 0094 92E8      		ldi r25,hi8(1666417251)
+ 111 0096 A3E5      		ldi r26,hlo8(1666417251)
+ 112 0098 B3E6      		ldi r27,hhi8(1666417251)
+ 113 009a 8883      		st Y,r24
+ 114 009c 9983      		std Y+1,r25
+ 115 009e AA83      		std Y+2,r26
+ 116 00a0 BB83      		std Y+3,r27
+ 117 00a2 CC5E      		subi r28,lo8(-(-236))
+ 118 00a4 D040      		sbci r29,hi8(-(-236))
+ 119               	.LSM15:
+ 120 00a6 F501      		movw r30,r10
+ 121               	.LVL4:
+ 122 00a8 C486      		std Z+12,r12
+ 123 00aa D586      		std Z+13,r13
+ 124 00ac E686      		std Z+14,r14
+ 125 00ae F786      		std Z+15,r15
+ 126               	.LSM16:
+ 127 00b0 8091 0000 		lds r24,ServerIPAddress
+ 128 00b4 9091 0000 		lds r25,(ServerIPAddress)+1
+ 129 00b8 A091 0000 		lds r26,(ServerIPAddress)+2
+ 130 00bc B091 0000 		lds r27,(ServerIPAddress)+3
+ 131 00c0 808B      		std Z+16,r24
+ 132 00c2 918B      		std Z+17,r25
+ 133 00c4 A28B      		std Z+18,r26
+ 134 00c6 B38B      		std Z+19,r27
+ 135 00c8 00C0      		rjmp .L2
+ 136               	.L10:
+ 137               	.LSM17:
+ 138 00ca 8533      		cpi r24,lo8(53)
+ 139 00cc 01F0      		breq .+2
+ 140 00ce 00C0      		rjmp .L3
+ 141               	.LSM18:
+ 142 00d0 9401      		movw r18,r8
+ 143 00d2 2E5F      		subi r18,lo8(-(2))
+ 144 00d4 3F4F      		sbci r19,hi8(-(2))
+ 145 00d6 F401      		movw r30,r8
+ 146 00d8 8281      		ldd r24,Z+2
+ 147 00da 8130      		cpi r24,lo8(1)
+ 148 00dc 01F0      		breq .L4
+ 149 00de 8330      		cpi r24,lo8(3)
+ 150 00e0 01F0      		breq .+2
+ 151 00e2 00C0      		rjmp .L5
+ 152               	.L4:
+ 153               	.LSM19:
+ 154 00e4 FE01      		movw r30,r28
+ 155               	.LVL5:
+ 156 00e6 E051      		subi r30,lo8(-(240))
+ 157 00e8 FF4F      		sbci r31,hi8(-(240))
+ 158               	.LSM20:
+ 159 00ea DF01      		movw r26,r30
+ 160 00ec 85E3      		ldi r24,lo8(53)
+ 161 00ee 8D93      		st X+,r24
+ 162               	.LSM21:
+ 163 00f0 81E0      		ldi r24,lo8(1)
+ 164 00f2 8183      		std Z+1,r24
+ 165 00f4 ED01      		movw r28,r26
+ 166               	.LVL6:
+ 167 00f6 2196      		adiw r28,1
+ 168               	.LVL7:
+ 169               	.LSM22:
+ 170 00f8 F901      		movw r30,r18
+ 171 00fa 8081      		ld r24,Z
+ 172 00fc 8130      		cpi r24,lo8(1)
+ 173 00fe 01F0      		breq .L6
+ 174 0100 85E0      		ldi r24,lo8(5)
+ 175 0102 00C0      		rjmp .L7
+ 176               	.L6:
+ 177 0104 82E0      		ldi r24,lo8(2)
+ 178               	.L7:
+ 179 0106 1196      		adiw r26,1
+ 180 0108 8C93      		st X,r24
+ 181 010a FE01      		movw r30,r28
+ 182 010c 3196      		adiw r30,1
+ 183               	.LVL8:
+ 184               	.LSM23:
+ 185 010e 81E0      		ldi r24,lo8(1)
+ 186 0110 8983      		std Y+1,r24
+ 187 0112 CF01      		movw r24,r30
+ 188 0114 0196      		adiw r24,1
+ 189               	.LVL9:
+ 190               	.LSM24:
+ 191 0116 34E0      		ldi r19,lo8(4)
+ 192 0118 3183      		std Z+1,r19
+ 193 011a DC01      		movw r26,r24
+ 194 011c 1196      		adiw r26,1
+ 195               	.LVL10:
+ 196               	.LSM25:
+ 197 011e 2FEF      		ldi r18,lo8(-1)
+ 198 0120 FC01      		movw r30,r24
+ 199 0122 2183      		std Z+1,r18
+ 200 0124 FD01      		movw r30,r26
+ 201 0126 3196      		adiw r30,1
+ 202               	.LVL11:
+ 203               	.LSM26:
+ 204 0128 1196      		adiw r26,1
+ 205 012a 2C93      		st X,r18
+ 206 012c DF01      		movw r26,r30
+ 207 012e 1196      		adiw r26,1
+ 208               	.LVL12:
+ 209               	.LSM27:
+ 210 0130 2183      		std Z+1,r18
+ 211 0132 FD01      		movw r30,r26
+ 212 0134 3196      		adiw r30,1
+ 213               	.LVL13:
+ 214               	.LSM28:
+ 215 0136 1196      		adiw r26,1
+ 216 0138 1C92      		st X,__zero_reg__
+ 217 013a DF01      		movw r26,r30
+ 218 013c 1196      		adiw r26,1
+ 219               	.LVL14:
+ 220               	.LSM29:
+ 221 013e 86E3      		ldi r24,lo8(54)
+ 222 0140 8183      		std Z+1,r24
+ 223 0142 FD01      		movw r30,r26
+ 224 0144 3196      		adiw r30,1
+ 225               	.LVL15:
+ 226               	.LSM30:
+ 227 0146 1196      		adiw r26,1
+ 228 0148 3C93      		st X,r19
+ 229               	.LSM31:
+ 230 014a 8091 0000 		lds r24,ServerIPAddress
+ 231 014e 9091 0000 		lds r25,(ServerIPAddress)+1
+ 232 0152 A091 0000 		lds r26,(ServerIPAddress)+2
+ 233 0156 B091 0000 		lds r27,(ServerIPAddress)+3
+ 234 015a 8183      		std Z+1,r24
+ 235 015c 9283      		std Z+2,r25
+ 236 015e A383      		std Z+3,r26
+ 237 0160 B483      		std Z+4,r27
+ 238               	.LSM32:
+ 239 0162 2583      		std Z+5,r18
+ 240 0164 20E0      		ldi r18,lo8(256)
+ 241 0166 31E0      		ldi r19,hi8(256)
+ 242 0168 00C0      		rjmp .L8
+ 243               	.LVL16:
+ 244               	.L3:
+ 245               	.LSM33:
+ 246 016a 8823      		tst r24
+ 247 016c 01F4      		brne .L5
+ 248 016e 81E0      		ldi r24,lo8(1)
+ 249 0170 90E0      		ldi r25,hi8(1)
+ 250 0172 00C0      		rjmp .L9
+ 251               	.L5:
+ 252 0174 F401      		movw r30,r8
+ 253 0176 8181      		ldd r24,Z+1
+ 254 0178 90E0      		ldi r25,lo8(0)
+ 255 017a 0296      		adiw r24,2
+ 256               	.L9:
+ 257 017c 880E      		add r8,r24
+ 258 017e 991E      		adc r9,r25
+ 259               	.L2:
+ 260               	.LSM34:
+ 261 0180 F401      		movw r30,r8
+ 262 0182 8081      		ld r24,Z
+ 263 0184 8F3F      		cpi r24,lo8(-1)
+ 264 0186 01F0      		breq .+2
+ 265 0188 00C0      		rjmp .L10
+ 266 018a 20E0      		ldi r18,lo8(0)
+ 267 018c 30E0      		ldi r19,hi8(0)
+ 268               	.LVL17:
+ 269               	.L8:
+ 270               	.LSM35:
+ 271 018e C901      		movw r24,r18
+ 272               	/* epilogue start */
+ 273 0190 DF91      		pop r29
+ 274 0192 CF91      		pop r28
+ 275               	.LVL18:
+ 276 0194 1F91      		pop r17
+ 277 0196 0F91      		pop r16
+ 278               	.LVL19:
+ 279 0198 FF90      		pop r15
+ 280 019a EF90      		pop r14
+ 281 019c DF90      		pop r13
+ 282 019e CF90      		pop r12
+ 283 01a0 BF90      		pop r11
+ 284 01a2 AF90      		pop r10
+ 285               	.LVL20:
+ 286 01a4 9F90      		pop r9
+ 287 01a6 8F90      		pop r8
+ 288               	.LVL21:
+ 289 01a8 0895      		ret
+ 290               	.LFE103:
+ 316               	.Letext0:
+DEFINED SYMBOLS
+                            *ABS*:00000000 DHCP.c
+C:\Users\Eddie\AppData\Local\Temp/ccwRdgyc.s:2      *ABS*:0000003f __SREG__
+C:\Users\Eddie\AppData\Local\Temp/ccwRdgyc.s:3      *ABS*:0000003e __SP_H__
+C:\Users\Eddie\AppData\Local\Temp/ccwRdgyc.s:4      *ABS*:0000003d __SP_L__
+C:\Users\Eddie\AppData\Local\Temp/ccwRdgyc.s:5      *ABS*:00000034 __CCP__
+C:\Users\Eddie\AppData\Local\Temp/ccwRdgyc.s:6      *ABS*:00000000 __tmp_reg__
+C:\Users\Eddie\AppData\Local\Temp/ccwRdgyc.s:7      *ABS*:00000001 __zero_reg__
+C:\Users\Eddie\AppData\Local\Temp/ccwRdgyc.s:19     .text.DHCP_ProcessDHCPPacket:00000000 DHCP_ProcessDHCPPacket
+
+UNDEFINED SYMBOLS
+DecodeDHCPHeader
+ClientIPAddress
+memmove
+ServerIPAddress

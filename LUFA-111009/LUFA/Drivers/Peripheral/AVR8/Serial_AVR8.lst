@@ -1,0 +1,268 @@
+   1               		.file	"Serial_AVR8.c"
+   2               	__SREG__ = 0x3f
+   3               	__SP_H__ = 0x3e
+   4               	__SP_L__ = 0x3d
+   5               	__CCP__  = 0x34
+   6               	__tmp_reg__ = 0
+   7               	__zero_reg__ = 1
+  15               	.Ltext0:
+  16               		.section	.text.Serial_putchar,"ax",@progbits
+  17               	.global	Serial_putchar
+  19               	Serial_putchar:
+  20               	.LFB23:
+  21               	.LSM0:
+  22               	.LVL0:
+  23               	/* prologue: function */
+  24               	/* frame size = 0 */
+  25 0000 982F      		mov r25,r24
+  26               	.LVL1:
+  27               	.L2:
+  28               	.LBB25:
+  29               	.LBB26:
+  30               	.LSM1:
+  31 0002 8091 C800 		lds r24,200
+  32 0006 85FF      		sbrs r24,5
+  33 0008 00C0      		rjmp .L2
+  34               	.LSM2:
+  35 000a 9093 CE00 		sts 206,r25
+  36               	.LBE26:
+  37               	.LBE25:
+  38               	.LSM3:
+  39 000e 80E0      		ldi r24,lo8(0)
+  40 0010 90E0      		ldi r25,hi8(0)
+  41               	/* epilogue start */
+  42 0012 0895      		ret
+  43               	.LFE23:
+  45               		.section	.text.Serial_getchar,"ax",@progbits
+  46               	.global	Serial_getchar
+  48               	Serial_getchar:
+  49               	.LFB24:
+  50               	.LSM4:
+  51               	.LVL2:
+  52               	/* prologue: function */
+  53               	/* frame size = 0 */
+  54               	.LBB27:
+  55               	.LBB28:
+  56               	.LSM5:
+  57 0000 8091 C800 		lds r24,200
+  58               	.LVL3:
+  59               	.LBE28:
+  60               	.LBE27:
+  61               	.LSM6:
+  62 0004 87FD      		sbrc r24,7
+  63 0006 00C0      		rjmp .L6
+  64 0008 2EEF      		ldi r18,lo8(-2)
+  65 000a 3FEF      		ldi r19,hi8(-2)
+  66 000c 00C0      		rjmp .L7
+  67               	.L6:
+  68               	.LBB29:
+  69               	.LBB30:
+  70               	.LBB31:
+  71               	.LBB32:
+  72               	.LSM7:
+  73 000e 8091 C800 		lds r24,200
+  74               	.LBE32:
+  75               	.LBE31:
+  76               	.LSM8:
+  77 0012 87FD      		sbrc r24,7
+  78 0014 00C0      		rjmp .L8
+  79 0016 2FEF      		ldi r18,lo8(-1)
+  80 0018 3FEF      		ldi r19,hi8(-1)
+  81 001a 00C0      		rjmp .L7
+  82               	.L8:
+  83               	.LSM9:
+  84 001c 8091 CE00 		lds r24,206
+  85 0020 282F      		mov r18,r24
+  86 0022 30E0      		ldi r19,lo8(0)
+  87               	.L7:
+  88               	.LBE30:
+  89               	.LBE29:
+  90               	.LSM10:
+  91 0024 C901      		movw r24,r18
+  92               	/* epilogue start */
+  93 0026 0895      		ret
+  94               	.LFE24:
+  96               		.section	.text.Serial_getchar_Blocking,"ax",@progbits
+  97               	.global	Serial_getchar_Blocking
+  99               	Serial_getchar_Blocking:
+ 100               	.LFB25:
+ 101               	.LSM11:
+ 102               	/* prologue: function */
+ 103               	/* frame size = 0 */
+ 104               	.LVL4:
+ 105               	.L11:
+ 106               	.LBB33:
+ 107               	.LBB34:
+ 108               	.LSM12:
+ 109 0000 8091 C800 		lds r24,200
+ 110               	.LVL5:
+ 111               	.LBE34:
+ 112               	.LBE33:
+ 113               	.LSM13:
+ 114 0004 87FF      		sbrs r24,7
+ 115 0006 00C0      		rjmp .L11
+ 116               	.LBB35:
+ 117               	.LBB36:
+ 118               	.LBB37:
+ 119               	.LBB38:
+ 120               	.LSM14:
+ 121 0008 8091 C800 		lds r24,200
+ 122               	.LBE38:
+ 123               	.LBE37:
+ 124               	.LSM15:
+ 125 000c 87FD      		sbrc r24,7
+ 126 000e 00C0      		rjmp .L12
+ 127 0010 2FEF      		ldi r18,lo8(-1)
+ 128 0012 3FEF      		ldi r19,hi8(-1)
+ 129 0014 00C0      		rjmp .L13
+ 130               	.L12:
+ 131               	.LSM16:
+ 132 0016 8091 CE00 		lds r24,206
+ 133 001a 282F      		mov r18,r24
+ 134 001c 30E0      		ldi r19,lo8(0)
+ 135               	.L13:
+ 136               	.LBE36:
+ 137               	.LBE35:
+ 138               	.LSM17:
+ 139 001e C901      		movw r24,r18
+ 140               	/* epilogue start */
+ 141 0020 0895      		ret
+ 142               	.LFE25:
+ 144               		.section	.text.Serial_SendString_P,"ax",@progbits
+ 145               	.global	Serial_SendString_P
+ 147               	Serial_SendString_P:
+ 148               	.LFB26:
+ 149               	.LSM18:
+ 150               	.LVL6:
+ 151               	/* prologue: function */
+ 152               	/* frame size = 0 */
+ 153 0000 FC01      		movw r30,r24
+ 154 0002 00C0      		rjmp .L17
+ 155               	.LVL7:
+ 156               	.L20:
+ 157               	.LBB39:
+ 158               	.LBB40:
+ 159               	.LSM19:
+ 160 0004 8091 C800 		lds r24,200
+ 161 0008 85FF      		sbrs r24,5
+ 162 000a 00C0      		rjmp .L20
+ 163               	.LSM20:
+ 164 000c 9093 CE00 		sts 206,r25
+ 165               	.LBE40:
+ 166               	.LBE39:
+ 167               	.LSM21:
+ 168 0010 3196      		adiw r30,1
+ 169               	.LVL8:
+ 170               	.L17:
+ 171               	.LBB41:
+ 172               	.LSM22:
+ 173               	/* #APP */
+ 174               	 ;  67 "../../LUFA/Drivers/Peripheral/AVR8/Serial_AVR8.c" 1
+ 175 0012 9491      		lpm r25, Z
+ 176               		
+ 177               	 ;  0 "" 2
+ 178               	/* #NOAPP */
+ 179               	.LBE41:
+ 180 0014 9923      		tst r25
+ 181 0016 01F4      		brne .L20
+ 182               	/* epilogue start */
+ 183               	.LSM23:
+ 184 0018 0895      		ret
+ 185               	.LFE26:
+ 187               		.section	.text.Serial_SendString,"ax",@progbits
+ 188               	.global	Serial_SendString
+ 190               	Serial_SendString:
+ 191               	.LFB27:
+ 192               	.LSM24:
+ 193               	.LVL9:
+ 194               	/* prologue: function */
+ 195               	/* frame size = 0 */
+ 196 0000 FC01      		movw r30,r24
+ 197 0002 00C0      		rjmp .L23
+ 198               	.LVL10:
+ 199               	.L26:
+ 200               	.LBB42:
+ 201               	.LBB43:
+ 202               	.LSM25:
+ 203 0004 8091 C800 		lds r24,200
+ 204 0008 85FF      		sbrs r24,5
+ 205 000a 00C0      		rjmp .L26
+ 206               	.LSM26:
+ 207 000c 9093 CE00 		sts 206,r25
+ 208               	.LBE43:
+ 209               	.LBE42:
+ 210               	.LSM27:
+ 211 0010 3196      		adiw r30,1
+ 212               	.LVL11:
+ 213               	.L23:
+ 214               	.LSM28:
+ 215 0012 9081      		ld r25,Z
+ 216 0014 9923      		tst r25
+ 217 0016 01F4      		brne .L26
+ 218               	/* epilogue start */
+ 219               	.LSM29:
+ 220 0018 0895      		ret
+ 221               	.LFE27:
+ 223               		.section	.text.Serial_SendData,"ax",@progbits
+ 224               	.global	Serial_SendData
+ 226               	Serial_SendData:
+ 227               	.LFB28:
+ 228               	.LSM30:
+ 229               	.LVL12:
+ 230               	/* prologue: function */
+ 231               	/* frame size = 0 */
+ 232 0000 FC01      		movw r30,r24
+ 233 0002 00C0      		rjmp .L29
+ 234               	.LVL13:
+ 235               	.L31:
+ 236               	.LSM31:
+ 237 0004 9081      		ld r25,Z
+ 238               	.L30:
+ 239               	.LBB44:
+ 240               	.LBB45:
+ 241               	.LSM32:
+ 242 0006 8091 C800 		lds r24,200
+ 243 000a 85FF      		sbrs r24,5
+ 244 000c 00C0      		rjmp .L30
+ 245               	.LBE45:
+ 246               	.LBE44:
+ 247               	.LSM33:
+ 248 000e 3196      		adiw r30,1
+ 249               	.LBB47:
+ 250               	.LBB46:
+ 251               	.LSM34:
+ 252 0010 9093 CE00 		sts 206,r25
+ 253 0014 6150      		subi r22,lo8(-(-1))
+ 254 0016 7040      		sbci r23,hi8(-(-1))
+ 255               	.LVL14:
+ 256               	.L29:
+ 257               	.LBE46:
+ 258               	.LBE47:
+ 259               	.LSM35:
+ 260 0018 6115      		cp r22,__zero_reg__
+ 261 001a 7105      		cpc r23,__zero_reg__
+ 262 001c 01F4      		brne .L31
+ 263               	/* epilogue start */
+ 264               	.LSM36:
+ 265 001e 0895      		ret
+ 266               	.LFE28:
+ 268               		.comm USARTSerialStream,14,1
+ 333               	.Letext0:
+DEFINED SYMBOLS
+                            *ABS*:00000000 Serial_AVR8.c
+C:\Users\Eddie\AppData\Local\Temp/cc9mVG0W.s:2      *ABS*:0000003f __SREG__
+C:\Users\Eddie\AppData\Local\Temp/cc9mVG0W.s:3      *ABS*:0000003e __SP_H__
+C:\Users\Eddie\AppData\Local\Temp/cc9mVG0W.s:4      *ABS*:0000003d __SP_L__
+C:\Users\Eddie\AppData\Local\Temp/cc9mVG0W.s:5      *ABS*:00000034 __CCP__
+C:\Users\Eddie\AppData\Local\Temp/cc9mVG0W.s:6      *ABS*:00000000 __tmp_reg__
+C:\Users\Eddie\AppData\Local\Temp/cc9mVG0W.s:7      *ABS*:00000001 __zero_reg__
+C:\Users\Eddie\AppData\Local\Temp/cc9mVG0W.s:19     .text.Serial_putchar:00000000 Serial_putchar
+C:\Users\Eddie\AppData\Local\Temp/cc9mVG0W.s:48     .text.Serial_getchar:00000000 Serial_getchar
+C:\Users\Eddie\AppData\Local\Temp/cc9mVG0W.s:99     .text.Serial_getchar_Blocking:00000000 Serial_getchar_Blocking
+C:\Users\Eddie\AppData\Local\Temp/cc9mVG0W.s:147    .text.Serial_SendString_P:00000000 Serial_SendString_P
+C:\Users\Eddie\AppData\Local\Temp/cc9mVG0W.s:190    .text.Serial_SendString:00000000 Serial_SendString
+C:\Users\Eddie\AppData\Local\Temp/cc9mVG0W.s:226    .text.Serial_SendData:00000000 Serial_SendData
+                            *COM*:0000000e USARTSerialStream
+
+UNDEFINED SYMBOLS
+__do_clear_bss

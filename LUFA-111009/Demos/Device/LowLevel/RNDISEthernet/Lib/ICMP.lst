@@ -1,0 +1,109 @@
+   1               		.file	"ICMP.c"
+   2               	__SREG__ = 0x3f
+   3               	__SP_H__ = 0x3e
+   4               	__SP_L__ = 0x3d
+   5               	__CCP__  = 0x34
+   6               	__tmp_reg__ = 0
+   7               	__zero_reg__ = 1
+  15               	.Ltext0:
+  16               		.section	.text.ICMP_ProcessICMPPacket,"ax",@progbits
+  17               	.global	ICMP_ProcessICMPPacket
+  19               	ICMP_ProcessICMPPacket:
+  20               	.LFB103:
+  21               	.LSM0:
+  22               	.LVL0:
+  23 0000 0F93      		push r16
+  24 0002 1F93      		push r17
+  25 0004 CF93      		push r28
+  26 0006 DF93      		push r29
+  27               	/* prologue: function */
+  28               	/* frame size = 0 */
+  29 0008 8C01      		movw r16,r24
+  30 000a EB01      		movw r28,r22
+  31               	.LSM1:
+  32 000c 0E94 0000 		call DecodeICMPHeader
+  33               	.LVL1:
+  34               	.LSM2:
+  35 0010 F801      		movw r30,r16
+  36 0012 8081      		ld r24,Z
+  37 0014 8830      		cpi r24,lo8(8)
+  38 0016 01F0      		breq .L2
+  39 0018 20E0      		ldi r18,lo8(0)
+  40 001a 30E0      		ldi r19,hi8(0)
+  41 001c 00C0      		rjmp .L3
+  42               	.L2:
+  43               	.LBB2:
+  44               	.LSM3:
+  45 001e 1882      		st Y,__zero_reg__
+  46               	.LSM4:
+  47 0020 1982      		std Y+1,__zero_reg__
+  48               	.LSM5:
+  49 0022 1B82      		std Y+3,__zero_reg__
+  50 0024 1A82      		std Y+2,__zero_reg__
+  51               	.LSM6:
+  52 0026 F801      		movw r30,r16
+  53 0028 8481      		ldd r24,Z+4
+  54 002a 9581      		ldd r25,Z+5
+  55 002c 9D83      		std Y+5,r25
+  56 002e 8C83      		std Y+4,r24
+  57               	.LSM7:
+  58 0030 8681      		ldd r24,Z+6
+  59 0032 9781      		ldd r25,Z+7
+  60 0034 9F83      		std Y+7,r25
+  61 0036 8E83      		std Y+6,r24
+  62               	.LSM8:
+  63 0038 B801      		movw r22,r16
+  64 003a 685F      		subi r22,lo8(-(8))
+  65 003c 7F4F      		sbci r23,hi8(-(8))
+  66 003e 0091 0000 		lds r16,FrameIN+1500
+  67 0042 1091 0000 		lds r17,(FrameIN+1500)+1
+  68               	.LVL2:
+  69 0046 0050      		subi r16,lo8(-(FrameIN))
+  70 0048 1040      		sbci r17,hi8(-(FrameIN))
+  71 004a 061B      		sub r16,r22
+  72 004c 170B      		sbc r17,r23
+  73               	.LSM9:
+  74 004e CE01      		movw r24,r28
+  75 0050 0896      		adiw r24,8
+  76 0052 A801      		movw r20,r16
+  77 0054 0E94 0000 		call memmove
+  78               	.LSM10:
+  79 0058 085F      		subi r16,lo8(-(8))
+  80 005a 1F4F      		sbci r17,hi8(-(8))
+  81 005c CE01      		movw r24,r28
+  82 005e B801      		movw r22,r16
+  83 0060 0E94 0000 		call Ethernet_Checksum16
+  84 0064 9B83      		std Y+3,r25
+  85 0066 8A83      		std Y+2,r24
+  86               	.LSM11:
+  87 0068 9801      		movw r18,r16
+  88               	.LVL3:
+  89               	.L3:
+  90               	.LBE2:
+  91               	.LSM12:
+  92 006a C901      		movw r24,r18
+  93               	/* epilogue start */
+  94 006c DF91      		pop r29
+  95 006e CF91      		pop r28
+  96               	.LVL4:
+  97 0070 1F91      		pop r17
+  98 0072 0F91      		pop r16
+  99               	.LVL5:
+ 100 0074 0895      		ret
+ 101               	.LFE103:
+ 127               	.Letext0:
+DEFINED SYMBOLS
+                            *ABS*:00000000 ICMP.c
+C:\Users\Eddie\AppData\Local\Temp/ccxsJ7CH.s:2      *ABS*:0000003f __SREG__
+C:\Users\Eddie\AppData\Local\Temp/ccxsJ7CH.s:3      *ABS*:0000003e __SP_H__
+C:\Users\Eddie\AppData\Local\Temp/ccxsJ7CH.s:4      *ABS*:0000003d __SP_L__
+C:\Users\Eddie\AppData\Local\Temp/ccxsJ7CH.s:5      *ABS*:00000034 __CCP__
+C:\Users\Eddie\AppData\Local\Temp/ccxsJ7CH.s:6      *ABS*:00000000 __tmp_reg__
+C:\Users\Eddie\AppData\Local\Temp/ccxsJ7CH.s:7      *ABS*:00000001 __zero_reg__
+C:\Users\Eddie\AppData\Local\Temp/ccxsJ7CH.s:19     .text.ICMP_ProcessICMPPacket:00000000 ICMP_ProcessICMPPacket
+
+UNDEFINED SYMBOLS
+DecodeICMPHeader
+FrameIN
+memmove
+Ethernet_Checksum16

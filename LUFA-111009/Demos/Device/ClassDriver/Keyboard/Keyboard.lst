@@ -1,0 +1,466 @@
+   1               		.file	"Keyboard.c"
+   2               	__SREG__ = 0x3f
+   3               	__SP_H__ = 0x3e
+   4               	__SP_L__ = 0x3d
+   5               	__CCP__  = 0x34
+   6               	__tmp_reg__ = 0
+   7               	__zero_reg__ = 1
+  15               	.Ltext0:
+  16               		.section	.text.EVENT_USB_Device_Connect,"ax",@progbits
+  17               	.global	EVENT_USB_Device_Connect
+  19               	EVENT_USB_Device_Connect:
+  20               	.LFB109:
+  21               	.LSM0:
+  22               	/* prologue: function */
+  23               	/* frame size = 0 */
+  24               	.LBB31:
+  25               	.LBB32:
+  26               	.LSM1:
+  27 0000 8BB1      		in r24,43-32
+  28 0002 8F70      		andi r24,lo8(15)
+  29 0004 806A      		ori r24,lo8(-96)
+  30 0006 8BB9      		out 43-32,r24
+  31               	/* epilogue start */
+  32               	.LBE32:
+  33               	.LBE31:
+  34               	.LSM2:
+  35 0008 0895      		ret
+  36               	.LFE109:
+  38               		.section	.text.EVENT_USB_Device_Disconnect,"ax",@progbits
+  39               	.global	EVENT_USB_Device_Disconnect
+  41               	EVENT_USB_Device_Disconnect:
+  42               	.LFB110:
+  43               	.LSM3:
+  44               	/* prologue: function */
+  45               	/* frame size = 0 */
+  46               	.LBB33:
+  47               	.LBB34:
+  48               	.LSM4:
+  49 0000 8BB1      		in r24,43-32
+  50 0002 8F70      		andi r24,lo8(15)
+  51 0004 8061      		ori r24,lo8(16)
+  52 0006 8BB9      		out 43-32,r24
+  53               	/* epilogue start */
+  54               	.LBE34:
+  55               	.LBE33:
+  56               	.LSM5:
+  57 0008 0895      		ret
+  58               	.LFE110:
+  60               		.section	.text.EVENT_USB_Device_StartOfFrame,"ax",@progbits
+  61               	.global	EVENT_USB_Device_StartOfFrame
+  63               	EVENT_USB_Device_StartOfFrame:
+  64               	.LFB113:
+  65               	.LSM6:
+  66               	/* prologue: function */
+  67               	/* frame size = 0 */
+  68               	.LBB35:
+  69               	.LBB36:
+  70               	.LSM7:
+  71 0000 8091 0000 		lds r24,Keyboard_HID_Interface+11
+  72 0004 9091 0000 		lds r25,(Keyboard_HID_Interface+11)+1
+  73 0008 0097      		sbiw r24,0
+  74 000a 01F0      		breq .L7
+  75               	.LSM8:
+  76 000c 0197      		sbiw r24,1
+  77 000e 9093 0000 		sts (Keyboard_HID_Interface+11)+1,r25
+  78 0012 8093 0000 		sts Keyboard_HID_Interface+11,r24
+  79               	.L7:
+  80 0016 0895      		ret
+  81               	.LBE36:
+  82               	.LBE35:
+  83               	.LFE113:
+  85               		.section	.text.CALLBACK_HID_Device_CreateHIDReport,"ax",@progbits
+  86               	.global	CALLBACK_HID_Device_CreateHIDReport
+  88               	CALLBACK_HID_Device_CreateHIDReport:
+  89               	.LFB114:
+  90               	.LSM9:
+  91               	.LVL0:
+  92 0000 0F93      		push r16
+  93               	.LVL1:
+  94 0002 1F93      		push r17
+  95 0004 CF93      		push r28
+  96 0006 DF93      		push r29
+  97               	/* prologue: function */
+  98               	/* frame size = 0 */
+  99 0008 E801      		movw r28,r16
+ 100               	.LVL2:
+ 101               	.LSM10:
+ 102 000a D901      		movw r26,r18
+ 103               	.LVL3:
+ 104               	.LBB37:
+ 105               	.LBB38:
+ 106               	.LSM11:
+ 107 000c 23B1      		in r18,35-32
+ 108               	.LVL4:
+ 109 000e 8CB1      		in r24,44-32
+ 110               	.LVL5:
+ 111 0010 8095      		com r24
+ 112 0012 90E0      		ldi r25,lo8(0)
+ 113 0014 8073      		andi r24,lo8(48)
+ 114 0016 9070      		andi r25,hi8(48)
+ 115 0018 9595      		asr r25
+ 116 001a 8795      		ror r24
+ 117 001c 2095      		com r18
+ 118 001e 207E      		andi r18,lo8(-32)
+ 119 0020 282B      		or r18,r24
+ 120               	.LBE38:
+ 121               	.LBE37:
+ 122               	.LBB39:
+ 123               	.LBB40:
+ 124               	.LSM12:
+ 125 0022 3CB1      		in r19,44-32
+ 126               	.LBE40:
+ 127               	.LBE39:
+ 128               	.LSM13:
+ 129 0024 27FF      		sbrs r18,7
+ 130 0026 00C0      		rjmp .L9
+ 131               	.LVL6:
+ 132               	.LSM14:
+ 133 0028 84E0      		ldi r24,lo8(4)
+ 134 002a 00C0      		rjmp .L19
+ 135               	.L9:
+ 136               	.LSM15:
+ 137 002c 24FD      		sbrc r18,4
+ 138 002e 00C0      		rjmp .L11
+ 139 0030 90E0      		ldi r25,lo8(0)
+ 140               	.LVL7:
+ 141 0032 00C0      		rjmp .L10
+ 142               	.LVL8:
+ 143               	.L11:
+ 144               	.LSM16:
+ 145 0034 85E0      		ldi r24,lo8(5)
+ 146               	.L19:
+ 147 0036 1296      		adiw r26,2
+ 148 0038 8C93      		st X,r24
+ 149 003a 1297      		sbiw r26,2
+ 150               	.LVL9:
+ 151 003c 91E0      		ldi r25,lo8(1)
+ 152               	.LVL10:
+ 153               	.L10:
+ 154               	.LSM17:
+ 155 003e 26FF      		sbrs r18,6
+ 156 0040 00C0      		rjmp .L12
+ 157               	.LVL11:
+ 158               	.LSM18:
+ 159 0042 FD01      		movw r30,r26
+ 160 0044 E90F      		add r30,r25
+ 161 0046 F11D      		adc r31,__zero_reg__
+ 162 0048 86E0      		ldi r24,lo8(6)
+ 163 004a 00C0      		rjmp .L20
+ 164               	.L12:
+ 165               	.LSM19:
+ 166 004c 23FF      		sbrs r18,3
+ 167 004e 00C0      		rjmp .L13
+ 168               	.LSM20:
+ 169 0050 FD01      		movw r30,r26
+ 170 0052 E90F      		add r30,r25
+ 171 0054 F11D      		adc r31,__zero_reg__
+ 172 0056 87E0      		ldi r24,lo8(7)
+ 173               	.L20:
+ 174 0058 8283      		std Z+2,r24
+ 175 005a 9F5F      		subi r25,lo8(-(1))
+ 176               	.L13:
+ 177               	.LSM21:
+ 178 005c 25FF      		sbrs r18,5
+ 179 005e 00C0      		rjmp .L14
+ 180               	.LSM22:
+ 181 0060 FD01      		movw r30,r26
+ 182 0062 E90F      		add r30,r25
+ 183 0064 F11D      		adc r31,__zero_reg__
+ 184 0066 88E0      		ldi r24,lo8(8)
+ 185 0068 8283      		std Z+2,r24
+ 186 006a 9F5F      		subi r25,lo8(-(1))
+ 187               	.L14:
+ 188               	.LSM23:
+ 189 006c 32FD      		sbrc r19,2
+ 190 006e 00C0      		rjmp .L15
+ 191               	.LSM24:
+ 192 0070 FD01      		movw r30,r26
+ 193 0072 E90F      		add r30,r25
+ 194 0074 F11D      		adc r31,__zero_reg__
+ 195 0076 89E0      		ldi r24,lo8(9)
+ 196 0078 8283      		std Z+2,r24
+ 197 007a 00C0      		rjmp .L16
+ 198               	.L15:
+ 199               	.LSM25:
+ 200 007c 9923      		tst r25
+ 201 007e 01F0      		breq .L17
+ 202               	.L16:
+ 203               	.LSM26:
+ 204 0080 82E0      		ldi r24,lo8(2)
+ 205 0082 8C93      		st X,r24
+ 206               	.L17:
+ 207               	.LSM27:
+ 208 0084 88E0      		ldi r24,lo8(8)
+ 209 0086 90E0      		ldi r25,hi8(8)
+ 210 0088 9983      		std Y+1,r25
+ 211 008a 8883      		st Y,r24
+ 212               	.LSM28:
+ 213 008c 80E0      		ldi r24,lo8(0)
+ 214               	/* epilogue start */
+ 215 008e DF91      		pop r29
+ 216 0090 CF91      		pop r28
+ 217               	.LVL12:
+ 218 0092 1F91      		pop r17
+ 219 0094 0F91      		pop r16
+ 220               	.LVL13:
+ 221 0096 0895      		ret
+ 222               	.LFE114:
+ 224               		.section	.text.CALLBACK_HID_Device_ProcessHIDReport,"ax",@progbits
+ 225               	.global	CALLBACK_HID_Device_ProcessHIDReport
+ 227               	CALLBACK_HID_Device_ProcessHIDReport:
+ 228               	.LFB115:
+ 229               	.LSM29:
+ 230               	.LVL14:
+ 231               	/* prologue: function */
+ 232               	/* frame size = 0 */
+ 233 0000 F901      		movw r30,r18
+ 234               	.LSM30:
+ 235 0002 8081      		ld r24,Z
+ 236               	.LVL15:
+ 237 0004 90E0      		ldi r25,lo8(0)
+ 238 0006 80FD      		sbrc r24,0
+ 239               	.LVL16:
+ 240 0008 90E1      		ldi r25,lo8(16)
+ 241               	.LVL17:
+ 242               	.L23:
+ 243               	.LSM31:
+ 244 000a 81FD      		sbrc r24,1
+ 245               	.LSM32:
+ 246 000c 9068      		ori r25,lo8(-128)
+ 247               	.L24:
+ 248               	.LSM33:
+ 249 000e 82FD      		sbrc r24,2
+ 250               	.LSM34:
+ 251 0010 9064      		ori r25,lo8(64)
+ 252               	.L25:
+ 253               	.LBB41:
+ 254               	.LBB42:
+ 255               	.LSM35:
+ 256 0012 8BB1      		in r24,43-32
+ 257 0014 8F70      		andi r24,lo8(15)
+ 258 0016 982B      		or r25,r24
+ 259 0018 9BB9      		out 43-32,r25
+ 260               	/* epilogue start */
+ 261               	.LBE42:
+ 262               	.LBE41:
+ 263               	.LSM36:
+ 264 001a 0895      		ret
+ 265               	.LFE115:
+ 267               		.section	.text.EVENT_USB_Device_ControlRequest,"ax",@progbits
+ 268               	.global	EVENT_USB_Device_ControlRequest
+ 270               	EVENT_USB_Device_ControlRequest:
+ 271               	.LFB112:
+ 272               	.LSM37:
+ 273               	/* prologue: function */
+ 274               	/* frame size = 0 */
+ 275               	.LSM38:
+ 276 0000 80E0      		ldi r24,lo8(Keyboard_HID_Interface)
+ 277 0002 90E0      		ldi r25,hi8(Keyboard_HID_Interface)
+ 278 0004 0E94 0000 		call HID_Device_ProcessControlRequest
+ 279               	/* epilogue start */
+ 280               	.LSM39:
+ 281 0008 0895      		ret
+ 282               	.LFE112:
+ 284               		.section	.text.EVENT_USB_Device_ConfigurationChanged,"ax",@progbits
+ 285               	.global	EVENT_USB_Device_ConfigurationChanged
+ 287               	EVENT_USB_Device_ConfigurationChanged:
+ 288               	.LFB111:
+ 289               	.LSM40:
+ 290               	/* prologue: function */
+ 291               	/* frame size = 0 */
+ 292               	.LSM41:
+ 293 0000 80E0      		ldi r24,lo8(Keyboard_HID_Interface)
+ 294 0002 90E0      		ldi r25,hi8(Keyboard_HID_Interface)
+ 295 0004 0E94 0000 		call HID_Device_ConfigureEndpoints
+ 296               	.LBB43:
+ 297               	.LBB44:
+ 298               	.LBB45:
+ 299               	.LBB46:
+ 300               	.LSM42:
+ 301 0008 9091 E200 		lds r25,226
+ 302 000c 9460      		ori r25,lo8(4)
+ 303 000e 9093 E200 		sts 226,r25
+ 304               	.LBE46:
+ 305               	.LBE45:
+ 306               	.LBE44:
+ 307               	.LBE43:
+ 308               	.LSM43:
+ 309 0012 80FD      		sbrc r24,0
+ 310 0014 00C0      		rjmp .L30
+ 311 0016 90E9      		ldi r25,lo8(-112)
+ 312 0018 00C0      		rjmp .L31
+ 313               	.L30:
+ 314 001a 90E6      		ldi r25,lo8(96)
+ 315               	.L31:
+ 316               	.LBB47:
+ 317               	.LBB48:
+ 318               	.LSM44:
+ 319 001c 8BB1      		in r24,43-32
+ 320 001e 8F70      		andi r24,lo8(15)
+ 321 0020 982B      		or r25,r24
+ 322 0022 9BB9      		out 43-32,r25
+ 323               	/* epilogue start */
+ 324               	.LBE48:
+ 325               	.LBE47:
+ 326               	.LSM45:
+ 327 0024 0895      		ret
+ 328               	.LFE111:
+ 330               		.section	.text.SetupHardware,"ax",@progbits
+ 331               	.global	SetupHardware
+ 333               	SetupHardware:
+ 334               	.LFB108:
+ 335               	.LSM46:
+ 336               	/* prologue: function */
+ 337               	/* frame size = 0 */
+ 338               	.LSM47:
+ 339 0000 84B7      		in r24,84-32
+ 340 0002 877F      		andi r24,lo8(-9)
+ 341 0004 84BF      		out 84-32,r24
+ 342               	.LSM48:
+ 343 0006 88E1      		ldi r24,lo8(24)
+ 344               	/* #APP */
+ 345               	 ;  84 "Keyboard.c" 1
+ 346 0008 0FB6      		in __tmp_reg__, __SREG__
+ 347 000a F894      		cli
+ 348 000c 8093 6000 		sts 96, r24
+ 349 0010 1092 6000 		sts 96, __zero_reg__
+ 350 0014 0FBE      		out __SREG__,__tmp_reg__
+ 351               		
+ 352               	 ;  0 "" 2
+ 353               	/* #NOAPP */
+ 354               	.LBB49:
+ 355               	.LSM49:
+ 356 0016 80E0      		ldi r24,lo8(0)
+ 357 0018 90E0      		ldi r25,hi8(0)
+ 358 001a 20E8      		ldi r18,lo8(-128)
+ 359               	/* #APP */
+ 360               	 ;  87 "Keyboard.c" 1
+ 361 001c 0FB6      		in __tmp_reg__,__SREG__
+ 362 001e F894      		cli
+ 363 0020 2093 6100 		sts 97, r18
+ 364 0024 8093 6100 		sts 97, r24
+ 365 0028 0FBE      		out __SREG__, __tmp_reg__
+ 366               	 ;  0 "" 2
+ 367               	/* #NOAPP */
+ 368               	.LBE49:
+ 369               	.LBB50:
+ 370               	.LBB51:
+ 371               	.LSM50:
+ 372 002a 84B1      		in r24,36-32
+ 373 002c 8F71      		andi r24,lo8(31)
+ 374 002e 84B9      		out 36-32,r24
+ 375               	.LSM51:
+ 376 0030 8DB1      		in r24,45-32
+ 377 0032 8F7C      		andi r24,lo8(-49)
+ 378 0034 8DB9      		out 45-32,r24
+ 379               	.LSM52:
+ 380 0036 85B1      		in r24,37-32
+ 381 0038 806E      		ori r24,lo8(-32)
+ 382 003a 85B9      		out 37-32,r24
+ 383               	.LSM53:
+ 384 003c 8EB1      		in r24,46-32
+ 385 003e 8063      		ori r24,lo8(48)
+ 386 0040 8EB9      		out 46-32,r24
+ 387               	.LBE51:
+ 388               	.LBE50:
+ 389               	.LBB52:
+ 390               	.LBB53:
+ 391               	.LSM54:
+ 392 0042 8AB1      		in r24,42-32
+ 393 0044 806F      		ori r24,lo8(-16)
+ 394 0046 8AB9      		out 42-32,r24
+ 395               	.LSM55:
+ 396 0048 8BB1      		in r24,43-32
+ 397 004a 8F70      		andi r24,lo8(15)
+ 398 004c 8BB9      		out 43-32,r24
+ 399               	.LBE53:
+ 400               	.LBE52:
+ 401               	.LBB54:
+ 402               	.LBB55:
+ 403               	.LSM56:
+ 404 004e 6A98      		cbi 45-32,2
+ 405               	.LSM57:
+ 406 0050 729A      		sbi 46-32,2
+ 407               	.LBE55:
+ 408               	.LBE54:
+ 409               	.LSM58:
+ 410 0052 0E94 0000 		call USB_Init
+ 411               	/* epilogue start */
+ 412               	.LSM59:
+ 413 0056 0895      		ret
+ 414               	.LFE108:
+ 416               		.section	.text.main,"ax",@progbits
+ 417               	.global	main
+ 419               	main:
+ 420               	.LFB107:
+ 421               	.LSM60:
+ 422               	/* prologue: function */
+ 423               	/* frame size = 0 */
+ 424               	.LSM61:
+ 425 0000 0E94 0000 		call SetupHardware
+ 426               	.LBB56:
+ 427               	.LBB57:
+ 428               	.LSM62:
+ 429 0004 8BB1      		in r24,43-32
+ 430 0006 8F70      		andi r24,lo8(15)
+ 431 0008 8061      		ori r24,lo8(16)
+ 432 000a 8BB9      		out 43-32,r24
+ 433               	.LBE57:
+ 434               	.LBE56:
+ 435               	.LSM63:
+ 436               	/* #APP */
+ 437               	 ;  70 "Keyboard.c" 1
+ 438 000c 7894      		sei
+ 439               	 ;  0 "" 2
+ 440               	/* #NOAPP */
+ 441               	.L36:
+ 442               	.LSM64:
+ 443 000e 80E0      		ldi r24,lo8(Keyboard_HID_Interface)
+ 444 0010 90E0      		ldi r25,hi8(Keyboard_HID_Interface)
+ 445 0012 0E94 0000 		call HID_Device_USBTask
+ 446               	.LSM65:
+ 447 0016 0E94 0000 		call USB_USBTask
+ 448 001a 00C0      		rjmp .L36
+ 449               	.LFE107:
+ 451               	.global	Keyboard_HID_Interface
+ 452               		.data
+ 455               	Keyboard_HID_Interface:
+ 456 0000 00        		.byte	0
+ 457 0001 01        		.byte	1
+ 458 0002 0800      		.word	8
+ 459 0004 00        		.byte	0
+ 460 0005 0000      		.word	PrevKeyboardHIDReportBuffer
+ 461 0007 08        		.byte	8
+ 462 0008 0000 0000 		.skip 5,0
+ 462      00
+ 463               		.lcomm PrevKeyboardHIDReportBuffer,8
+ 552               	.Letext0:
+DEFINED SYMBOLS
+                            *ABS*:00000000 Keyboard.c
+C:\Users\Eddie\AppData\Local\Temp/ccQkLVqy.s:2      *ABS*:0000003f __SREG__
+C:\Users\Eddie\AppData\Local\Temp/ccQkLVqy.s:3      *ABS*:0000003e __SP_H__
+C:\Users\Eddie\AppData\Local\Temp/ccQkLVqy.s:4      *ABS*:0000003d __SP_L__
+C:\Users\Eddie\AppData\Local\Temp/ccQkLVqy.s:5      *ABS*:00000034 __CCP__
+C:\Users\Eddie\AppData\Local\Temp/ccQkLVqy.s:6      *ABS*:00000000 __tmp_reg__
+C:\Users\Eddie\AppData\Local\Temp/ccQkLVqy.s:7      *ABS*:00000001 __zero_reg__
+C:\Users\Eddie\AppData\Local\Temp/ccQkLVqy.s:19     .text.EVENT_USB_Device_Connect:00000000 EVENT_USB_Device_Connect
+C:\Users\Eddie\AppData\Local\Temp/ccQkLVqy.s:41     .text.EVENT_USB_Device_Disconnect:00000000 EVENT_USB_Device_Disconnect
+C:\Users\Eddie\AppData\Local\Temp/ccQkLVqy.s:63     .text.EVENT_USB_Device_StartOfFrame:00000000 EVENT_USB_Device_StartOfFrame
+C:\Users\Eddie\AppData\Local\Temp/ccQkLVqy.s:455    .data:00000000 Keyboard_HID_Interface
+C:\Users\Eddie\AppData\Local\Temp/ccQkLVqy.s:88     .text.CALLBACK_HID_Device_CreateHIDReport:00000000 CALLBACK_HID_Device_CreateHIDReport
+C:\Users\Eddie\AppData\Local\Temp/ccQkLVqy.s:227    .text.CALLBACK_HID_Device_ProcessHIDReport:00000000 CALLBACK_HID_Device_ProcessHIDReport
+C:\Users\Eddie\AppData\Local\Temp/ccQkLVqy.s:270    .text.EVENT_USB_Device_ControlRequest:00000000 EVENT_USB_Device_ControlRequest
+C:\Users\Eddie\AppData\Local\Temp/ccQkLVqy.s:287    .text.EVENT_USB_Device_ConfigurationChanged:00000000 EVENT_USB_Device_ConfigurationChanged
+C:\Users\Eddie\AppData\Local\Temp/ccQkLVqy.s:333    .text.SetupHardware:00000000 SetupHardware
+C:\Users\Eddie\AppData\Local\Temp/ccQkLVqy.s:419    .text.main:00000000 main
+                             .bss:00000000 PrevKeyboardHIDReportBuffer
+
+UNDEFINED SYMBOLS
+HID_Device_ProcessControlRequest
+HID_Device_ConfigureEndpoints
+USB_Init
+HID_Device_USBTask
+USB_USBTask
+__do_copy_data
+__do_clear_bss

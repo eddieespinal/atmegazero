@@ -1,0 +1,1613 @@
+   1               		.file	"MassStoreCommands.c"
+   2               	__SREG__ = 0x3f
+   3               	__SP_H__ = 0x3e
+   4               	__SP_L__ = 0x3d
+   5               	__CCP__  = 0x34
+   6               	__tmp_reg__ = 0
+   7               	__zero_reg__ = 1
+  15               	.Ltext0:
+  16               		.section	.text.MassStore_WaitForDataReceived,"ax",@progbits
+  18               	MassStore_WaitForDataReceived:
+  19               	.LFB144:
+  20               	.LSM0:
+  21               	/* prologue: function */
+  22               	/* frame size = 0 */
+  23               	.LBB127:
+  24               	.LBB128:
+  25               	.LSM1:
+  26 0000 4091 A200 		lds r20,162
+  27 0004 5091 A300 		lds r21,(162)+1
+  28               	.LVL0:
+  29               	.LBE128:
+  30               	.LBE127:
+  31               	.LBB129:
+  32               	.LBB130:
+  33               	.LSM2:
+  34 0008 81E0      		ldi r24,lo8(1)
+  35 000a 8093 A700 		sts 167,r24
+  36               	.LBE130:
+  37               	.LBE129:
+  38               	.LBB131:
+  39               	.LBB132:
+  40               	.LSM3:
+  41 000e 8091 A900 		lds r24,169
+  42 0012 8F7B      		andi r24,lo8(-65)
+  43 0014 8093 A900 		sts 169,r24
+  44 0018 20E1      		ldi r18,lo8(10000)
+  45 001a 37E2      		ldi r19,hi8(10000)
+  46               	.LVL1:
+  47               	.LBE132:
+  48               	.LBE131:
+  49               	.LBB133:
+  50               	.LBB134:
+  51               	.LBB135:
+  52               	.LSM4:
+  53 001c 72E0      		ldi r23,lo8(2)
+  54               	.LBE135:
+  55               	.LBE134:
+  56               	.LBB137:
+  57               	.LBB138:
+  58 001e 61E0      		ldi r22,lo8(1)
+  59 0020 00C0      		rjmp .L2
+  60               	.L12:
+  61               	.LBE138:
+  62               	.LBE137:
+  63               	.LBB140:
+  64               	.LBB141:
+  65               	.LSM5:
+  66 0022 8091 A200 		lds r24,162
+  67 0026 9091 A300 		lds r25,(162)+1
+  68               	.LVL2:
+  69               	.LBE141:
+  70               	.LBE140:
+  71               	.LSM6:
+  72 002a 8417      		cp r24,r20
+  73 002c 9507      		cpc r25,r21
+  74 002e 01F0      		breq .L3
+  75               	.LSM7:
+  76 0030 2150      		subi r18,lo8(-(-1))
+  77 0032 3040      		sbci r19,hi8(-(-1))
+  78               	.LSM8:
+  79 0034 01F4      		brne .L4
+  80 0036 83E0      		ldi r24,lo8(3)
+  81               	.LVL3:
+  82 0038 0895      		ret
+  83               	.LVL4:
+  84               	.L4:
+  85 003a AC01      		movw r20,r24
+  86               	.L3:
+  87               	.LBB142:
+  88               	.LBB143:
+  89               	.LSM9:
+  90 003c 8091 A900 		lds r24,169
+  91               	.LVL5:
+  92 0040 8064      		ori r24,lo8(64)
+  93 0042 8093 A900 		sts 169,r24
+  94               	.LBE143:
+  95               	.LBE142:
+  96               	.LBB144:
+  97               	.LBB136:
+  98               	.LSM10:
+  99 0046 7093 A700 		sts 167,r23
+ 100               	.LBE136:
+ 101               	.LBE144:
+ 102               	.LBB145:
+ 103               	.LBB146:
+ 104               	.LSM11:
+ 105 004a 8091 A900 		lds r24,169
+ 106 004e 8F7B      		andi r24,lo8(-65)
+ 107 0050 8093 A900 		sts 169,r24
+ 108               	.LBE146:
+ 109               	.LBE145:
+ 110               	.LBB147:
+ 111               	.LBB148:
+ 112               	.LSM12:
+ 113 0054 8091 A600 		lds r24,166
+ 114               	.LBE148:
+ 115               	.LBE147:
+ 116               	.LSM13:
+ 117 0058 81FD      		sbrc r24,1
+ 118 005a 00C0      		rjmp .L17
+ 119               	.L6:
+ 120               	.LBB149:
+ 121               	.LBB150:
+ 122               	.LSM14:
+ 123 005c 8091 A900 		lds r24,169
+ 124 0060 8064      		ori r24,lo8(64)
+ 125 0062 8093 A900 		sts 169,r24
+ 126               	.LBE150:
+ 127               	.LBE149:
+ 128               	.LBB151:
+ 129               	.LBB139:
+ 130               	.LSM15:
+ 131 0066 6093 A700 		sts 167,r22
+ 132               	.LBE139:
+ 133               	.LBE151:
+ 134               	.LBB152:
+ 135               	.LBB153:
+ 136               	.LSM16:
+ 137 006a 8091 A900 		lds r24,169
+ 138 006e 8F7B      		andi r24,lo8(-65)
+ 139 0070 8093 A900 		sts 169,r24
+ 140               	.LBE153:
+ 141               	.LBE152:
+ 142               	.LBB154:
+ 143               	.LBB155:
+ 144               	.LSM17:
+ 145 0074 8091 A600 		lds r24,166
+ 146               	.LBE155:
+ 147               	.LBE154:
+ 148               	.LSM18:
+ 149 0078 81FF      		sbrs r24,1
+ 150 007a 00C0      		rjmp .L9
+ 151               	.L17:
+ 152               	.LBB156:
+ 153               	.LBB157:
+ 154               	.LSM19:
+ 155 007c 9091 AA00 		lds r25,170
+ 156               	.LBB158:
+ 157               	.LBB159:
+ 158               	.LSM20:
+ 159 0080 8091 AA00 		lds r24,170
+ 160               	.LBE159:
+ 161               	.LBE158:
+ 162               	.LSM21:
+ 163 0084 8073      		andi r24,lo8(48)
+ 164 0086 8031      		cpi r24,lo8(16)
+ 165 0088 01F0      		breq .L10
+ 166 008a 80E0      		ldi r24,lo8(0)
+ 167 008c 00C0      		rjmp .L11
+ 168               	.L10:
+ 169 008e 80E8      		ldi r24,lo8(-128)
+ 170               	.L11:
+ 171               	.LBE157:
+ 172               	.LBE156:
+ 173               	.LSM22:
+ 174 0090 9F70      		andi r25,lo8(15)
+ 175 0092 892B      		or r24,r25
+ 176 0094 0E94 0000 		call USB_Host_ClearEndpointStall
+ 177               	.LVL6:
+ 178 0098 81E0      		ldi r24,lo8(1)
+ 179 009a 0895      		ret
+ 180               	.LVL7:
+ 181               	.L9:
+ 182               	.LSM23:
+ 183 009c 8091 0000 		lds r24,USB_HostState
+ 184 00a0 8130      		cpi r24,lo8(1)
+ 185 00a2 01F4      		brne .L2
+ 186 00a4 82E0      		ldi r24,lo8(2)
+ 187 00a6 0895      		ret
+ 188               	.L2:
+ 189               	.LBE133:
+ 190               	.LBB160:
+ 191               	.LBB161:
+ 192               	.LSM24:
+ 193 00a8 8091 A600 		lds r24,166
+ 194               	.LBE161:
+ 195               	.LBE160:
+ 196               	.LSM25:
+ 197 00ac 80FF      		sbrs r24,0
+ 198 00ae 00C0      		rjmp .L12
+ 199               	.LBB162:
+ 200               	.LBB163:
+ 201               	.LSM26:
+ 202 00b0 81E0      		ldi r24,lo8(1)
+ 203 00b2 8093 A700 		sts 167,r24
+ 204               	.LBE163:
+ 205               	.LBE162:
+ 206               	.LBB164:
+ 207               	.LBB165:
+ 208               	.LSM27:
+ 209 00b6 8091 A900 		lds r24,169
+ 210 00ba 8064      		ori r24,lo8(64)
+ 211 00bc 8093 A900 		sts 169,r24
+ 212               	.LBE165:
+ 213               	.LBE164:
+ 214               	.LBB166:
+ 215               	.LBB167:
+ 216               	.LSM28:
+ 217 00c0 82E0      		ldi r24,lo8(2)
+ 218 00c2 8093 A700 		sts 167,r24
+ 219               	.LBE167:
+ 220               	.LBE166:
+ 221               	.LBB168:
+ 222               	.LBB169:
+ 223               	.LSM29:
+ 224 00c6 8091 A900 		lds r24,169
+ 225 00ca 8064      		ori r24,lo8(64)
+ 226 00cc 8093 A900 		sts 169,r24
+ 227 00d0 80E0      		ldi r24,lo8(0)
+ 228               	.LBE169:
+ 229               	.LBE168:
+ 230               	.LSM30:
+ 231 00d2 0895      		ret
+ 232               	.LFE144:
+ 234               		.section	.text.MassStore_SendCommand,"ax",@progbits
+ 236               	MassStore_SendCommand:
+ 237               	.LFB143:
+ 238               	.LSM31:
+ 239               	.LVL8:
+ 240 0000 CF92      		push r12
+ 241 0002 DF92      		push r13
+ 242 0004 EF92      		push r14
+ 243 0006 FF92      		push r15
+ 244 0008 0F93      		push r16
+ 245 000a 1F93      		push r17
+ 246 000c CF93      		push r28
+ 247 000e DF93      		push r29
+ 248               	/* prologue: function */
+ 249               	/* frame size = 0 */
+ 250 0010 EC01      		movw r28,r24
+ 251 0012 8B01      		movw r16,r22
+ 252               	.LSM32:
+ 253 0014 8091 0000 		lds r24,MassStore_Tag
+ 254 0018 9091 0000 		lds r25,(MassStore_Tag)+1
+ 255 001c A091 0000 		lds r26,(MassStore_Tag)+2
+ 256 0020 B091 0000 		lds r27,(MassStore_Tag)+3
+ 257               	.LVL9:
+ 258 0024 0196      		adiw r24,1
+ 259 0026 A11D      		adc r26,__zero_reg__
+ 260 0028 B11D      		adc r27,__zero_reg__
+ 261 002a 8093 0000 		sts MassStore_Tag,r24
+ 262 002e 9093 0000 		sts (MassStore_Tag)+1,r25
+ 263 0032 A093 0000 		sts (MassStore_Tag)+2,r26
+ 264 0036 B093 0000 		sts (MassStore_Tag)+3,r27
+ 265 003a 8F5F      		subi r24,lo8(-1)
+ 266 003c 9F4F      		sbci r25,hi8(-1)
+ 267 003e AF4F      		sbci r26,hlo8(-1)
+ 268 0040 BF4F      		sbci r27,hhi8(-1)
+ 269 0042 01F4      		brne .L19
+ 270               	.LVL10:
+ 271               	.LSM33:
+ 272 0044 81E0      		ldi r24,lo8(1)
+ 273 0046 90E0      		ldi r25,hi8(1)
+ 274 0048 A0E0      		ldi r26,hlo8(1)
+ 275 004a B0E0      		ldi r27,hhi8(1)
+ 276 004c 8093 0000 		sts MassStore_Tag,r24
+ 277 0050 9093 0000 		sts (MassStore_Tag)+1,r25
+ 278 0054 A093 0000 		sts (MassStore_Tag)+2,r26
+ 279 0058 B093 0000 		sts (MassStore_Tag)+3,r27
+ 280               	.L19:
+ 281               	.LSM34:
+ 282 005c 8091 0000 		lds r24,MassStore_Tag
+ 283 0060 9091 0000 		lds r25,(MassStore_Tag)+1
+ 284 0064 A091 0000 		lds r26,(MassStore_Tag)+2
+ 285 0068 B091 0000 		lds r27,(MassStore_Tag)+3
+ 286 006c 8C83      		std Y+4,r24
+ 287 006e 9D83      		std Y+5,r25
+ 288 0070 AE83      		std Y+6,r26
+ 289 0072 BF83      		std Y+7,r27
+ 290               	.LBB198:
+ 291               	.LBB199:
+ 292               	.LSM35:
+ 293 0074 82E0      		ldi r24,lo8(2)
+ 294 0076 C82E      		mov r12,r24
+ 295 0078 C092 A700 		sts 167,r12
+ 296               	.LBE199:
+ 297               	.LBE198:
+ 298               	.LBB200:
+ 299               	.LBB201:
+ 300               	.LSM36:
+ 301 007c 8091 A900 		lds r24,169
+ 302 0080 8F7B      		andi r24,lo8(-65)
+ 303 0082 8093 A900 		sts 169,r24
+ 304               	.LBE201:
+ 305               	.LBE200:
+ 306               	.LSM37:
+ 307 0086 CE01      		movw r24,r28
+ 308 0088 6FE1      		ldi r22,lo8(31)
+ 309 008a 70E0      		ldi r23,hi8(31)
+ 310 008c 40E0      		ldi r20,lo8(0)
+ 311 008e 50E0      		ldi r21,hi8(0)
+ 312 0090 0E94 0000 		call Pipe_Write_Stream_LE
+ 313 0094 D82E      		mov r13,r24
+ 314               	.LVL11:
+ 315 0096 8823      		tst r24
+ 316 0098 01F0      		breq .+2
+ 317 009a 00C0      		rjmp .L20
+ 318               	.LVL12:
+ 319               	.LBB202:
+ 320               	.LBB203:
+ 321               	.LSM38:
+ 322 009c 8091 A600 		lds r24,166
+ 323               	.LVL13:
+ 324 00a0 8B77      		andi r24,lo8(123)
+ 325 00a2 8093 A600 		sts 166,r24
+ 326               	.LBE203:
+ 327               	.LBE202:
+ 328               	.LSM39:
+ 329 00a6 0E94 0000 		call Pipe_WaitUntilReady
+ 330               	.LBB204:
+ 331               	.LBB205:
+ 332               	.LSM40:
+ 333 00aa 8091 A900 		lds r24,169
+ 334 00ae 8064      		ori r24,lo8(64)
+ 335 00b0 8093 A900 		sts 169,r24
+ 336               	.LBE205:
+ 337               	.LBE204:
+ 338               	.LSM41:
+ 339 00b4 0115      		cp r16,__zero_reg__
+ 340 00b6 1105      		cpc r17,__zero_reg__
+ 341 00b8 01F4      		brne .+2
+ 342 00ba 00C0      		rjmp .L20
+ 343               	.LBB206:
+ 344               	.LBB207:
+ 345               	.LSM42:
+ 346 00bc E884      		ldd r14,Y+8
+ 347 00be F984      		ldd r15,Y+9
+ 348               	.LVL14:
+ 349               	.LSM43:
+ 350 00c0 8C85      		ldd r24,Y+12
+ 351 00c2 87FF      		sbrs r24,7
+ 352 00c4 00C0      		rjmp .L21
+ 353               	.LBE207:
+ 354               	.LSM44:
+ 355 00c6 0E94 0000 		call MassStore_WaitForDataReceived
+ 356 00ca 982F      		mov r25,r24
+ 357               	.LVL15:
+ 358               	.LBB224:
+ 359 00cc 8823      		tst r24
+ 360 00ce 01F4      		brne .L22
+ 361               	.LVL16:
+ 362               	.LBB214:
+ 363               	.LBB215:
+ 364               	.LSM45:
+ 365 00d0 81E0      		ldi r24,lo8(1)
+ 366               	.LVL17:
+ 367 00d2 8093 A700 		sts 167,r24
+ 368               	.LBE215:
+ 369               	.LBE214:
+ 370               	.LBB216:
+ 371               	.LBB217:
+ 372               	.LSM46:
+ 373 00d6 8091 A900 		lds r24,169
+ 374 00da 8F7B      		andi r24,lo8(-65)
+ 375 00dc 8093 A900 		sts 169,r24
+ 376               	.LBE217:
+ 377               	.LBE216:
+ 378               	.LBE224:
+ 379               	.LSM47:
+ 380 00e0 C801      		movw r24,r16
+ 381 00e2 B701      		movw r22,r14
+ 382 00e4 40E0      		ldi r20,lo8(0)
+ 383 00e6 50E0      		ldi r21,hi8(0)
+ 384 00e8 0E94 0000 		call Pipe_Read_Stream_LE
+ 385               	.LVL18:
+ 386 00ec 982F      		mov r25,r24
+ 387               	.LVL19:
+ 388               	.LBB225:
+ 389 00ee 8823      		tst r24
+ 390 00f0 01F4      		brne .L22
+ 391               	.LVL20:
+ 392               	.LBB212:
+ 393               	.LBB213:
+ 394               	.LSM48:
+ 395 00f2 8091 A600 		lds r24,166
+ 396               	.LVL21:
+ 397 00f6 8E77      		andi r24,lo8(126)
+ 398 00f8 8093 A600 		sts 166,r24
+ 399 00fc 00C0      		rjmp .L23
+ 400               	.LVL22:
+ 401               	.L21:
+ 402               	.LBE213:
+ 403               	.LBE212:
+ 404               	.LBB210:
+ 405               	.LBB211:
+ 406               	.LSM49:
+ 407 00fe C092 A700 		sts 167,r12
+ 408               	.LBE211:
+ 409               	.LBE210:
+ 410               	.LBB208:
+ 411               	.LBB209:
+ 412               	.LSM50:
+ 413 0102 8091 A900 		lds r24,169
+ 414 0106 8F7B      		andi r24,lo8(-65)
+ 415 0108 8093 A900 		sts 169,r24
+ 416               	.LBE209:
+ 417               	.LBE208:
+ 418               	.LBE225:
+ 419               	.LSM51:
+ 420 010c C801      		movw r24,r16
+ 421 010e B701      		movw r22,r14
+ 422 0110 40E0      		ldi r20,lo8(0)
+ 423 0112 50E0      		ldi r21,hi8(0)
+ 424 0114 0E94 0000 		call Pipe_Write_Stream_LE
+ 425 0118 982F      		mov r25,r24
+ 426               	.LVL23:
+ 427               	.LBB226:
+ 428 011a 8823      		tst r24
+ 429 011c 01F4      		brne .L22
+ 430               	.LVL24:
+ 431               	.LBB218:
+ 432               	.LBB219:
+ 433               	.LSM52:
+ 434 011e 8091 A600 		lds r24,166
+ 435               	.LVL25:
+ 436 0122 8B77      		andi r24,lo8(123)
+ 437 0124 8093 A600 		sts 166,r24
+ 438 0128 00C0      		rjmp .L24
+ 439               	.L26:
+ 440               	.LBE219:
+ 441               	.LBE218:
+ 442               	.LSM53:
+ 443 012a 8091 0000 		lds r24,USB_HostState
+ 444 012e 8130      		cpi r24,lo8(1)
+ 445 0130 01F0      		breq .L25
+ 446               	.L24:
+ 447               	.LBB220:
+ 448               	.LBB221:
+ 449               	.LSM54:
+ 450 0132 8091 A600 		lds r24,166
+ 451               	.LBE221:
+ 452               	.LBE220:
+ 453               	.LSM55:
+ 454 0136 82FF      		sbrs r24,2
+ 455 0138 00C0      		rjmp .L26
+ 456               	.L23:
+ 457               	.LBB222:
+ 458               	.LBB223:
+ 459               	.LSM56:
+ 460 013a 8091 A900 		lds r24,169
+ 461 013e 8064      		ori r24,lo8(64)
+ 462 0140 8093 A900 		sts 169,r24
+ 463 0144 00C0      		rjmp .L20
+ 464               	.L25:
+ 465 0146 92E0      		ldi r25,lo8(2)
+ 466               	.LVL26:
+ 467               	.L22:
+ 468               	.LBE223:
+ 469               	.LBE222:
+ 470               	.LBE226:
+ 471               	.LBE206:
+ 472               	.LBB227:
+ 473               	.LBB228:
+ 474 0148 8091 A900 		lds r24,169
+ 475 014c 8064      		ori r24,lo8(64)
+ 476 014e 8093 A900 		sts 169,r24
+ 477 0152 D92E      		mov r13,r25
+ 478               	.LVL27:
+ 479               	.L20:
+ 480               	.LBE228:
+ 481               	.LBE227:
+ 482               	.LSM57:
+ 483 0154 8D2D      		mov r24,r13
+ 484               	/* epilogue start */
+ 485 0156 DF91      		pop r29
+ 486 0158 CF91      		pop r28
+ 487               	.LVL28:
+ 488 015a 1F91      		pop r17
+ 489 015c 0F91      		pop r16
+ 490               	.LVL29:
+ 491 015e FF90      		pop r15
+ 492 0160 EF90      		pop r14
+ 493               	.LVL30:
+ 494 0162 DF90      		pop r13
+ 495 0164 CF90      		pop r12
+ 496 0166 0895      		ret
+ 497               	.LFE143:
+ 499               		.section	.text.MassStore_GetReturnedStatus,"ax",@progbits
+ 501               	MassStore_GetReturnedStatus:
+ 502               	.LFB146:
+ 503               	.LSM58:
+ 504               	.LVL31:
+ 505 0000 CF93      		push r28
+ 506 0002 DF93      		push r29
+ 507               	/* prologue: function */
+ 508               	/* frame size = 0 */
+ 509 0004 EC01      		movw r28,r24
+ 510               	.LSM59:
+ 511 0006 0E94 0000 		call MassStore_WaitForDataReceived
+ 512               	.LVL32:
+ 513 000a 982F      		mov r25,r24
+ 514               	.LVL33:
+ 515 000c 8823      		tst r24
+ 516 000e 01F4      		brne .L29
+ 517               	.LVL34:
+ 518               	.LBB229:
+ 519               	.LBB230:
+ 520               	.LSM60:
+ 521 0010 81E0      		ldi r24,lo8(1)
+ 522               	.LVL35:
+ 523 0012 8093 A700 		sts 167,r24
+ 524               	.LBE230:
+ 525               	.LBE229:
+ 526               	.LBB231:
+ 527               	.LBB232:
+ 528               	.LSM61:
+ 529 0016 8091 A900 		lds r24,169
+ 530 001a 8F7B      		andi r24,lo8(-65)
+ 531 001c 8093 A900 		sts 169,r24
+ 532               	.LBE232:
+ 533               	.LBE231:
+ 534               	.LSM62:
+ 535 0020 CE01      		movw r24,r28
+ 536 0022 6DE0      		ldi r22,lo8(13)
+ 537 0024 70E0      		ldi r23,hi8(13)
+ 538 0026 40E0      		ldi r20,lo8(0)
+ 539 0028 50E0      		ldi r21,hi8(0)
+ 540 002a 0E94 0000 		call Pipe_Read_Stream_LE
+ 541               	.LVL36:
+ 542 002e 982F      		mov r25,r24
+ 543               	.LVL37:
+ 544 0030 8823      		tst r24
+ 545 0032 01F4      		brne .L29
+ 546               	.LVL38:
+ 547               	.LBB233:
+ 548               	.LBB234:
+ 549               	.LSM63:
+ 550 0034 8091 A600 		lds r24,166
+ 551               	.LVL39:
+ 552 0038 8E77      		andi r24,lo8(126)
+ 553 003a 8093 A600 		sts 166,r24
+ 554               	.LBE234:
+ 555               	.LBE233:
+ 556               	.LBB235:
+ 557               	.LBB236:
+ 558               	.LSM64:
+ 559 003e 8091 A900 		lds r24,169
+ 560 0042 8064      		ori r24,lo8(64)
+ 561 0044 8093 A900 		sts 169,r24
+ 562               	.LBE236:
+ 563               	.LBE235:
+ 564               	.LSM65:
+ 565 0048 8C85      		ldd r24,Y+12
+ 566 004a 8111      		cpse r24,__zero_reg__
+ 567 004c 90EC      		ldi r25,lo8(-64)
+ 568               	.LVL40:
+ 569               	.L29:
+ 570               	.LSM66:
+ 571 004e 892F      		mov r24,r25
+ 572               	/* epilogue start */
+ 573 0050 DF91      		pop r29
+ 574 0052 CF91      		pop r28
+ 575               	.LVL41:
+ 576 0054 0895      		ret
+ 577               	.LFE146:
+ 579               		.section	.text.MassStore_PreventAllowMediumRemoval,"ax",@progbits
+ 580               	.global	MassStore_PreventAllowMediumRemoval
+ 582               	MassStore_PreventAllowMediumRemoval:
+ 583               	.LFB155:
+ 584               	.LSM67:
+ 585               	.LVL42:
+ 586 0000 DF93      		push r29
+ 587 0002 CF93      		push r28
+ 588 0004 CDB7      		in r28,__SP_L__
+ 589 0006 DEB7      		in r29,__SP_H__
+ 590 0008 AC97      		sbiw r28,44
+ 591 000a 0FB6      		in __tmp_reg__,__SREG__
+ 592 000c F894      		cli
+ 593 000e DEBF      		out __SP_H__,r29
+ 594 0010 0FBE      		out __SREG__,__tmp_reg__
+ 595 0012 CDBF      		out __SP_L__,r28
+ 596               	/* prologue: function */
+ 597               	/* frame size = 44 */
+ 598               	.LSM68:
+ 599 0014 FE01      		movw r30,r28
+ 600 0016 3E96      		adiw r30,14
+ 601 0018 9FE1      		ldi r25,lo8(31)
+ 602 001a DF01      		movw r26,r30
+ 603 001c 1D92      		st X+,__zero_reg__
+ 604 001e 9A95      	        dec r25
+ 605 0020 01F4      		brne .-6
+ 606 0022 25E5      		ldi r18,lo8(1128420181)
+ 607 0024 33E5      		ldi r19,hi8(1128420181)
+ 608 0026 42E4      		ldi r20,hlo8(1128420181)
+ 609 0028 53E4      		ldi r21,hhi8(1128420181)
+ 610 002a 2E87      		std Y+14,r18
+ 611 002c 3F87      		std Y+15,r19
+ 612 002e 488B      		std Y+16,r20
+ 613 0030 598B      		std Y+17,r21
+ 614 0032 8B8F      		std Y+27,r24
+ 615 0034 86E0      		ldi r24,lo8(6)
+ 616               	.LVL43:
+ 617 0036 8C8F      		std Y+28,r24
+ 618 0038 8EE1      		ldi r24,lo8(30)
+ 619 003a 8D8F      		std Y+29,r24
+ 620 003c 68A3      		std Y+32,r22
+ 621               	.LSM69:
+ 622 003e CF01      		movw r24,r30
+ 623 0040 60E0      		ldi r22,lo8(0)
+ 624 0042 70E0      		ldi r23,hi8(0)
+ 625               	.LVL44:
+ 626 0044 0E94 0000 		call MassStore_SendCommand
+ 627 0048 982F      		mov r25,r24
+ 628               	.LVL45:
+ 629 004a 8823      		tst r24
+ 630 004c 01F4      		brne .L35
+ 631               	.LVL46:
+ 632               	.L32:
+ 633               	.LSM70:
+ 634 004e CE01      		movw r24,r28
+ 635               	.LVL47:
+ 636 0050 0196      		adiw r24,1
+ 637 0052 0E94 0000 		call MassStore_GetReturnedStatus
+ 638               	.LVL48:
+ 639 0056 982F      		mov r25,r24
+ 640               	.LVL49:
+ 641 0058 8823      		tst r24
+ 642 005a 01F0      		breq .L33
+ 643               	.LVL50:
+ 644               	.L35:
+ 645               	.LBB237:
+ 646               	.LBB238:
+ 647               	.LSM71:
+ 648 005c 8091 A900 		lds r24,169
+ 649               	.LVL51:
+ 650 0060 8064      		ori r24,lo8(64)
+ 651 0062 8093 A900 		sts 169,r24
+ 652               	.LVL52:
+ 653               	.L33:
+ 654               	.LBE238:
+ 655               	.LBE237:
+ 656               	.LSM72:
+ 657 0066 892F      		mov r24,r25
+ 658               	/* epilogue start */
+ 659 0068 AC96      		adiw r28,44
+ 660 006a 0FB6      		in __tmp_reg__,__SREG__
+ 661 006c F894      		cli
+ 662 006e DEBF      		out __SP_H__,r29
+ 663 0070 0FBE      		out __SREG__,__tmp_reg__
+ 664 0072 CDBF      		out __SP_L__,r28
+ 665 0074 CF91      		pop r28
+ 666 0076 DF91      		pop r29
+ 667 0078 0895      		ret
+ 668               	.LFE155:
+ 670               		.section	.text.MassStore_TestUnitReady,"ax",@progbits
+ 671               	.global	MassStore_TestUnitReady
+ 673               	MassStore_TestUnitReady:
+ 674               	.LFB153:
+ 675               	.LSM73:
+ 676               	.LVL53:
+ 677 0000 DF93      		push r29
+ 678 0002 CF93      		push r28
+ 679 0004 CDB7      		in r28,__SP_L__
+ 680 0006 DEB7      		in r29,__SP_H__
+ 681 0008 AC97      		sbiw r28,44
+ 682 000a 0FB6      		in __tmp_reg__,__SREG__
+ 683 000c F894      		cli
+ 684 000e DEBF      		out __SP_H__,r29
+ 685 0010 0FBE      		out __SREG__,__tmp_reg__
+ 686 0012 CDBF      		out __SP_L__,r28
+ 687               	/* prologue: function */
+ 688               	/* frame size = 44 */
+ 689               	.LSM74:
+ 690 0014 FE01      		movw r30,r28
+ 691 0016 3E96      		adiw r30,14
+ 692 0018 9FE1      		ldi r25,lo8(31)
+ 693 001a DF01      		movw r26,r30
+ 694 001c 1D92      		st X+,__zero_reg__
+ 695 001e 9A95      	        dec r25
+ 696 0020 01F4      		brne .-6
+ 697 0022 25E5      		ldi r18,lo8(1128420181)
+ 698 0024 33E5      		ldi r19,hi8(1128420181)
+ 699 0026 42E4      		ldi r20,hlo8(1128420181)
+ 700 0028 53E4      		ldi r21,hhi8(1128420181)
+ 701 002a 2E87      		std Y+14,r18
+ 702 002c 3F87      		std Y+15,r19
+ 703 002e 488B      		std Y+16,r20
+ 704 0030 598B      		std Y+17,r21
+ 705 0032 90E8      		ldi r25,lo8(-128)
+ 706 0034 9A8F      		std Y+26,r25
+ 707 0036 8B8F      		std Y+27,r24
+ 708 0038 86E0      		ldi r24,lo8(6)
+ 709               	.LVL54:
+ 710 003a 8C8F      		std Y+28,r24
+ 711               	.LSM75:
+ 712 003c CF01      		movw r24,r30
+ 713 003e 60E0      		ldi r22,lo8(0)
+ 714 0040 70E0      		ldi r23,hi8(0)
+ 715 0042 0E94 0000 		call MassStore_SendCommand
+ 716 0046 982F      		mov r25,r24
+ 717               	.LVL55:
+ 718 0048 8823      		tst r24
+ 719 004a 01F4      		brne .L40
+ 720               	.LVL56:
+ 721               	.L37:
+ 722               	.LSM76:
+ 723 004c CE01      		movw r24,r28
+ 724               	.LVL57:
+ 725 004e 0196      		adiw r24,1
+ 726 0050 0E94 0000 		call MassStore_GetReturnedStatus
+ 727               	.LVL58:
+ 728 0054 982F      		mov r25,r24
+ 729               	.LVL59:
+ 730 0056 8823      		tst r24
+ 731 0058 01F0      		breq .L38
+ 732               	.LVL60:
+ 733               	.L40:
+ 734               	.LBB239:
+ 735               	.LBB240:
+ 736               	.LSM77:
+ 737 005a 8091 A900 		lds r24,169
+ 738               	.LVL61:
+ 739 005e 8064      		ori r24,lo8(64)
+ 740 0060 8093 A900 		sts 169,r24
+ 741               	.LVL62:
+ 742               	.L38:
+ 743               	.LBE240:
+ 744               	.LBE239:
+ 745               	.LSM78:
+ 746 0064 892F      		mov r24,r25
+ 747               	/* epilogue start */
+ 748 0066 AC96      		adiw r28,44
+ 749 0068 0FB6      		in __tmp_reg__,__SREG__
+ 750 006a F894      		cli
+ 751 006c DEBF      		out __SP_H__,r29
+ 752 006e 0FBE      		out __SREG__,__tmp_reg__
+ 753 0070 CDBF      		out __SP_L__,r28
+ 754 0072 CF91      		pop r28
+ 755 0074 DF91      		pop r29
+ 756 0076 0895      		ret
+ 757               	.LFE153:
+ 759               		.section	.text.MassStore_WriteDeviceBlock,"ax",@progbits
+ 760               	.global	MassStore_WriteDeviceBlock
+ 762               	MassStore_WriteDeviceBlock:
+ 763               	.LFB152:
+ 764               	.LSM79:
+ 765               	.LVL63:
+ 766 0000 8F92      		push r8
+ 767 0002 9F92      		push r9
+ 768 0004 AF92      		push r10
+ 769 0006 BF92      		push r11
+ 770 0008 CF92      		push r12
+ 771 000a DF92      		push r13
+ 772 000c EF92      		push r14
+ 773               	.LVL64:
+ 774 000e FF92      		push r15
+ 775 0010 0F93      		push r16
+ 776               	.LVL65:
+ 777 0012 1F93      		push r17
+ 778 0014 DF93      		push r29
+ 779 0016 CF93      		push r28
+ 780 0018 CDB7      		in r28,__SP_L__
+ 781 001a DEB7      		in r29,__SP_H__
+ 782 001c AC97      		sbiw r28,44
+ 783 001e 0FB6      		in __tmp_reg__,__SREG__
+ 784 0020 F894      		cli
+ 785 0022 DEBF      		out __SP_H__,r29
+ 786 0024 0FBE      		out __SREG__,__tmp_reg__
+ 787 0026 CDBF      		out __SP_L__,r28
+ 788               	/* prologue: function */
+ 789               	/* frame size = 44 */
+ 790 0028 982E      		mov r9,r24
+ 791 002a 5A01      		movw r10,r20
+ 792 002c 6B01      		movw r12,r22
+ 793 002e 822E      		mov r8,r18
+ 794 0030 B801      		movw r22,r16
+ 795               	.LVL66:
+ 796               	.LSM80:
+ 797 0032 8E01      		movw r16,r28
+ 798               	.LVL67:
+ 799 0034 025F      		subi r16,lo8(-(14))
+ 800 0036 1F4F      		sbci r17,hi8(-(14))
+ 801 0038 2FE1      		ldi r18,lo8(31)
+ 802               	.LVL68:
+ 803 003a F801      		movw r30,r16
+ 804 003c 1192      		st Z+,__zero_reg__
+ 805 003e 2A95      	        dec r18
+ 806 0040 01F4      		brne .-6
+ 807 0042 25E5      		ldi r18,lo8(1128420181)
+ 808 0044 33E5      		ldi r19,hi8(1128420181)
+ 809 0046 42E4      		ldi r20,hlo8(1128420181)
+ 810 0048 53E4      		ldi r21,hhi8(1128420181)
+ 811 004a 2E87      		std Y+14,r18
+ 812 004c 3F87      		std Y+15,r19
+ 813 004e 488B      		std Y+16,r20
+ 814 0050 598B      		std Y+17,r21
+ 815 0052 80E0      		ldi r24,lo8(0)
+ 816 0054 90E0      		ldi r25,hi8(0)
+ 817               	.LVL69:
+ 818 0056 282D      		mov r18,r8
+ 819 0058 30E0      		ldi r19,lo8(0)
+ 820               	.LVL70:
+ 821 005a 40E0      		ldi r20,lo8(0)
+ 822 005c 50E0      		ldi r21,hi8(0)
+ 823               	.LVL71:
+ 824 005e 0E94 0000 		call __mulsi3
+ 825               	.LVL72:
+ 826 0062 6E8B      		std Y+22,r22
+ 827 0064 7F8B      		std Y+23,r23
+ 828 0066 888F      		std Y+24,r24
+ 829 0068 998F      		std Y+25,r25
+ 830 006a 9B8E      		std Y+27,r9
+ 831 006c 8AE0      		ldi r24,lo8(10)
+ 832               	.LVL73:
+ 833 006e 8C8F      		std Y+28,r24
+ 834 0070 8AE2      		ldi r24,lo8(42)
+ 835 0072 8D8F      		std Y+29,r24
+ 836 0074 8D2D      		mov r24,r13
+ 837 0076 9927      		clr r25
+ 838 0078 AA27      		clr r26
+ 839 007a BB27      		clr r27
+ 840               	.LVL74:
+ 841 007c 8F8F      		std Y+31,r24
+ 842 007e C601      		movw r24,r12
+ 843 0080 AA27      		clr r26
+ 844 0082 BB27      		clr r27
+ 845 0084 88A3      		std Y+32,r24
+ 846 0086 BB27      		clr r27
+ 847 0088 AD2D      		mov r26,r13
+ 848 008a 9C2D      		mov r25,r12
+ 849 008c 8B2D      		mov r24,r11
+ 850 008e 89A3      		std Y+33,r24
+ 851 0090 AAA2      		std Y+34,r10
+ 852 0092 8DA2      		std Y+37,r8
+ 853               	.LSM81:
+ 854 0094 C801      		movw r24,r16
+ 855 0096 B701      		movw r22,r14
+ 856               	.LVL75:
+ 857 0098 0E94 0000 		call MassStore_SendCommand
+ 858               	.LVL76:
+ 859 009c 982F      		mov r25,r24
+ 860               	.LVL77:
+ 861 009e 8823      		tst r24
+ 862 00a0 01F4      		brne .L45
+ 863               	.LVL78:
+ 864               	.L42:
+ 865               	.LSM82:
+ 866 00a2 CE01      		movw r24,r28
+ 867               	.LVL79:
+ 868 00a4 0196      		adiw r24,1
+ 869 00a6 0E94 0000 		call MassStore_GetReturnedStatus
+ 870               	.LVL80:
+ 871 00aa 982F      		mov r25,r24
+ 872               	.LVL81:
+ 873 00ac 8823      		tst r24
+ 874 00ae 01F0      		breq .L43
+ 875               	.LVL82:
+ 876               	.L45:
+ 877               	.LBB241:
+ 878               	.LBB242:
+ 879               	.LSM83:
+ 880 00b0 8091 A900 		lds r24,169
+ 881               	.LVL83:
+ 882 00b4 8064      		ori r24,lo8(64)
+ 883 00b6 8093 A900 		sts 169,r24
+ 884               	.LVL84:
+ 885               	.L43:
+ 886               	.LBE242:
+ 887               	.LBE241:
+ 888               	.LSM84:
+ 889 00ba 892F      		mov r24,r25
+ 890               	/* epilogue start */
+ 891 00bc AC96      		adiw r28,44
+ 892 00be 0FB6      		in __tmp_reg__,__SREG__
+ 893 00c0 F894      		cli
+ 894 00c2 DEBF      		out __SP_H__,r29
+ 895 00c4 0FBE      		out __SREG__,__tmp_reg__
+ 896 00c6 CDBF      		out __SP_L__,r28
+ 897 00c8 CF91      		pop r28
+ 898 00ca DF91      		pop r29
+ 899 00cc 1F91      		pop r17
+ 900 00ce 0F91      		pop r16
+ 901 00d0 FF90      		pop r15
+ 902 00d2 EF90      		pop r14
+ 903               	.LVL85:
+ 904 00d4 DF90      		pop r13
+ 905 00d6 CF90      		pop r12
+ 906 00d8 BF90      		pop r11
+ 907 00da AF90      		pop r10
+ 908               	.LVL86:
+ 909 00dc 9F90      		pop r9
+ 910               	.LVL87:
+ 911 00de 8F90      		pop r8
+ 912               	.LVL88:
+ 913 00e0 0895      		ret
+ 914               	.LFE152:
+ 916               		.section	.text.MassStore_ReadDeviceBlock,"ax",@progbits
+ 917               	.global	MassStore_ReadDeviceBlock
+ 919               	MassStore_ReadDeviceBlock:
+ 920               	.LFB151:
+ 921               	.LSM85:
+ 922               	.LVL89:
+ 923 0000 8F92      		push r8
+ 924 0002 9F92      		push r9
+ 925 0004 AF92      		push r10
+ 926 0006 BF92      		push r11
+ 927 0008 CF92      		push r12
+ 928 000a DF92      		push r13
+ 929 000c EF92      		push r14
+ 930               	.LVL90:
+ 931 000e FF92      		push r15
+ 932 0010 0F93      		push r16
+ 933               	.LVL91:
+ 934 0012 1F93      		push r17
+ 935 0014 DF93      		push r29
+ 936 0016 CF93      		push r28
+ 937 0018 CDB7      		in r28,__SP_L__
+ 938 001a DEB7      		in r29,__SP_H__
+ 939 001c AC97      		sbiw r28,44
+ 940 001e 0FB6      		in __tmp_reg__,__SREG__
+ 941 0020 F894      		cli
+ 942 0022 DEBF      		out __SP_H__,r29
+ 943 0024 0FBE      		out __SREG__,__tmp_reg__
+ 944 0026 CDBF      		out __SP_L__,r28
+ 945               	/* prologue: function */
+ 946               	/* frame size = 44 */
+ 947 0028 982E      		mov r9,r24
+ 948 002a 5A01      		movw r10,r20
+ 949 002c 6B01      		movw r12,r22
+ 950 002e 822E      		mov r8,r18
+ 951 0030 B801      		movw r22,r16
+ 952               	.LVL92:
+ 953               	.LSM86:
+ 954 0032 8E01      		movw r16,r28
+ 955               	.LVL93:
+ 956 0034 025F      		subi r16,lo8(-(14))
+ 957 0036 1F4F      		sbci r17,hi8(-(14))
+ 958 0038 2FE1      		ldi r18,lo8(31)
+ 959               	.LVL94:
+ 960 003a F801      		movw r30,r16
+ 961 003c 1192      		st Z+,__zero_reg__
+ 962 003e 2A95      	        dec r18
+ 963 0040 01F4      		brne .-6
+ 964 0042 25E5      		ldi r18,lo8(1128420181)
+ 965 0044 33E5      		ldi r19,hi8(1128420181)
+ 966 0046 42E4      		ldi r20,hlo8(1128420181)
+ 967 0048 53E4      		ldi r21,hhi8(1128420181)
+ 968 004a 2E87      		std Y+14,r18
+ 969 004c 3F87      		std Y+15,r19
+ 970 004e 488B      		std Y+16,r20
+ 971 0050 598B      		std Y+17,r21
+ 972 0052 80E0      		ldi r24,lo8(0)
+ 973 0054 90E0      		ldi r25,hi8(0)
+ 974               	.LVL95:
+ 975 0056 282D      		mov r18,r8
+ 976 0058 30E0      		ldi r19,lo8(0)
+ 977               	.LVL96:
+ 978 005a 40E0      		ldi r20,lo8(0)
+ 979 005c 50E0      		ldi r21,hi8(0)
+ 980               	.LVL97:
+ 981 005e 0E94 0000 		call __mulsi3
+ 982               	.LVL98:
+ 983 0062 6E8B      		std Y+22,r22
+ 984 0064 7F8B      		std Y+23,r23
+ 985 0066 888F      		std Y+24,r24
+ 986 0068 998F      		std Y+25,r25
+ 987 006a 80E8      		ldi r24,lo8(-128)
+ 988               	.LVL99:
+ 989 006c 8A8F      		std Y+26,r24
+ 990 006e 9B8E      		std Y+27,r9
+ 991 0070 8AE0      		ldi r24,lo8(10)
+ 992 0072 8C8F      		std Y+28,r24
+ 993 0074 88E2      		ldi r24,lo8(40)
+ 994 0076 8D8F      		std Y+29,r24
+ 995 0078 8D2D      		mov r24,r13
+ 996 007a 9927      		clr r25
+ 997 007c AA27      		clr r26
+ 998 007e BB27      		clr r27
+ 999 0080 8F8F      		std Y+31,r24
+ 1000 0082 C601      		movw r24,r12
+ 1001 0084 AA27      		clr r26
+ 1002 0086 BB27      		clr r27
+ 1003 0088 88A3      		std Y+32,r24
+ 1004 008a BB27      		clr r27
+ 1005 008c AD2D      		mov r26,r13
+ 1006 008e 9C2D      		mov r25,r12
+ 1007 0090 8B2D      		mov r24,r11
+ 1008               	.LVL100:
+ 1009 0092 89A3      		std Y+33,r24
+ 1010 0094 AAA2      		std Y+34,r10
+ 1011 0096 8DA2      		std Y+37,r8
+ 1012               	.LSM87:
+ 1013 0098 C801      		movw r24,r16
+ 1014 009a B701      		movw r22,r14
+ 1015               	.LVL101:
+ 1016 009c 0E94 0000 		call MassStore_SendCommand
+ 1017               	.LVL102:
+ 1018 00a0 982F      		mov r25,r24
+ 1019               	.LVL103:
+ 1020 00a2 8823      		tst r24
+ 1021 00a4 01F4      		brne .L50
+ 1022               	.LVL104:
+ 1023               	.L47:
+ 1024               	.LSM88:
+ 1025 00a6 CE01      		movw r24,r28
+ 1026               	.LVL105:
+ 1027 00a8 0196      		adiw r24,1
+ 1028 00aa 0E94 0000 		call MassStore_GetReturnedStatus
+ 1029               	.LVL106:
+ 1030 00ae 982F      		mov r25,r24
+ 1031               	.LVL107:
+ 1032 00b0 8823      		tst r24
+ 1033 00b2 01F0      		breq .L48
+ 1034               	.LVL108:
+ 1035               	.L50:
+ 1036               	.LBB243:
+ 1037               	.LBB244:
+ 1038               	.LSM89:
+ 1039 00b4 8091 A900 		lds r24,169
+ 1040               	.LVL109:
+ 1041 00b8 8064      		ori r24,lo8(64)
+ 1042 00ba 8093 A900 		sts 169,r24
+ 1043               	.LVL110:
+ 1044               	.L48:
+ 1045               	.LBE244:
+ 1046               	.LBE243:
+ 1047               	.LSM90:
+ 1048 00be 892F      		mov r24,r25
+ 1049               	/* epilogue start */
+ 1050 00c0 AC96      		adiw r28,44
+ 1051 00c2 0FB6      		in __tmp_reg__,__SREG__
+ 1052 00c4 F894      		cli
+ 1053 00c6 DEBF      		out __SP_H__,r29
+ 1054 00c8 0FBE      		out __SREG__,__tmp_reg__
+ 1055 00ca CDBF      		out __SP_L__,r28
+ 1056 00cc CF91      		pop r28
+ 1057 00ce DF91      		pop r29
+ 1058 00d0 1F91      		pop r17
+ 1059 00d2 0F91      		pop r16
+ 1060 00d4 FF90      		pop r15
+ 1061 00d6 EF90      		pop r14
+ 1062               	.LVL111:
+ 1063 00d8 DF90      		pop r13
+ 1064 00da CF90      		pop r12
+ 1065 00dc BF90      		pop r11
+ 1066 00de AF90      		pop r10
+ 1067               	.LVL112:
+ 1068 00e0 9F90      		pop r9
+ 1069               	.LVL113:
+ 1070 00e2 8F90      		pop r8
+ 1071               	.LVL114:
+ 1072 00e4 0895      		ret
+ 1073               	.LFE151:
+ 1075               		.section	.text.MassStore_RequestSense,"ax",@progbits
+ 1076               	.global	MassStore_RequestSense
+ 1078               	MassStore_RequestSense:
+ 1079               	.LFB150:
+ 1080               	.LSM91:
+ 1081               	.LVL115:
+ 1082 0000 DF93      		push r29
+ 1083 0002 CF93      		push r28
+ 1084 0004 CDB7      		in r28,__SP_L__
+ 1085 0006 DEB7      		in r29,__SP_H__
+ 1086 0008 AC97      		sbiw r28,44
+ 1087 000a 0FB6      		in __tmp_reg__,__SREG__
+ 1088 000c F894      		cli
+ 1089 000e DEBF      		out __SP_H__,r29
+ 1090 0010 0FBE      		out __SREG__,__tmp_reg__
+ 1091 0012 CDBF      		out __SP_L__,r28
+ 1092               	/* prologue: function */
+ 1093               	/* frame size = 44 */
+ 1094               	.LSM92:
+ 1095 0014 FE01      		movw r30,r28
+ 1096 0016 3E96      		adiw r30,14
+ 1097 0018 9FE1      		ldi r25,lo8(31)
+ 1098 001a DF01      		movw r26,r30
+ 1099 001c 1D92      		st X+,__zero_reg__
+ 1100 001e 9A95      	        dec r25
+ 1101 0020 01F4      		brne .-6
+ 1102 0022 25E5      		ldi r18,lo8(1128420181)
+ 1103 0024 33E5      		ldi r19,hi8(1128420181)
+ 1104 0026 42E4      		ldi r20,hlo8(1128420181)
+ 1105 0028 53E4      		ldi r21,hhi8(1128420181)
+ 1106 002a 2E87      		std Y+14,r18
+ 1107 002c 3F87      		std Y+15,r19
+ 1108 002e 488B      		std Y+16,r20
+ 1109 0030 598B      		std Y+17,r21
+ 1110 0032 22E1      		ldi r18,lo8(18)
+ 1111 0034 30E0      		ldi r19,hi8(18)
+ 1112 0036 40E0      		ldi r20,hlo8(18)
+ 1113 0038 50E0      		ldi r21,hhi8(18)
+ 1114 003a 2E8B      		std Y+22,r18
+ 1115 003c 3F8B      		std Y+23,r19
+ 1116 003e 488F      		std Y+24,r20
+ 1117 0040 598F      		std Y+25,r21
+ 1118 0042 90E8      		ldi r25,lo8(-128)
+ 1119 0044 9A8F      		std Y+26,r25
+ 1120 0046 8B8F      		std Y+27,r24
+ 1121 0048 86E0      		ldi r24,lo8(6)
+ 1122               	.LVL116:
+ 1123 004a 8C8F      		std Y+28,r24
+ 1124 004c 83E0      		ldi r24,lo8(3)
+ 1125 004e 8D8F      		std Y+29,r24
+ 1126 0050 82E1      		ldi r24,lo8(18)
+ 1127 0052 89A3      		std Y+33,r24
+ 1128               	.LSM93:
+ 1129 0054 CF01      		movw r24,r30
+ 1130 0056 0E94 0000 		call MassStore_SendCommand
+ 1131               	.LVL117:
+ 1132 005a 982F      		mov r25,r24
+ 1133               	.LVL118:
+ 1134 005c 8823      		tst r24
+ 1135 005e 01F4      		brne .L55
+ 1136               	.LVL119:
+ 1137               	.L52:
+ 1138               	.LSM94:
+ 1139 0060 CE01      		movw r24,r28
+ 1140               	.LVL120:
+ 1141 0062 0196      		adiw r24,1
+ 1142 0064 0E94 0000 		call MassStore_GetReturnedStatus
+ 1143               	.LVL121:
+ 1144 0068 982F      		mov r25,r24
+ 1145               	.LVL122:
+ 1146 006a 8823      		tst r24
+ 1147 006c 01F0      		breq .L53
+ 1148               	.LVL123:
+ 1149               	.L55:
+ 1150               	.LBB245:
+ 1151               	.LBB246:
+ 1152               	.LSM95:
+ 1153 006e 8091 A900 		lds r24,169
+ 1154               	.LVL124:
+ 1155 0072 8064      		ori r24,lo8(64)
+ 1156 0074 8093 A900 		sts 169,r24
+ 1157               	.LVL125:
+ 1158               	.L53:
+ 1159               	.LBE246:
+ 1160               	.LBE245:
+ 1161               	.LSM96:
+ 1162 0078 892F      		mov r24,r25
+ 1163               	/* epilogue start */
+ 1164 007a AC96      		adiw r28,44
+ 1165 007c 0FB6      		in __tmp_reg__,__SREG__
+ 1166 007e F894      		cli
+ 1167 0080 DEBF      		out __SP_H__,r29
+ 1168 0082 0FBE      		out __SREG__,__tmp_reg__
+ 1169 0084 CDBF      		out __SP_L__,r28
+ 1170 0086 CF91      		pop r28
+ 1171 0088 DF91      		pop r29
+ 1172 008a 0895      		ret
+ 1173               	.LFE150:
+ 1175               		.section	.text.MassStore_Inquiry,"ax",@progbits
+ 1176               	.global	MassStore_Inquiry
+ 1178               	MassStore_Inquiry:
+ 1179               	.LFB149:
+ 1180               	.LSM97:
+ 1181               	.LVL126:
+ 1182 0000 DF93      		push r29
+ 1183 0002 CF93      		push r28
+ 1184 0004 CDB7      		in r28,__SP_L__
+ 1185 0006 DEB7      		in r29,__SP_H__
+ 1186 0008 AC97      		sbiw r28,44
+ 1187 000a 0FB6      		in __tmp_reg__,__SREG__
+ 1188 000c F894      		cli
+ 1189 000e DEBF      		out __SP_H__,r29
+ 1190 0010 0FBE      		out __SREG__,__tmp_reg__
+ 1191 0012 CDBF      		out __SP_L__,r28
+ 1192               	/* prologue: function */
+ 1193               	/* frame size = 44 */
+ 1194               	.LSM98:
+ 1195 0014 FE01      		movw r30,r28
+ 1196 0016 3E96      		adiw r30,14
+ 1197 0018 9FE1      		ldi r25,lo8(31)
+ 1198 001a DF01      		movw r26,r30
+ 1199 001c 1D92      		st X+,__zero_reg__
+ 1200 001e 9A95      	        dec r25
+ 1201 0020 01F4      		brne .-6
+ 1202 0022 25E5      		ldi r18,lo8(1128420181)
+ 1203 0024 33E5      		ldi r19,hi8(1128420181)
+ 1204 0026 42E4      		ldi r20,hlo8(1128420181)
+ 1205 0028 53E4      		ldi r21,hhi8(1128420181)
+ 1206 002a 2E87      		std Y+14,r18
+ 1207 002c 3F87      		std Y+15,r19
+ 1208 002e 488B      		std Y+16,r20
+ 1209 0030 598B      		std Y+17,r21
+ 1210 0032 24E2      		ldi r18,lo8(36)
+ 1211 0034 30E0      		ldi r19,hi8(36)
+ 1212 0036 40E0      		ldi r20,hlo8(36)
+ 1213 0038 50E0      		ldi r21,hhi8(36)
+ 1214 003a 2E8B      		std Y+22,r18
+ 1215 003c 3F8B      		std Y+23,r19
+ 1216 003e 488F      		std Y+24,r20
+ 1217 0040 598F      		std Y+25,r21
+ 1218 0042 90E8      		ldi r25,lo8(-128)
+ 1219 0044 9A8F      		std Y+26,r25
+ 1220 0046 8B8F      		std Y+27,r24
+ 1221 0048 86E0      		ldi r24,lo8(6)
+ 1222               	.LVL127:
+ 1223 004a 8C8F      		std Y+28,r24
+ 1224 004c 82E1      		ldi r24,lo8(18)
+ 1225 004e 8D8F      		std Y+29,r24
+ 1226 0050 84E2      		ldi r24,lo8(36)
+ 1227 0052 89A3      		std Y+33,r24
+ 1228               	.LSM99:
+ 1229 0054 CF01      		movw r24,r30
+ 1230 0056 0E94 0000 		call MassStore_SendCommand
+ 1231               	.LVL128:
+ 1232 005a 982F      		mov r25,r24
+ 1233               	.LVL129:
+ 1234 005c 8823      		tst r24
+ 1235 005e 01F4      		brne .L60
+ 1236               	.LVL130:
+ 1237               	.L57:
+ 1238               	.LSM100:
+ 1239 0060 CE01      		movw r24,r28
+ 1240               	.LVL131:
+ 1241 0062 0196      		adiw r24,1
+ 1242 0064 0E94 0000 		call MassStore_GetReturnedStatus
+ 1243               	.LVL132:
+ 1244 0068 982F      		mov r25,r24
+ 1245               	.LVL133:
+ 1246 006a 8823      		tst r24
+ 1247 006c 01F0      		breq .L58
+ 1248               	.LVL134:
+ 1249               	.L60:
+ 1250               	.LBB247:
+ 1251               	.LBB248:
+ 1252               	.LSM101:
+ 1253 006e 8091 A900 		lds r24,169
+ 1254               	.LVL135:
+ 1255 0072 8064      		ori r24,lo8(64)
+ 1256 0074 8093 A900 		sts 169,r24
+ 1257               	.LVL136:
+ 1258               	.L58:
+ 1259               	.LBE248:
+ 1260               	.LBE247:
+ 1261               	.LSM102:
+ 1262 0078 892F      		mov r24,r25
+ 1263               	/* epilogue start */
+ 1264 007a AC96      		adiw r28,44
+ 1265 007c 0FB6      		in __tmp_reg__,__SREG__
+ 1266 007e F894      		cli
+ 1267 0080 DEBF      		out __SP_H__,r29
+ 1268 0082 0FBE      		out __SREG__,__tmp_reg__
+ 1269 0084 CDBF      		out __SP_L__,r28
+ 1270 0086 CF91      		pop r28
+ 1271 0088 DF91      		pop r29
+ 1272 008a 0895      		ret
+ 1273               	.LFE149:
+ 1275               		.section	.text.SwapEndian_32,"ax",@progbits
+ 1277               	SwapEndian_32:
+ 1278               	.LFB8:
+ 1279               	.LSM103:
+ 1280               	.LVL137:
+ 1281               	/* prologue: function */
+ 1282               	/* frame size = 0 */
+ 1283 0000 362F      		mov r19,r22
+ 1284 0002 272F      		mov r18,r23
+ 1285               	.LVL138:
+ 1286               	.LSM104:
+ 1287 0004 692F      		mov r22,r25
+ 1288               	.LVL139:
+ 1289 0006 782F      		mov r23,r24
+ 1290               	.LVL140:
+ 1291 0008 C901      		movw r24,r18
+ 1292               	.LVL141:
+ 1293               	/* epilogue start */
+ 1294 000a 0895      		ret
+ 1295               	.LFE8:
+ 1297               		.section	.text.MassStore_ReadCapacity,"ax",@progbits
+ 1298               	.global	MassStore_ReadCapacity
+ 1300               	MassStore_ReadCapacity:
+ 1301               	.LFB154:
+ 1302               	.LSM105:
+ 1303               	.LVL142:
+ 1304 0000 0F93      		push r16
+ 1305 0002 1F93      		push r17
+ 1306 0004 DF93      		push r29
+ 1307 0006 CF93      		push r28
+ 1308 0008 CDB7      		in r28,__SP_L__
+ 1309 000a DEB7      		in r29,__SP_H__
+ 1310 000c AC97      		sbiw r28,44
+ 1311 000e 0FB6      		in __tmp_reg__,__SREG__
+ 1312 0010 F894      		cli
+ 1313 0012 DEBF      		out __SP_H__,r29
+ 1314 0014 0FBE      		out __SREG__,__tmp_reg__
+ 1315 0016 CDBF      		out __SP_L__,r28
+ 1316               	/* prologue: function */
+ 1317               	/* frame size = 44 */
+ 1318 0018 8B01      		movw r16,r22
+ 1319               	.LSM106:
+ 1320 001a FE01      		movw r30,r28
+ 1321 001c 3E96      		adiw r30,14
+ 1322 001e 9FE1      		ldi r25,lo8(31)
+ 1323 0020 DF01      		movw r26,r30
+ 1324 0022 1D92      		st X+,__zero_reg__
+ 1325 0024 9A95      	        dec r25
+ 1326 0026 01F4      		brne .-6
+ 1327 0028 25E5      		ldi r18,lo8(1128420181)
+ 1328 002a 33E5      		ldi r19,hi8(1128420181)
+ 1329 002c 42E4      		ldi r20,hlo8(1128420181)
+ 1330 002e 53E4      		ldi r21,hhi8(1128420181)
+ 1331 0030 2E87      		std Y+14,r18
+ 1332 0032 3F87      		std Y+15,r19
+ 1333 0034 488B      		std Y+16,r20
+ 1334 0036 598B      		std Y+17,r21
+ 1335 0038 28E0      		ldi r18,lo8(8)
+ 1336 003a 30E0      		ldi r19,hi8(8)
+ 1337 003c 40E0      		ldi r20,hlo8(8)
+ 1338 003e 50E0      		ldi r21,hhi8(8)
+ 1339 0040 2E8B      		std Y+22,r18
+ 1340 0042 3F8B      		std Y+23,r19
+ 1341 0044 488F      		std Y+24,r20
+ 1342 0046 598F      		std Y+25,r21
+ 1343 0048 90E8      		ldi r25,lo8(-128)
+ 1344 004a 9A8F      		std Y+26,r25
+ 1345 004c 8B8F      		std Y+27,r24
+ 1346 004e 8AE0      		ldi r24,lo8(10)
+ 1347               	.LVL143:
+ 1348 0050 8C8F      		std Y+28,r24
+ 1349 0052 85E2      		ldi r24,lo8(37)
+ 1350 0054 8D8F      		std Y+29,r24
+ 1351               	.LSM107:
+ 1352 0056 CF01      		movw r24,r30
+ 1353 0058 0E94 0000 		call MassStore_SendCommand
+ 1354               	.LVL144:
+ 1355 005c 982F      		mov r25,r24
+ 1356               	.LVL145:
+ 1357 005e 8823      		tst r24
+ 1358 0060 01F4      		brne .L67
+ 1359               	.LVL146:
+ 1360               	.L64:
+ 1361               	.LSM108:
+ 1362 0062 F801      		movw r30,r16
+ 1363 0064 6081      		ld r22,Z
+ 1364 0066 7181      		ldd r23,Z+1
+ 1365 0068 8281      		ldd r24,Z+2
+ 1366 006a 9381      		ldd r25,Z+3
+ 1367 006c 0E94 0000 		call SwapEndian_32
+ 1368               	.LVL147:
+ 1369 0070 D801      		movw r26,r16
+ 1370 0072 6D93      		st X+,r22
+ 1371 0074 7D93      		st X+,r23
+ 1372 0076 8D93      		st X+,r24
+ 1373 0078 9C93      		st X,r25
+ 1374 007a 1397      		sbiw r26,3
+ 1375               	.LSM109:
+ 1376 007c 1496      		adiw r26,4
+ 1377 007e 6D91      		ld r22,X+
+ 1378 0080 7D91      		ld r23,X+
+ 1379 0082 8D91      		ld r24,X+
+ 1380 0084 9C91      		ld r25,X
+ 1381 0086 1797      		sbiw r26,4+3
+ 1382 0088 0E94 0000 		call SwapEndian_32
+ 1383 008c F801      		movw r30,r16
+ 1384 008e 6483      		std Z+4,r22
+ 1385 0090 7583      		std Z+5,r23
+ 1386 0092 8683      		std Z+6,r24
+ 1387 0094 9783      		std Z+7,r25
+ 1388               	.LSM110:
+ 1389 0096 CE01      		movw r24,r28
+ 1390 0098 0196      		adiw r24,1
+ 1391 009a 0E94 0000 		call MassStore_GetReturnedStatus
+ 1392 009e 982F      		mov r25,r24
+ 1393               	.LVL148:
+ 1394 00a0 8823      		tst r24
+ 1395 00a2 01F0      		breq .L65
+ 1396               	.LVL149:
+ 1397               	.L67:
+ 1398               	.LBB249:
+ 1399               	.LBB250:
+ 1400               	.LSM111:
+ 1401 00a4 8091 A900 		lds r24,169
+ 1402               	.LVL150:
+ 1403 00a8 8064      		ori r24,lo8(64)
+ 1404 00aa 8093 A900 		sts 169,r24
+ 1405               	.LVL151:
+ 1406               	.L65:
+ 1407               	.LBE250:
+ 1408               	.LBE249:
+ 1409               	.LSM112:
+ 1410 00ae 892F      		mov r24,r25
+ 1411               	/* epilogue start */
+ 1412 00b0 AC96      		adiw r28,44
+ 1413 00b2 0FB6      		in __tmp_reg__,__SREG__
+ 1414 00b4 F894      		cli
+ 1415 00b6 DEBF      		out __SP_H__,r29
+ 1416 00b8 0FBE      		out __SREG__,__tmp_reg__
+ 1417 00ba CDBF      		out __SP_L__,r28
+ 1418 00bc CF91      		pop r28
+ 1419 00be DF91      		pop r29
+ 1420 00c0 1F91      		pop r17
+ 1421 00c2 0F91      		pop r16
+ 1422               	.LVL152:
+ 1423 00c4 0895      		ret
+ 1424               	.LFE154:
+ 1426               		.section	.text.MassStore_GetMaxLUN,"ax",@progbits
+ 1427               	.global	MassStore_GetMaxLUN
+ 1429               	MassStore_GetMaxLUN:
+ 1430               	.LFB148:
+ 1431               	.LSM113:
+ 1432               	.LVL153:
+ 1433 0000 CF93      		push r28
+ 1434 0002 DF93      		push r29
+ 1435               	/* prologue: function */
+ 1436               	/* frame size = 0 */
+ 1437 0004 EC01      		movw r28,r24
+ 1438               	.LSM114:
+ 1439 0006 A0E0      		ldi r26,lo8(USB_ControlRequest)
+ 1440 0008 B0E0      		ldi r27,hi8(USB_ControlRequest)
+ 1441 000a E0E0      		ldi r30,lo8(C.31.4678)
+ 1442 000c F0E0      		ldi r31,hi8(C.31.4678)
+ 1443 000e 88E0      		ldi r24,lo8(8)
+ 1444               	.LVL154:
+ 1445               	.L69:
+ 1446 0010 0190      		ld r0,Z+
+ 1447 0012 0D92      		st X+,r0
+ 1448 0014 8150      		subi r24,lo8(-(-1))
+ 1449 0016 01F4      		brne .L69
+ 1450               	.LBB251:
+ 1451               	.LBB252:
+ 1452               	.LSM115:
+ 1453 0018 1092 A700 		sts 167,__zero_reg__
+ 1454               	.LBE252:
+ 1455               	.LBE251:
+ 1456               	.LSM116:
+ 1457 001c CE01      		movw r24,r28
+ 1458 001e 0E94 0000 		call USB_Host_SendControlRequest
+ 1459 0022 8330      		cpi r24,lo8(3)
+ 1460               	.LVL155:
+ 1461 0024 01F4      		brne .L70
+ 1462               	.LBB253:
+ 1463               	.LBB254:
+ 1464               	.LSM117:
+ 1465 0026 8091 A600 		lds r24,166
+ 1466               	.LVL156:
+ 1467 002a 8D7F      		andi r24,lo8(-3)
+ 1468 002c 8093 A600 		sts 166,r24
+ 1469               	.LBE254:
+ 1470               	.LBE253:
+ 1471               	.LSM118:
+ 1472 0030 1882      		st Y,__zero_reg__
+ 1473 0032 80E0      		ldi r24,lo8(0)
+ 1474               	.LVL157:
+ 1475               	.L70:
+ 1476               	.LVL158:
+ 1477               	/* epilogue start */
+ 1478               	.LSM119:
+ 1479 0034 DF91      		pop r29
+ 1480 0036 CF91      		pop r28
+ 1481               	.LVL159:
+ 1482 0038 0895      		ret
+ 1483               	.LFE148:
+ 1485               		.section	.text.MassStore_MassStorageReset,"ax",@progbits
+ 1486               	.global	MassStore_MassStorageReset
+ 1488               	MassStore_MassStorageReset:
+ 1489               	.LFB147:
+ 1490               	.LSM120:
+ 1491               	/* prologue: function */
+ 1492               	/* frame size = 0 */
+ 1493               	.LSM121:
+ 1494 0000 A0E0      		ldi r26,lo8(USB_ControlRequest)
+ 1495 0002 B0E0      		ldi r27,hi8(USB_ControlRequest)
+ 1496 0004 E0E0      		ldi r30,lo8(C.27.4666)
+ 1497 0006 F0E0      		ldi r31,hi8(C.27.4666)
+ 1498 0008 88E0      		ldi r24,lo8(8)
+ 1499               	.L74:
+ 1500 000a 0190      		ld r0,Z+
+ 1501 000c 0D92      		st X+,r0
+ 1502 000e 8150      		subi r24,lo8(-(-1))
+ 1503 0010 01F4      		brne .L74
+ 1504               	.LBB255:
+ 1505               	.LBB256:
+ 1506               	.LSM122:
+ 1507 0012 1092 A700 		sts 167,__zero_reg__
+ 1508               	.LBE256:
+ 1509               	.LBE255:
+ 1510               	.LSM123:
+ 1511 0016 80E0      		ldi r24,lo8(0)
+ 1512 0018 90E0      		ldi r25,hi8(0)
+ 1513 001a 0E94 0000 		call USB_Host_SendControlRequest
+ 1514 001e 8823      		tst r24
+ 1515               	.LVL160:
+ 1516 0020 01F4      		brne .L75
+ 1517               	.LBB257:
+ 1518               	.LBB258:
+ 1519               	.LSM124:
+ 1520 0022 81E0      		ldi r24,lo8(1)
+ 1521               	.LVL161:
+ 1522 0024 8093 A700 		sts 167,r24
+ 1523               	.LBE258:
+ 1524               	.LBE257:
+ 1525               	.LBB259:
+ 1526               	.LBB260:
+ 1527               	.LSM125:
+ 1528 0028 9091 AA00 		lds r25,170
+ 1529               	.LBB261:
+ 1530               	.LBB262:
+ 1531               	.LSM126:
+ 1532 002c 8091 AA00 		lds r24,170
+ 1533               	.LBE262:
+ 1534               	.LBE261:
+ 1535               	.LSM127:
+ 1536 0030 8073      		andi r24,lo8(48)
+ 1537 0032 8031      		cpi r24,lo8(16)
+ 1538 0034 01F0      		breq .L76
+ 1539 0036 80E0      		ldi r24,lo8(0)
+ 1540 0038 00C0      		rjmp .L77
+ 1541               	.L76:
+ 1542 003a 80E8      		ldi r24,lo8(-128)
+ 1543               	.L77:
+ 1544               	.LBE260:
+ 1545               	.LBE259:
+ 1546               	.LSM128:
+ 1547 003c 9F70      		andi r25,lo8(15)
+ 1548 003e 892B      		or r24,r25
+ 1549 0040 0E94 0000 		call USB_Host_ClearEndpointStall
+ 1550 0044 8823      		tst r24
+ 1551               	.LVL162:
+ 1552 0046 01F4      		brne .L75
+ 1553               	.LBB263:
+ 1554               	.LBB264:
+ 1555               	.LSM129:
+ 1556 0048 82E0      		ldi r24,lo8(2)
+ 1557               	.LVL163:
+ 1558 004a 8093 A700 		sts 167,r24
+ 1559               	.LBE264:
+ 1560               	.LBE263:
+ 1561               	.LBB265:
+ 1562               	.LBB266:
+ 1563               	.LSM130:
+ 1564 004e 9091 AA00 		lds r25,170
+ 1565               	.LBB267:
+ 1566               	.LBB268:
+ 1567               	.LSM131:
+ 1568 0052 8091 AA00 		lds r24,170
+ 1569               	.LBE268:
+ 1570               	.LBE267:
+ 1571               	.LSM132:
+ 1572 0056 8073      		andi r24,lo8(48)
+ 1573 0058 8031      		cpi r24,lo8(16)
+ 1574 005a 01F0      		breq .L78
+ 1575 005c 80E0      		ldi r24,lo8(0)
+ 1576 005e 00C0      		rjmp .L79
+ 1577               	.L78:
+ 1578 0060 80E8      		ldi r24,lo8(-128)
+ 1579               	.L79:
+ 1580               	.LBE266:
+ 1581               	.LBE265:
+ 1582               	.LSM133:
+ 1583 0062 9F70      		andi r25,lo8(15)
+ 1584 0064 892B      		or r24,r25
+ 1585 0066 0E94 0000 		call USB_Host_ClearEndpointStall
+ 1586               	.LVL164:
+ 1587               	.L75:
+ 1588               	.LVL165:
+ 1589               	.LSM134:
+ 1590 006a 0895      		ret
+ 1591               	.LFE147:
+ 1593               		.data
+ 1596               	MassStore_Tag:
+ 1597 0000 01        		.byte	1
+ 1598 0001 00        		.byte	0
+ 1599 0002 00        		.byte	0
+ 1600 0003 00        		.byte	0
+ 1603               	C.31.4678:
+ 1604 0004 A1        		.byte	-95
+ 1605 0005 FE        		.byte	-2
+ 1606 0006 0000      		.word	0
+ 1607 0008 0000      		.word	0
+ 1608 000a 0100      		.word	1
+ 1611               	C.27.4666:
+ 1612 000c 21        		.byte	33
+ 1613 000d FF        		.byte	-1
+ 1614 000e 0000      		.word	0
+ 1615 0010 0000      		.word	0
+ 1616 0012 0000      		.word	0
+ 1737               	.Letext0:
+DEFINED SYMBOLS
+                            *ABS*:00000000 MassStoreCommands.c
+C:\Users\Eddie\AppData\Local\Temp/ccf3aqt4.s:2      *ABS*:0000003f __SREG__
+C:\Users\Eddie\AppData\Local\Temp/ccf3aqt4.s:3      *ABS*:0000003e __SP_H__
+C:\Users\Eddie\AppData\Local\Temp/ccf3aqt4.s:4      *ABS*:0000003d __SP_L__
+C:\Users\Eddie\AppData\Local\Temp/ccf3aqt4.s:5      *ABS*:00000034 __CCP__
+C:\Users\Eddie\AppData\Local\Temp/ccf3aqt4.s:6      *ABS*:00000000 __tmp_reg__
+C:\Users\Eddie\AppData\Local\Temp/ccf3aqt4.s:7      *ABS*:00000001 __zero_reg__
+C:\Users\Eddie\AppData\Local\Temp/ccf3aqt4.s:18     .text.MassStore_WaitForDataReceived:00000000 MassStore_WaitForDataReceived
+C:\Users\Eddie\AppData\Local\Temp/ccf3aqt4.s:236    .text.MassStore_SendCommand:00000000 MassStore_SendCommand
+C:\Users\Eddie\AppData\Local\Temp/ccf3aqt4.s:1596   .data:00000000 MassStore_Tag
+C:\Users\Eddie\AppData\Local\Temp/ccf3aqt4.s:501    .text.MassStore_GetReturnedStatus:00000000 MassStore_GetReturnedStatus
+C:\Users\Eddie\AppData\Local\Temp/ccf3aqt4.s:582    .text.MassStore_PreventAllowMediumRemoval:00000000 MassStore_PreventAllowMediumRemoval
+C:\Users\Eddie\AppData\Local\Temp/ccf3aqt4.s:673    .text.MassStore_TestUnitReady:00000000 MassStore_TestUnitReady
+C:\Users\Eddie\AppData\Local\Temp/ccf3aqt4.s:762    .text.MassStore_WriteDeviceBlock:00000000 MassStore_WriteDeviceBlock
+C:\Users\Eddie\AppData\Local\Temp/ccf3aqt4.s:919    .text.MassStore_ReadDeviceBlock:00000000 MassStore_ReadDeviceBlock
+C:\Users\Eddie\AppData\Local\Temp/ccf3aqt4.s:1078   .text.MassStore_RequestSense:00000000 MassStore_RequestSense
+C:\Users\Eddie\AppData\Local\Temp/ccf3aqt4.s:1178   .text.MassStore_Inquiry:00000000 MassStore_Inquiry
+C:\Users\Eddie\AppData\Local\Temp/ccf3aqt4.s:1277   .text.SwapEndian_32:00000000 SwapEndian_32
+C:\Users\Eddie\AppData\Local\Temp/ccf3aqt4.s:1300   .text.MassStore_ReadCapacity:00000000 MassStore_ReadCapacity
+C:\Users\Eddie\AppData\Local\Temp/ccf3aqt4.s:1429   .text.MassStore_GetMaxLUN:00000000 MassStore_GetMaxLUN
+C:\Users\Eddie\AppData\Local\Temp/ccf3aqt4.s:1603   .data:00000004 C.31.4678
+C:\Users\Eddie\AppData\Local\Temp/ccf3aqt4.s:1488   .text.MassStore_MassStorageReset:00000000 MassStore_MassStorageReset
+C:\Users\Eddie\AppData\Local\Temp/ccf3aqt4.s:1611   .data:0000000c C.27.4666
+
+UNDEFINED SYMBOLS
+USB_Host_ClearEndpointStall
+USB_HostState
+Pipe_Write_Stream_LE
+Pipe_WaitUntilReady
+Pipe_Read_Stream_LE
+__mulsi3
+USB_ControlRequest
+USB_Host_SendControlRequest
+__do_copy_data

@@ -1,0 +1,220 @@
+   1               		.file	"ARP.c"
+   2               	__SREG__ = 0x3f
+   3               	__SP_H__ = 0x3e
+   4               	__SP_L__ = 0x3d
+   5               	__CCP__  = 0x34
+   6               	__tmp_reg__ = 0
+   7               	__zero_reg__ = 1
+  15               	.Ltext0:
+  16               		.section	.text.ARP_ProcessARPPacket,"ax",@progbits
+  17               	.global	ARP_ProcessARPPacket
+  19               	ARP_ProcessARPPacket:
+  20               	.LFB103:
+  21               	.LSM0:
+  22               	.LVL0:
+  23 0000 EF92      		push r14
+  24 0002 FF92      		push r15
+  25 0004 0F93      		push r16
+  26 0006 1F93      		push r17
+  27 0008 CF93      		push r28
+  28 000a DF93      		push r29
+  29               	/* prologue: function */
+  30               	/* frame size = 0 */
+  31 000c 182F      		mov r17,r24
+  32 000e 092F      		mov r16,r25
+  33               	.LVL1:
+  34 0010 F62E      		mov r15,r22
+  35 0012 E72E      		mov r14,r23
+  36               	.LVL2:
+  37               	.LSM1:
+  38 0014 0E94 0000 		call DecodeARPHeader
+  39               	.LVL3:
+  40               	.LSM2:
+  41 0018 C12F      		mov r28,r17
+  42               	.LVL4:
+  43 001a D02F      		mov r29,r16
+  44               	.LVL5:
+  45               	.LBB8:
+  46               	.LBB9:
+  47               	.LSM3:
+  48 001c 8A81      		ldd r24,Y+2
+  49 001e 9B81      		ldd r25,Y+3
+  50               	.LVL6:
+  51               	.LSM4:
+  52 0020 282F      		mov r18,r24
+  53               	.LVL7:
+  54               	.LSM5:
+  55 0022 892F      		mov r24,r25
+  56               	.LVL8:
+  57               	.LSM6:
+  58 0024 922F      		mov r25,r18
+  59               	.LVL9:
+  60               	.LBE9:
+  61               	.LBE8:
+  62               	.LSM7:
+  63 0026 8050      		subi r24,lo8(2048)
+  64 0028 9840      		sbci r25,hi8(2048)
+  65               	.LVL10:
+  66 002a 01F0      		breq .+2
+  67 002c 00C0      		rjmp .L2
+  68               	.LBB10:
+  69               	.LBB11:
+  70               	.LSM8:
+  71 002e 8E81      		ldd r24,Y+6
+  72 0030 9F81      		ldd r25,Y+7
+  73               	.LVL11:
+  74               	.LSM9:
+  75 0032 282F      		mov r18,r24
+  76               	.LVL12:
+  77               	.LSM10:
+  78 0034 892F      		mov r24,r25
+  79               	.LVL13:
+  80               	.LSM11:
+  81 0036 922F      		mov r25,r18
+  82               	.LVL14:
+  83               	.LBE11:
+  84               	.LBE10:
+  85               	.LSM12:
+  86 0038 0197      		sbiw r24,1
+  87 003a 01F0      		breq .+2
+  88 003c 00C0      		rjmp .L2
+  89               	.LSM13:
+  90 003e CE01      		movw r24,r28
+  91               	.LVL15:
+  92 0040 4896      		adiw r24,24
+  93 0042 60E0      		ldi r22,lo8(ServerIPAddress)
+  94 0044 70E0      		ldi r23,hi8(ServerIPAddress)
+  95 0046 44E0      		ldi r20,lo8(4)
+  96 0048 50E0      		ldi r21,hi8(4)
+  97 004a 0E94 0000 		call memcmp
+  98               	.LVL16:
+  99 004e 0097      		sbiw r24,0
+ 100 0050 01F0      		breq .L3
+ 101 0052 CE01      		movw r24,r28
+ 102 0054 4296      		adiw r24,18
+ 103 0056 60E0      		ldi r22,lo8(ServerMACAddress)
+ 104 0058 70E0      		ldi r23,hi8(ServerMACAddress)
+ 105 005a 46E0      		ldi r20,lo8(6)
+ 106 005c 50E0      		ldi r21,hi8(6)
+ 107 005e 0E94 0000 		call memcmp
+ 108 0062 0097      		sbiw r24,0
+ 109 0064 01F0      		breq .+2
+ 110 0066 00C0      		rjmp .L2
+ 111               	.L3:
+ 112               	.LSM14:
+ 113 0068 EF2D      		mov r30,r15
+ 114               	.LVL17:
+ 115 006a FE2D      		mov r31,r14
+ 116               	.LVL18:
+ 117               	.LSM15:
+ 118 006c 8881      		ld r24,Y
+ 119 006e 9981      		ldd r25,Y+1
+ 120 0070 9183      		std Z+1,r25
+ 121 0072 8083      		st Z,r24
+ 122               	.LSM16:
+ 123 0074 8A81      		ldd r24,Y+2
+ 124 0076 9B81      		ldd r25,Y+3
+ 125 0078 9383      		std Z+3,r25
+ 126 007a 8283      		std Z+2,r24
+ 127               	.LSM17:
+ 128 007c 8C81      		ldd r24,Y+4
+ 129 007e 8483      		std Z+4,r24
+ 130               	.LSM18:
+ 131 0080 8D81      		ldd r24,Y+5
+ 132 0082 8583      		std Z+5,r24
+ 133               	.LSM19:
+ 134 0084 80E0      		ldi r24,lo8(512)
+ 135 0086 92E0      		ldi r25,hi8(512)
+ 136 0088 9783      		std Z+7,r25
+ 137 008a 8683      		std Z+6,r24
+ 138               	.LSM20:
+ 139 008c 9F01      		movw r18,r30
+ 140 008e 2E5E      		subi r18,lo8(-(18))
+ 141 0090 3F4F      		sbci r19,hi8(-(18))
+ 142 0092 AE01      		movw r20,r28
+ 143 0094 485F      		subi r20,lo8(-(8))
+ 144 0096 5F4F      		sbci r21,hi8(-(8))
+ 145 0098 86E0      		ldi r24,lo8(6)
+ 146               	.L4:
+ 147 009a DA01      		movw r26,r20
+ 148 009c 0D90      		ld r0,X+
+ 149 009e AD01      		movw r20,r26
+ 150 00a0 D901      		movw r26,r18
+ 151 00a2 0D92      		st X+,r0
+ 152 00a4 9D01      		movw r18,r26
+ 153 00a6 8150      		subi r24,lo8(-(-1))
+ 154 00a8 01F4      		brne .L4
+ 155               	.LSM21:
+ 156 00aa 8E85      		ldd r24,Y+14
+ 157 00ac 9F85      		ldd r25,Y+15
+ 158 00ae A889      		ldd r26,Y+16
+ 159 00b0 B989      		ldd r27,Y+17
+ 160 00b2 808F      		std Z+24,r24
+ 161 00b4 918F      		std Z+25,r25
+ 162 00b6 A28F      		std Z+26,r26
+ 163 00b8 B38F      		std Z+27,r27
+ 164               	.LSM22:
+ 165 00ba EF01      		movw r28,r30
+ 166               	.LVL19:
+ 167 00bc 2896      		adiw r28,8
+ 168 00be A0E0      		ldi r26,lo8(ServerMACAddress)
+ 169 00c0 B0E0      		ldi r27,hi8(ServerMACAddress)
+ 170 00c2 86E0      		ldi r24,lo8(6)
+ 171               	.L5:
+ 172 00c4 0D90      		ld r0,X+
+ 173 00c6 0992      		st Y+,r0
+ 174 00c8 8150      		subi r24,lo8(-(-1))
+ 175 00ca 01F4      		brne .L5
+ 176               	.LSM23:
+ 177 00cc 8091 0000 		lds r24,ServerIPAddress
+ 178 00d0 9091 0000 		lds r25,(ServerIPAddress)+1
+ 179 00d4 A091 0000 		lds r26,(ServerIPAddress)+2
+ 180 00d8 B091 0000 		lds r27,(ServerIPAddress)+3
+ 181 00dc 8687      		std Z+14,r24
+ 182 00de 9787      		std Z+15,r25
+ 183 00e0 A08B      		std Z+16,r26
+ 184 00e2 B18B      		std Z+17,r27
+ 185 00e4 2CE1      		ldi r18,lo8(28)
+ 186 00e6 30E0      		ldi r19,hi8(28)
+ 187 00e8 00C0      		rjmp .L6
+ 188               	.LVL20:
+ 189               	.L2:
+ 190               	.LSM24:
+ 191 00ea 20E0      		ldi r18,lo8(0)
+ 192 00ec 30E0      		ldi r19,hi8(0)
+ 193               	.LVL21:
+ 194               	.L6:
+ 195               	.LSM25:
+ 196 00ee C901      		movw r24,r18
+ 197               	.LVL22:
+ 198               	/* epilogue start */
+ 199 00f0 DF91      		pop r29
+ 200               	.LVL23:
+ 201 00f2 CF91      		pop r28
+ 202               	.LVL24:
+ 203 00f4 1F91      		pop r17
+ 204               	.LVL25:
+ 205 00f6 0F91      		pop r16
+ 206               	.LVL26:
+ 207 00f8 FF90      		pop r15
+ 208               	.LVL27:
+ 209 00fa EF90      		pop r14
+ 210               	.LVL28:
+ 211 00fc 0895      		ret
+ 212               	.LFE103:
+ 238               	.Letext0:
+DEFINED SYMBOLS
+                            *ABS*:00000000 ARP.c
+C:\Users\Eddie\AppData\Local\Temp/ccEvxREV.s:2      *ABS*:0000003f __SREG__
+C:\Users\Eddie\AppData\Local\Temp/ccEvxREV.s:3      *ABS*:0000003e __SP_H__
+C:\Users\Eddie\AppData\Local\Temp/ccEvxREV.s:4      *ABS*:0000003d __SP_L__
+C:\Users\Eddie\AppData\Local\Temp/ccEvxREV.s:5      *ABS*:00000034 __CCP__
+C:\Users\Eddie\AppData\Local\Temp/ccEvxREV.s:6      *ABS*:00000000 __tmp_reg__
+C:\Users\Eddie\AppData\Local\Temp/ccEvxREV.s:7      *ABS*:00000001 __zero_reg__
+C:\Users\Eddie\AppData\Local\Temp/ccEvxREV.s:19     .text.ARP_ProcessARPPacket:00000000 ARP_ProcessARPPacket
+
+UNDEFINED SYMBOLS
+DecodeARPHeader
+ServerIPAddress
+memcmp
+ServerMACAddress
