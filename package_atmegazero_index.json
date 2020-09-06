@@ -1,0 +1,27 @@
+{
+  "packages": [
+    {
+      "name": "ATMegaZero",
+      "maintainer": "Eddie Espinal (4hackrr)",
+      "websiteURL": "https://atmegazero.com",
+      "email": "support@espinallab.com",
+      "platforms": [
+	      {
+          "name": "ATMegaZero",
+          "architecture": "avr",
+          "version": "1.0.0",
+          "category": "Contributed",
+          "url": "https://github.com/eddieespinal/atmegazero/raw/master/board/atmegazero-1.0.0.zip",
+          "archiveFileName": "atmegazero-1.0.0.zip",
+          "checksum": "SHA-256:3e3ff6cbabbfc8c09691a2e00a8528cf9f21f6b49b3061dd3edada53266b2ec4",
+          "size": "12707",
+          "boards": [
+            {"name": "ATMegaZero"}
+          ],
+          "toolsDependencies": [ ]
+	      }
+	    ],
+	    "tools": []
+	  }
+  ]
+}
