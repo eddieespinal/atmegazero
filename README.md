@@ -1,7 +1,7 @@
 # ATMegaZero
 ===================
 
-**Installing in Arduino IDE **
+**Installing in Arduino IDE**
 1. In the Arduino IDE, Navigate to File->Preferences and paste
    https://github.com/eddieespinal/atmegazero/raw/master/package_atmegazero_index.json
    into "Additional Board Manager URLs".
@@ -9,7 +9,7 @@
 3. Install the ATMegaZero board.
 
 
-Bootloader for ATMegaZero Board
+# Bootloader for ATMegaZero Board
 ================
 
 **Requirements**
